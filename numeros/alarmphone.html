@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TAG REVUE — @alarm_phone · Analyse corpus 2025–2026</title>
+<title>TAG REVUE — #01 Alarm Phone · Frontex · Non-assistance documentée</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -12,6 +12,7 @@
 
 :root {
   --red: #D92B2B;
+  --blue: #0000FF;
   --black: #111111;
   --grey-dark: #444444;
   --grey-mid: #888888;
@@ -518,14 +519,320 @@ body {
 }
 .leaflet-popup-tip-container { display: none; }
 
+
+/* ── EDITORIAL ARCHITECTURE / FRONTEX CONTEXT ── */
+.cover-claim {
+  display: inline-block;
+  border-left: 3px solid var(--red);
+  padding: 14px 18px;
+  background: var(--grey-bg);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--grey-dark);
+  max-width: 760px;
+  margin: 0 0 28px;
+  font-weight: 300;
+}
+.cover-claim strong { color: var(--black); font-weight: 700; }
+.ctag-blue { border-color: var(--blue); color: var(--blue); }
+.architecture-section {
+  padding: 56px 40px;
+  max-width: 1120px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--grey-light);
+}
+.architecture-kicker, .part-kicker {
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.architecture-title {
+  font-size: clamp(28px, 3.5vw, 44px);
+  line-height: 1.12;
+  letter-spacing: -.02em;
+  font-weight: 300;
+  max-width: 850px;
+  margin-bottom: 24px;
+}
+.architecture-title strong { font-weight: 700; color: var(--black); }
+.architecture-lead {
+  max-width: 760px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--grey-dark);
+  font-weight: 300;
+  margin-bottom: 36px;
+}
+.arch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--grey-light);
+  border: 1px solid var(--grey-light);
+}
+.arch-card { background: var(--white); padding: 30px 26px; }
+.arch-num {
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+.arch-card:nth-child(1) .arch-num { color: var(--blue); }
+.arch-card h3 { font-size: 18px; line-height: 1.2; margin-bottom: 12px; }
+.arch-card p { font-size: 13px; line-height: 1.7; color: var(--grey-dark); font-weight: 300; }
+.front-context {
+  padding: 56px 40px;
+  max-width: 1120px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--grey-light);
+}
+.front-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.front-copy { font-size: 14px; line-height: 1.8; color: var(--grey-dark); font-weight: 300; }
+.front-copy strong { color: var(--black); font-weight: 700; }
+.front-copy .blue { color: var(--blue); }
+.front-copy .red { color: var(--red); }
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--grey-light);
+}
+.kpi { padding: 34px 28px; border-right: 1px solid var(--grey-light); }
+.kpi:last-child { border-right: none; }
+.kpi-n { font-size: clamp(28px, 3.2vw, 44px); line-height: 1; font-weight: 700; letter-spacing: -.02em; color: var(--black); }
+.kpi:nth-child(1) .kpi-n, .kpi:nth-child(3) .kpi-n { color: var(--blue); }
+.kpi:nth-child(2) .kpi-n, .kpi:nth-child(4) .kpi-n { color: var(--red); }
+.kpi-l { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--grey-mid); font-weight: 700; margin-top: 10px; }
+.kpi-s { font-size: 12px; line-height: 1.5; color: var(--grey-mid); margin-top: 6px; }
+.chart-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; margin-top: 34px; }
+.chart-panel { min-width: 0; }
+.chart-panel-title { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--grey-mid); font-weight: 700; margin-bottom: 12px; }
+.chart-canvas-small { height: 250px; max-height: 250px; position: relative; overflow: hidden; }
+.chart-canvas-small canvas { width: 100% !important; height: 100% !important; }
+.method-note {
+  background: var(--grey-bg);
+  border-left: 3px solid var(--blue);
+  padding: 20px 24px;
+  margin-top: 30px;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--grey-dark);
+  font-weight: 300;
+}
+.method-note strong { color: var(--blue); }
+.audit-section {
+  padding: 56px 40px;
+  max-width: 1120px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--grey-light);
+  background: var(--white);
+}
+.audit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--grey-light);
+  border: 1px solid var(--grey-light);
+  margin-top: 32px;
+}
+.audit-card { background: var(--white); padding: 28px 24px; }
+.audit-card h3 { font-size: 15px; line-height: 1.25; color: var(--red); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px; }
+.audit-card p { font-size: 13px; line-height: 1.7; color: var(--grey-dark); font-weight: 300; }
+.audit-card strong { color: var(--black); }
+
+
+.context-band {
+  padding: 56px 40px;
+  max-width: 1120px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--grey-light);
+  background: var(--white);
+}
+.context-band.alt { background: var(--grey-bg); max-width: none; }
+.context-band.alt > .context-inner { max-width: 1120px; margin: 0 auto; }
+.context-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--grey-light);
+  border: 1px solid var(--grey-light);
+  margin-top: 34px;
+}
+.context-card {
+  background: var(--white);
+  padding: 28px 24px;
+}
+.context-card .num {
+  font-size: 10px;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--blue);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.context-card h3 {
+  font-size: 17px;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+.context-card p {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--grey-dark);
+  font-weight: 300;
+}
+.context-card strong { color: var(--black); font-weight: 700; }
+.context-card.red .num { color: var(--red); }
+.context-card.red h3 { color: var(--red); }
+.context-list {
+  margin-top: 28px;
+  border-top: 1px solid var(--grey-light);
+}
+.context-list-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 32px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--grey-light);
+}
+.context-list-label {
+  font-size: 11px;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--blue);
+}
+.context-list-body {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--grey-dark);
+  font-weight: 300;
+}
+.context-list-body strong { color: var(--black); }
+.mini-table {
+  margin-top: 30px;
+  border: 1px solid var(--grey-light);
+  display: grid;
+  grid-template-columns: 1.1fr .9fr 1.4fr;
+  font-size: 12px;
+}
+.mini-table div { padding: 13px 14px; border-right: 1px solid var(--grey-light); border-bottom: 1px solid var(--grey-light); line-height: 1.45; }
+.mini-table div:nth-child(3n) { border-right: none; }
+.mini-table .head { background: var(--black); color: var(--white); font-size: 10px; letter-spacing:.1em; text-transform: uppercase; font-weight:700; }
+.mini-table .blue { color: var(--blue); font-weight: 700; }
+.mini-table .red { color: var(--red); font-weight: 700; }
+
+
+
+/* ── FRONTEX / DTM INSERT — CSS repris du numéro spécial ── */
+.section-divider {
+  padding: 12px 40px;
+  background: var(--grey-bg);
+  color: var(--grey-mid);
+  border-top: 1px solid var(--grey-light);
+  border-bottom: 1px solid var(--grey-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.section-divider span:first-child { color: var(--black); font-weight: 700; }
+.chart-section, .money-section, .dtm-section, .tweets-section, .concept-section {
+  padding: 56px 40px;
+  max-width: 1120px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--grey-light);
+  border-top: none;
+  background: var(--white);
+  color: var(--black);
+}
+.chart-title, .money-title, .dtm-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1.2;
+  font-style: normal;
+}
+.chart-subtitle, .money-subtitle, .dtm-subtitle, .chart-label {
+  font-size: 12px;
+  color: var(--grey-mid);
+  opacity: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.chart-box canvas, .dtm-section canvas {
+  display: block;
+  width: 100% !important;
+  max-width: 100%;
+  height: 260px !important;
+  max-height: 260px !important;
+}
+.dtm-section canvas#chart3 { height: 240px !important; max-height: 240px !important; }
+.canvas-limiter {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  max-height: 260px;
+  overflow: hidden;
+}
+.canvas-limiter canvas { height: 100% !important; max-height: 100% !important; }
+.money-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.sector-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.sector-label { width: 160px; flex-shrink: 0; font-size: 12px; color: var(--grey-dark); font-weight: 600; text-align: right; }
+.sector-track { flex: 1; height: 18px; background: var(--grey-bg); overflow: hidden; }
+.sector-fill { height: 100%; background: var(--blue); }
+.sector-value { width: 72px; flex-shrink: 0; font-size: 12px; font-weight: 700; color: var(--blue); text-align: right; }
+.rnd-section, .operations-section { padding: 56px 40px; max-width: 1120px; margin: 0 auto; border-bottom: 1px solid var(--grey-light); background: var(--white); }
+.rnd-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 60px; align-items: start; }
+.canvas-limiter-treemap { position: relative; width: 100%; height: 360px; max-height: 360px; overflow: hidden; }
+.canvas-limiter-treemap canvas { height: 100% !important; max-height: 100% !important; width: 100% !important; display: block; }
+.rnd-note { font-size: 13px; line-height: 1.7; color: var(--grey-dark); font-weight: 300; padding: 20px 24px; border-left: 3px solid var(--blue); background: var(--grey-bg); }
+.ops-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--grey-light); border: 1px solid var(--grey-light); margin-top: 36px; }
+.op-card { background: var(--white); padding: 28px 24px; }
+.op-name { font-size: 15px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.op-zone { font-size: 10px; color: var(--grey-mid); letter-spacing: .1em; text-transform: uppercase; font-weight: 600; margin-bottom: 16px; }
+.op-amount { font-size: 32px; font-weight: 700; color: var(--blue); line-height: 1; letter-spacing: -.02em; }
+.op-amountlabel { font-size: 10px; color: var(--grey-mid); letter-spacing: .1em; text-transform: uppercase; font-weight: 600; margin-top: 6px; }
+.op-body { font-size: 12px; color: var(--grey-dark); line-height: 1.65; margin-top: 14px; font-weight: 300; }
+.bar-row { display: flex; align-items: center; gap: 14px; margin-bottom: 13px; }
+.bar-label { width: 120px; flex-shrink: 0; font-size: 12px; color: var(--grey-dark); font-weight: 600; text-align: right; letter-spacing: 0; text-transform: none; }
+.bar-track { flex: 1; height: 20px; background: var(--grey-bg); position: relative; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--blue); }
+.bar-value { width: 64px; flex-shrink: 0; font-size: 12px; font-weight: 700; color: var(--blue); text-align: right; }
+.money-section > div:nth-child(2) .bar-fill { background: var(--blue); }
+.money-section > div:nth-child(2) .bar-row:nth-of-type(3) .bar-fill { background: var(--red) !important; }
+.money-section > div:nth-child(2) .bar-row:nth-of-type(3) .bar-value { color: var(--red) !important; }
+.route-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--grey-light); border: 1px solid var(--grey-light); margin: 36px 0 40px; }
+.route-card { background: var(--white); border: none; padding: 28px 24px; }
+.route-name { font-size: 12px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; opacity: 1; }
+.route-peak { font-size: 32px; font-weight: 700; color: var(--red); line-height: 1; letter-spacing: -0.02em; }
+.route-peaklabel { font-size: 10px; color: var(--grey-mid); opacity: 1; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; font-weight: 600; }
+.route-note { font-size: 12px; color: var(--grey-dark); opacity: 1; line-height: 1.6; margin-top: 12px; font-weight: 300; }
+@media (max-width: 820px) {
+  .rnd-grid, .ops-grid, .route-grid { grid-template-columns: 1fr; }
+  .rnd-section, .operations-section, .dtm-section, .money-section { padding-left: 20px; padding-right: 20px; }
+  .sector-label { width: 130px; }
+  .money-section { grid-template-columns: 1fr; gap: 40px; }
+  .section-divider { padding-left: 20px; padding-right: 20px; flex-direction: column; align-items: flex-start; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 820px) {
-  .stats-row { grid-template-columns: 1fr 1fr; }
-  .grid-2, .words-grid, .prop-grid { grid-template-columns: 1fr; gap: 40px; }
+  .stats-row, .kpi-strip { grid-template-columns: 1fr 1fr; }
+  .grid-2, .words-grid, .prop-grid, .front-grid, .chart-pair, .arch-grid, .audit-grid, .context-grid-3, .context-list-row, .mini-table { grid-template-columns: 1fr; gap: 40px; }
   .gz-grid, .samples-grid { grid-template-columns: 1fr; }
   .map-intro-row { grid-template-columns: 1fr; gap: 24px; }
   .site-header, .sec-label, .map-footer, .analysis-section, .gz-inner, .words-section, .timeline-section, .samples-section { padding-left: 20px; padding-right: 20px; }
-  .cover, .proposal { padding-left: 20px; padding-right: 20px; }
+  .cover, .proposal, .architecture-section, .front-context, .audit-section, .context-band { padding-left: 20px; padding-right: 20px; }
 }
 </style>
 </head>
@@ -534,33 +841,282 @@ body {
 <!-- SITE HEADER -->
 <header class="site-header">
   <span><strong>TAG REVUE</strong> — @001</span>
-  <span>V2 — Capitalisation données Alarm Phone</span>
-  <span>Maquette pitch · mai 2025</span>
+  <span>Alarm Phone × Frontex · documenter la non assistance en Meditérannée</span>
+  <span>Maquette· mai 2026</span>
 </header>
 
 <!-- COVER -->
 <div class="cover">
-  <div class="cover-eyebrow">@alarm_phone · Corpus 293 tweets · Juil. 2025 – Avr. 2026</div>
+  <div class="cover-eyebrow">@alarm_phone · Corpus 293 tweets · Frontex/IOM/DTM · 2008–2026</div>
   <h1 class="cover-title">
     293 alertes de détresse.<br>
-    <strong>Qui répond — et qui ne répond pas ?</strong>
+    <strong>Qui répond et qui ne répond pas ?</strong>
   </h1>
-  <p class="cover-lead">
-    Tag Revue a récupéré par algorithme l'intégralité des tweets publiés par @alarm_phone entre juillet 2025 et avril 2026. Ces 293 documents constituent un journal de bord des eaux méditerranéennes et atlantiques : qui appelle, depuis où, vers où — et ce que font (ou ne font pas) les autorités compétentes une fois alertées.
+   <p class="cover-lead">
+    Tag Revue a récupéré par algorithme l'intégralité des tweets publiés par Alarm_phone entre juillet 2025 et avril 2026. Cet échantillon de 293 tweets constitue un journal de bord des eaux méditerranéennes et atlantiques : qui appelle, depuis où, vers où et ce que font (ou ne font pas) les autorités compétentes une fois alertées.
+    <br>
+    En dix ans, Alarm Phone dit avoir été alerté par plus de 8 000 bateaux en Méditerranée, dans l’Atlantique et dans la Manche. Parmi eux, plus de 3 000 cas concernaient la seule Méditerranée centrale.
+    <br>
+    Là où un rapport institutionnel plaide, où une base de données archive, où un témoignage raconte, TAG REVUE propose une forme intermédiaire : une revue papier qui rend lisible un système. Le cœur du numéro tient dans ce croisement : <strong>922 millions d’euros de budget Frontex, 33 170 morts documentés en Méditerranée depuis 2014, 293 alertes de détresse collectées chez Alarm Phone</strong>. La question devient alors moins abstraite : que fait l’infrastructure européenne de surveillance lorsqu’une embarcation appelle à l’aide, et que peut-on mesurer depuis ses silences ?
   </p>
-  <div class="cover-tags">
-    <span class="ctag">293 tweets récoltés</span>
-    <span class="ctag">Données géolocalisées</span>
-    <span class="ctag">10 mois d'activité</span>
-    <span class="ctag ctag-red">48 contacts perdus</span>
-    <span class="ctag ctag-red">57 attentes prolongées</span>
+
+  <div class="cover-claim">
+    <strong>Hypothèse éditoriale :</strong> la frontière européenne ne manque pas de données, de budgets ou d’outils de surveillance. Elle manque de secours. Ce numéro ne raconte pas seulement des naufrages : il met en relation les alertes publiques d’Alarm Phone, les budgets Frontex, les routes DTM/IOM et les morts documentés pour produire <strong>une analyse de la non-assistance.</strong>
   </div>
+ 
+  <div class="cover-tags">
+    <span class="ctag ctag-blue">Budget Frontex</span>
+    <span class="ctag ctag-red">Morts documentés</span>
+    <span class="ctag">Corpus @alarm_phone</span>
+    <span class="ctag">Routes DTM/IOM</span>
+    <span class="ctag ctag-red">Non-assistance</span>
+  </div>
+</div>
+
+<!-- ARCHITECTURE -->
+<div class="architecture-section">
+  <div class="architecture-kicker">Construction proposée du n°1</div>
+  <h2 class="architecture-title">Un numéro en trois mouvements : <strong>contexte, typologie, archive brute.</strong></h2>
+  <p class="architecture-lead">
+    Le numéro ne se limite pas au corpus Twitter/X : il l’inscrit dans le contexte politique et économique de la frontière, puis revient aux données Alarm Phone pour montrer comment le silence institutionnel peut être lu, classé et publié.
+  </p>
+  <div class="arch-grid">
+    <div class="arch-card">
+      <div class="arch-num">Partie 01</div>
+      <h3>Contribution analytique & documentation contextuelle</h3>
+      <p>Mettre en face budgets Frontex, routes DTM/IOM, opérations européennes et morts documentés. La thèse est posée sans réduire la preuve à un ratio : l’augmentation des moyens de surveillance ne garantit pas l’assistance, et les alertes Alarm Phone permettent d’apréhender ce décalage à l’épreuve du réel.</p>
+    </div>
+    <div class="arch-card">
+      <div class="arch-num">Partie 02</div>
+      <h3>Analyse typologique des données Alarm Phone</h3>
+      <p>Classer les tweets par zones, pays de départ, autorités interpellées, temps d’attente, pertes de contact et registres lexicaux. Objet de la section est de concevoir un tableau de bord de la non-assistance.</p>
+    </div>
+    <div class="arch-card">
+      <div class="arch-num">Partie 03</div>
+      <h3>Data brute & collecte</h3>
+      <p>Exposer les données brutes : 
+      tweets sélectionnés, dates, lieux, mots, lacunes, données manquantes. Rendre compte de l'étendue de la collecte constitue la preuve et la mémoire éditoriale du numéro.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PART I CONTEXT -->
+<div class="sec-label">
+  <span><strong>Partie 01</strong> — Contribution analytique · Frontex/IOM/DTM</span>
+  <span>Contexte structurel à associer au corpus Alarm Phone</span>
+</div>
+<div class="kpi-strip">
+  <div class="kpi"><div class="kpi-n">922<span style="font-size:.45em;color:var(--grey-mid)"> M€</span></div><div class="kpi-l">Budget Frontex 2024</div><div class="kpi-s">Une puissance budgétaire devenue centrale dans l’architecture européenne de surveillance.</div></div>
+  <div class="kpi"><div class="kpi-n">2 573</div><div class="kpi-l">Morts documentés en 2024</div><div class="kpi-s">Chiffre IOM Missing Migrants pour la Méditerranée : un plancher statistique, non un bilan définitif.</div></div>
+  <div class="kpi"><div class="kpi-n">2<span style="font-size:.5em;color:var(--grey-mid)"> Mrd€</span></div><div class="kpi-l">Subventions 2008–2024</div><div class="kpi-s">Flux Frontex vers États membres, opérations, équipements et dispositifs frontaliers.</div></div>
+  <div class="kpi"><div class="kpi-n">33 170</div><div class="kpi-l">Morts 2014–2024</div><div class="kpi-s">Chiffre plancher IOM Missing Migrants : les disparitions sans corps restent sous-documentées.</div></div>
+</div>
+<div class="front-context">
+  <div class="front-grid">
+    <div>
+      <div class="section-title">Partie 1</div>
+      <div class="section-sub">Surveillance, financement, alerte</div>
+      <div class="front-copy">
+        Collecter les tweets d’Alarm Phone ne sert pas seulement à documenter des appels de détresse. C’est aussi l’occasion de <strong>quantifier une politique de non-assistance</strong> : identifier qui est alerté, où, à quel moment, après combien d’heures, avec quelle issue visible — et avec quels silences.
+        <br><br>
+        Pour que cette quantification soit politiquement lisible, les alertes doivent être mises à côté des chiffres de l’infrastructure qui encadre ces mêmes eaux : <strong class="blue">budgets Frontex, liste des opérations, zones de contrôle, financements de projets de surveillance</strong>. La Partie 1 ne cherche donc pas à prouver qu’un budget “cause” mécaniquement une mort. Elle pose une hypothèse suivante : <strong>l’Europe finance massivement la détection et la contention ; le corpus Alarm Phone permet d’observer ce qui se passe quand la demande n’est plus de détecter, mais de secourir</strong>.
+      </div>
+      <div class="method-note">“La revue fait ici une tentative : rendre mesurable ce qui reste souvent formulé qualitativement : délais, adresses institutionnelles, pertes de contact, refoulements, absences d’issue.”</div>
+    </div>
+    <div>
+      <div class="section-title">Deux séries pour cadrer la preuve</div>
+      <div class="section-sub">Frontex grants · décès IOM · traversées DTM · 2016–2024</div>
+      <div class="chart-pair">
+        <div class="chart-panel">
+          <div class="chart-panel-title">Subventions Frontex vs morts documentés</div>
+          <div class="chart-canvas-small"><canvas id="chartFrontexMoneyDeaths"></canvas></div>
+        </div>
+        <div class="chart-panel">
+          <div class="chart-panel-title">Traversées documentées vs morts documentés</div>
+          <div class="chart-canvas-small"><canvas id="chartFrontexMortality"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="context-band alt">
+  <div class="context-inner">
+    <div class="section-title">Ce que la Partie 1 doit établir</div>
+    <div class="section-sub">Une contribution analytique avant la typologie du corpus</div>
+    <div class="context-grid-3">
+      <div class="context-card">
+        <div class="num">01 · Infrastructure</div>
+        <h3>Les eaux sont déjà gouvernées</h3>
+        <p>Les alertes n’arrivent pas dans un vide. Elles surgissent dans des zones SAR, des routes DTM, des opérations Frontex, des frontières maritimes, des dispositifs d’interception et des chaînes de commandement. La revue doit montrer cet environnement avant de montrer les tweets.</p>
+      </div>
+      <div class="context-card">
+        <div class="num">02 · Déplacement</div>
+        <h3>Les routes se recomposent</h3>
+        <p>La Méditerranée centrale, la Méditerranée occidentale et l’Atlantique ne sont pas trois scènes séparées : elles sont liées par les effets du verrouillage, des accords bilatéraux, des opérations de contrôle et des opportunités de passage qui se déplacent.</p>
+      </div>
+      <div class="context-card red">
+        <div class="num">03 · Assistance</div>
+        <h3>La question n’est pas seulement “où ?”</h3>
+        <p>La question centrale devient : <strong>qui répond ?</strong> Qui accuse réception, qui tarde, qui renvoie vers une autre autorité, qui intercepte, qui disparaît du récit ? Ici, le travail de collecte d'Alarm Phone est structurant.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DTM ROUTES -->
+<div class="section-divider" style=""><span>§ 02 — Les routes · DTM Europe Q3 2025</span><span>IOM / DTM · iom.int/dtm · données trimestrielles</span></div>
+
+<div class="dtm-section">
+  <div class="dtm-title">Quatre routes, une pression constante</div>
+  <div class="dtm-subtitle">Arrivées par route maritime · 2016–2025 · Source : DTM Europe (IOM)</div>
+
+  <div class="route-grid">
+    <div class="route-card">
+      <div class="route-name">Méd. Centrale (CMR)</div>
+      <div class="route-peak">181 460</div>
+      <div class="route-peaklabel">Pic 2016 · Libye → Italie/Malta</div>
+      <div class="route-note">2024 : 66 855. Route la plus meurtrière au monde selon l'IOM. Opérations Frontex Poseidon & Triton concentrées ici.</div>
+    </div>
+    <div class="route-card">
+      <div class="route-name">Méd. Orientale (EMR)</div>
+      <div class="route-peak">194 438</div>
+      <div class="route-peaklabel">Pic 2016 · Turquie → Grèce</div>
+      <div class="route-note">2024 : 78 084. Chute post-accord UE-Turquie mars 2016. Opération Poseidon déplacée. Pushbacks documentés.</div>
+    </div>
+    <div class="route-card">
+      <div class="route-name">Atl. Ouest (WAAR)</div>
+      <div class="route-peak">46 843</div>
+      <div class="route-peaklabel">Pic 2024 · W. Afrique → Canaries</div>
+      <div class="route-note">Route en explosion : ×70 entre 2016 et 2024. Reflet du verrouillage des routes centrales. Alarm Phone 2025–26 : 9 alertes Atlantic.</div>
+    </div>
+    <div class="route-card">
+      <div class="route-name">Méd. Occ. (WMR)</div>
+      <div class="route-peak">62 991</div>
+      <div class="route-peaklabel">Pic 2018 · Maroc/Algérie → Espagne</div>
+      <div class="route-note">2024 : 17 127. Route la plus documentée par Alarm Phone 2025–26 : 19 alertes WesternMed, 24 mentions Algeria.</div>
+    </div>
+  </div>
+
+  <div class="canvas-limiter canvas-limiter-wide"><canvas id="chart3"></canvas></div>
+  <div style="font-size:10px;opacity:.4;margin-top:16px;font-style:italic;">Source : DTM Europe Q3 2025 — IOM. Données trimestrielles compilées par route et pays d'arrivée. iom.int/dtm</div>
+</div>
+
+<!-- MONEY -->
+<div class="section-divider"><span>§ 03 — L'argent · Statewatch / Frontex grants</span><span>statewatch.org · CSV public · 13 454 lignes</span></div>
+
+<div class="money-section">
+  <div>
+    <div class="money-title">Qui reçoit l'argent</div>
+    <div class="money-subtitle">Subventions Frontex 2008–2024 par État membre (M€)</div>
+    <div class="bar-row"><div class="bar-label">Allemagne</div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="bar-value">369,6</div></div>
+    <div class="bar-row"><div class="bar-label">Italie</div><div class="bar-track"><div class="bar-fill" style="width:85%"></div></div><div class="bar-value">314,4</div></div>
+    <div class="bar-row"><div class="bar-label">Espagne</div><div class="bar-track"><div class="bar-fill" style="width:51%"></div></div><div class="bar-value">187,7</div></div>
+    <div class="bar-row"><div class="bar-label">Grèce</div><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><div class="bar-value">148,5</div></div>
+    <div class="bar-row"><div class="bar-label">Portugal</div><div class="bar-track"><div class="bar-fill" style="width:34%"></div></div><div class="bar-value">126,3</div></div>
+    <div class="bar-row"><div class="bar-label">France</div><div class="bar-track"><div class="bar-fill" style="width:29%"></div></div><div class="bar-value">107,0</div></div>
+    <div class="bar-row"><div class="bar-label">Pays-Bas</div><div class="bar-track"><div class="bar-fill" style="width:27%"></div></div><div class="bar-value">100,6</div></div>
+    <div style="font-size:10px;color:var(--grey-mid);margin-top:20px;font-style:italic;">Source : Statewatch.org, frontex-grants CSV, 2025. Total 2 Mrd€ sur 17 ans.</div>
+  </div>
+  <div>
+    <div class="money-title">À quoi sert l'argent ?</div>
+    <div class="money-subtitle">Ventilation par secteur · total 2008–2024</div>
+    <div class="sector-row"><div class="sector-label">Frontières terrestres</div><div class="sector-track"><div class="sector-fill" style="width:100%"></div></div><div class="sector-value">~560 M€</div></div>
+    <div class="sector-row"><div class="sector-label">Frontières maritimes</div><div class="sector-track"><div class="sector-fill" style="width:85%"></div></div><div class="sector-value">~480 M€</div></div>
+    <div class="sector-row"><div class="sector-label">Expulsions / retours</div><div class="sector-track"><div class="sector-fill" style="width:55%;background:var(--red)"></div></div><div class="sector-value" style="color:var(--red)">~310 M€</div></div>
+    <div class="sector-row"><div class="sector-label">Frontières aériennes</div><div class="sector-track"><div class="sector-fill" style="width:42%"></div></div><div class="sector-value">~240 M€</div></div>
+    <div class="sector-row"><div class="sector-label">Corps permanent</div><div class="sector-track"><div class="sector-fill" style="width:28%"></div></div><div class="sector-value">~160 M€</div></div>
+    <div class="sector-row"><div class="sector-label">Équipements lourds</div><div class="sector-track"><div class="sector-fill" style="width:20%"></div></div><div class="sector-value">~115 M€</div></div>
+    <div style="font-size:10px;color:var(--grey-mid);margin-top:20px;font-style:italic;">Niveau de détail repris de la maquette transmise : secteurs consolidés 2008–2024, montants arrondis.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span>§ 04 — Côté R&D · industrie de surveillance</span><span>Fonds UE Horizon · Money Trails / Corporate Europe Observatory</span></div>
+<div class="rnd-section">
+  <div class="rnd-grid">
+    <div>
+      <div class="money-title">Côté R&D : qui construit les outils ?</div>
+      <div class="money-subtitle">Treemap · nombre de projets cités par bénéficiaire industriel</div>
+      <div class="canvas-limiter-treemap"><canvas id="chartRND"></canvas></div>
+      <div style="font-size:11px;color:var(--grey-mid);margin-top:14px;font-style:italic;">Données reprises de la section “Côté R&D” : 223 M€ · 38 projets · Thales, Finmeccanica, Airbus, Safran et familles technologiques associées.</div>
+    </div>
+    <div class="rnd-note">
+      <strong style="color:var(--blue);">223 M€ de fonds UE additionnels</strong> via Horizon ont financé 38 projets de surveillance. Les bénéficiaires industriels cités concentrent les dispositifs de détection : drones, biométrie, capteurs thermiques, détection olfactive et contrôle de véhicules.
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>§ 05 — Les opérations</span><span>Des noms de dieux grecs pour nommer les eaux</span></div>
+<div class="operations-section">
+  <div class="money-title">Les opérations — des noms de dieux grecs pour nommer les eaux</div>
+  <div class="money-subtitle">Opérations permanentes Frontex en Méditerranée · financement total sur durée de vie</div>
+  <div class="ops-grid">
+    <div class="op-card"><div class="op-name">POSEIDON</div><div class="op-zone">Mer Égée · Grèce / Turquie</div><div class="op-amount">251,7<span style="font-size:.55em;color:var(--grey-mid)"> M€</span></div><div class="op-amountlabel">Subventions Frontex 2008–2018</div><div class="op-body">Opération la plus financée. Pic en 2016 : 68,1 M€ — l'année record des morts en Méditerranée.</div></div>
+    <div class="op-card"><div class="op-name">TRITON</div><div class="op-zone">Méditerranée centrale · Italie</div><div class="op-amount">145,7<span style="font-size:.55em;color:var(--grey-mid)"> M€</span></div><div class="op-amountlabel">2014–2018</div><div class="op-body">Successeur de Mare Nostrum. Zone d'opération réduite, fréquence des naufrages augmentée.</div></div>
+    <div class="op-card"><div class="op-name">HERMES</div><div class="op-zone">Mer de Sicile · Lampedusa</div><div class="op-amount">40,1<span style="font-size:.55em;color:var(--grey-mid)"> M€</span></div><div class="op-amountlabel">2008–2015</div><div class="op-body">Opération Lampedusa. Naufrage du 3 octobre 2013 : 366 morts à 1 km des côtes.</div></div>
+    <div class="op-card"><div class="op-name">INDALO</div><div class="op-zone">Mer d'Alboran · Espagne</div><div class="op-amount">45,6<span style="font-size:.55em;color:var(--grey-mid)"> M€</span></div><div class="op-amountlabel">2008–2021</div><div class="op-body">Route Maroc–Espagne. Avec Alarm Phone 2025–26 : toujours active, alertes quotidiennes.</div></div>
+  </div>
+</div>
+
+<!-- <div class="context-band">
+  
+  <div class="front-grid">
+     <div>
+      <div class="section-title">Surveillance financée, secours incertain</div>
+      
+      <div class="front-copy">
+       L'observation de la Partie 1 : <strong>les moyens de surveillance augmentent, les morts restent massivement documentés, et les alertes publiques montrent des situations où l’assistance reste incertaine, différée voire absente</strong>.
+        <br><br>
+        La problématique émerge : <strong> Comment une frontière équipée, financée et cartographiée peut-elle produire autant de zones de silence lorsqu’un bateau demande secours ?</strong>
+      </div>
+    </div>
+    <div> 
+        <div class="mini-table">
+        <div class="head">Donnée contexte</div><div class="head">Ce qu’elle montre</div><div class="head">Lien avec Alarm Phone</div>
+        <div class="blue">Budget Frontex</div><div>La capacité matérielle et institutionnelle de surveillance.</div><div>Permet de demander pourquoi la détection ne se traduit pas automatiquement en secours.</div>
+        <div class="blue">Opérations maritimes</div><div>Les zones où l’Europe nomme, finance et organise le contrôle.</div><div>Permet de superposer les alertes aux eaux déjà couvertes par un dispositif.</div>
+        <div class="red">Morts documentés IOM</div><div>Le coût humain minimal connu, avec de fortes zones d’ombre.</div><div>Permet de situer les pertes de contact comme des blancs possibles dans les registres officiels.</div>
+        <div>Routes DTM</div><div>Les trajectoires qui se déplacent selon les verrouillages.</div><div>Permet d’expliquer pourquoi l’Algérie, les Canaries ou Malte apparaissent dans le corpus.</div>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<div class="context-band alt">
+  <div class="context-inner">
+    <div class="section-title">Surveillance financée, secours incertain </div>
+    <div class="section-sub">Comment une frontière équipée, financée et cartographiée peut-elle produire autant de zones de silence lorsqu’un bateau demande secours ? Proposition de quatre fils narratifs pour introduire le numéro</div>
+    <div class="context-list">
+      <div class="context-list-row">
+        <div class="context-list-label">Frontex, fer de lance des politique migratoire  de l'UE ?</div>
+        <div class="context-list-body">La frontière européenne n’est pas seulement une ligne : c’est un système financé, équipé, externalisé et mis en récit par des opérations. Cette couche donne au lecteur non spécialiste le cadre nécessaire avant d’entrer dans les tweets.</div>
+      </div>
+      <div class="context-list-row">
+        <div class="context-list-label">Alarm Phone comme révélateur</div>
+        <div class="context-list-body">Les tweets ne sont pas de simples posts militants : ils sont des traces horodatées d’un appel, d’une localisation approximative, d’un acteur informé, d’un délai, parfois d’une disparition documentaire. Ils constituent une contre-archive publique.</div>
+      </div>
+      <div class="context-list-row">
+        <div class="context-list-label">La non-assistance comme donnée</div>
+        <div class="context-list-body">La revue peut transformer des formulations récurrentes — “authorities informed”, “no rescue”, “lost contact”, “4 days ago” — en variables lisibles. C’est la valeur ajoutée : ne pas uniquement raconter l’abandon mais en construire des indicateurs.</div>
+      </div>
+      <div class="context-list-row">
+        <div class="context-list-label">Le format comme changement d’audience</div>
+        <div class="context-list-body">Un rapport circule dans les réseaux militants et institutionnels. Une revue imprimable peut circuler dans des écoles, bibliothèques, salons, ateliers et élargir le public. La forme déplace le sujet vers des publics qui ne lisent pas les rapports.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PART II INTRO -->
+<div class="sec-label">
+  <span><strong>Partie 02</strong> — Analyse typologique des data</span>
+  <span>@alarm_phone · Twitter/X · juil. 2025 – avr. 2026</span>
 </div>
 
 <!-- §01 STATS -->
 <div class="sec-label">
-  <span><strong>§ 01</strong> — Corpus · données brutes</span>
-  <span>@alarm_phone · Twitter/X · juil. 2025 – avr. 2026</span>
+  <span><strong>§ 01</strong> — Echantillon de base · Corpus</span>
+  <span>Base de l'analyse typologique · 293 tweets</span>
 </div>
 <div class="stats-row">
   <div class="stat-cell">
@@ -705,6 +1261,18 @@ body {
   </div>
 </div>
 
+
+<div class="audit-section">
+  <div class="section-title">Ce que la typologie doit produire</div>
+  <div class="section-sub">Vers un audit de non-assistance lisible par institution</div>
+  
+  <div class="audit-grid">
+    <div class="audit-card"><h3>Qui est informé ?</h3><p><strong>MRCC Rome, Malte, Espagne, Commission européenne, garde-côtes libyens ou tunisiens</strong> : le corpus permet de lister les acteurs nommés et d’objectiver l’adresse institutionnelle des alertes.</p></div>
+    <div class="audit-card"><h3>Quel délai ?</h3><p>Les mentions de <strong>48 heures, 3 jours, 4 jours, 15 heures</strong> transforment l’urgence en variable temporelle. Le temps d’attente devient une preuve éditoriale.</p></div>
+    <div class="audit-card"><h3>Quelle issue ?</h3><p>Rescue, interception, arrivée, silence, perte de contact : la typologie doit distinguer le secours effectif de la disparition documentaire. C’est le cœur politique du numéro.</p></div>
+  </div>
+</div>
+
 <!-- §04 GREY ZONES -->
 <div class="sec-label">
   <span><strong>§ 04</strong> — Zones grises · eaux sans réponse</span>
@@ -717,7 +1285,7 @@ body {
       <div class="gz-card">
         <div class="gz-card-name">Zone SAR maltaise</div>
         <div class="gz-card-zone">Méditerranée centrale</div>
-        <div class="gz-card-body">La zone SAR de Malte couvre une surface disproportionnée par rapport aux capacités de l'île. Le corpus documente systématiquement des délais de réponse supérieurs à 10 heures dans cette zone. 12 tweets citent Malta directement — sans résolution documentée dans la moitié des cas.</div>
+        <div class="gz-card-body">La zone SAR de Malte couvre une surface disproportionnée par rapport aux capacités de l'île. Le corpus documente systématiquement des délais de réponse supérieurs à 10 heures dans cette zone. 12 tweets citent Malta, sans résolution documentée dans la moitié des cas.</div>
         <div class="gz-card-stat">12</div>
         <div class="gz-card-statlbl">alertes Malta dans le corpus 2025–26</div>
       </div>
@@ -787,6 +1355,12 @@ body {
   </div>
 </div>
 
+<!-- PART III INTRO -->
+<div class="sec-label">
+  <span><strong>Partie 03</strong> — Data brute · collecte</span>
+  <span>Tweets sélectionnés · matière première éditoriale</span>
+</div>
+
 <!-- §07 TWEET SAMPLES -->
 <div class="sec-label">
   <span><strong>§ 07</strong> — Matière brute · tweets sélectionnés</span>
@@ -834,42 +1408,43 @@ body {
   <div class="prop-inner">
     <div class="prop-eyebrow">Proposition de collaboration — Tag Revue × Alarm Phone</div>
     <h2 class="prop-title">
-      Vos données comme argument.<br>
+      Tag revue & Alarm phone.<br>
       <strong>Une revue construite depuis les alertes.</strong>
     </h2>
     <p class="prop-body">
-      Les tweets d'Alarm Phone sont une matière éditoriale de premier ordre : datés, géolocalisés, écrits dans l'urgence, ils documentent un vide institutionnel systématique. Tag Revue propose d'en faire le cœur éditorial d'un numéro imprimé et numérique, croisé avec les données financières Frontex et les flux migratoires DTM/IOM. L'argument n'est pas formulé — il est rendu visible par les données elles-mêmes.
+      Les tweets d'Alarm Phone, datés, géolocalisés, documentent un vide institutionnel systématique. Tag Revue propose de les associer aux données Frontex, IOM et DTM pour produire un objet qui circule hors des espaces militants déjà convaincus : une revue imprimée et web qui transforme la trace d’alerte en preuve publique.
     </p>
     <div class="prop-grid">
       <div class="prop-item">
-        <div class="prop-n">Vos tweets comme matière première</div>
-        <div class="prop-b">Le corpus récupéré est déjà analysé. 293 tweets, 15 pays, 48 pertes de contact. La revue les publie dans leur forme brute, organisés par zone, par acteur, par issue.</div>
+        <div class="prop-n">Une contribution analytique située</div>
+        <div class="prop-b">Le numéro ouvre sur le contexte Frontex/IOM : budgets, morts documentés, routes et opérations. Les alertes Alarm Phone ne sont plus isolées ; elles apparaissent dans l’infrastructure qui prétend surveiller ces eaux.</div>
       </div>
       <div class="prop-item">
-        <div class="prop-n">La carte comme argument politique</div>
-        <div class="prop-b">La carte interactive des alertes superposée aux zones d'opération Frontex (Poseidon, Triton, Indalo) est l'argument visuel central : les deux systèmes occupent les mêmes eaux.</div>
+        <div class="prop-n">Une typologie de la non-assistance</div>
+        <div class="prop-b">Pays de départ, autorités interpellées, attentes prolongées, pertes de contact : la revue classe les tweets pour faire apparaître des régularités, pas seulement des cas.</div>
       </div>
       <div class="prop-item">
-        <div class="prop-n">Les zones grises nommées</div>
-        <div class="prop-b">SAR maltaise, eaux libyennes sous financement EU, route algéro-espagnole émergente — trois zones documentées par vos tweets où la responsabilité étatique s'efface.</div>
+        <div class="prop-n">La donnée brute conservée</div>
+        <div class="prop-b">La maquette garde les tweets, les dates, les extraits, les blancs et les issues inconnues. Le brut n’est pas décoratif : il rend vérifiable le geste éditorial.</div>
       </div>
       <div class="prop-item">
-        <div class="prop-n">Format revue imprimable + web</div>
-        <div class="prop-b">Typographie éditoriale, données brutes assumées, sources citées ligne à ligne. PDF haute qualité distribuable + version HTML interactive pour diffusion en ligne.</div>
+        <div class="prop-n">Un format qui change d’audience</div>
+        <div class="prop-b">Un rapport convainc les institutions ; une base de données archive ; une revue circule.</div>
       </div>
     </div>
   </div>
 </div>
 
 <footer class="site-footer">
-  <span>Tag Revue · @001 · V2 Swiss · Mai 2025</span>
+  <span>Tag Revue · @001 · Alarm Phone/Frontex · Mai 2026</span>
   <span>@alarm_phone · Statewatch · IOM DTM · Twitter/X</span>
-  <span>Maquette pitch · données ouvertes</span>
+  <span>Maquette Proposition · données ouvertes · diffusion encadrée ©servicescartographiques</span>
 </footer>
 
 <!-- SCRIPTS — loaded after DOM -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@2.3.0/dist/chartjs-chart-treemap.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -1109,7 +1684,137 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+
+  // ─── FRONTEX CONTEXT CHARTS ─────────────────────────
+  var frontYears = [2016,2017,2018,2019,2020,2021,2022,2023,2024];
+  var frontGrants = [172.7,194.5,179.0,179.6,153.8,210.7,242.5,300.3,285.3];
+  var frontDeaths = [5097,3139,2337,1885,1440,2047,2411,3155,2573];
+  var frontArrivals = [389976,187499,146949,128663,99907,151417,189595,293838,208909];
+    var moneyDeathsEl = document.getElementById('chartFrontexMoneyDeaths');
+  if (moneyDeathsEl) {
+    new Chart(moneyDeathsEl, {
+      type: 'bar',
+      data: { labels: frontYears, datasets: [
+        { type:'bar', label:'Subventions Frontex (M€)', data:frontGrants, backgroundColor:'rgba(0,0,255,.78)', yAxisID:'y1', order:2 },
+        { type:'line', label:'Décès Méditerranée', data:frontDeaths, borderColor:'#D92B2B', backgroundColor:'rgba(217,43,43,.08)', borderWidth:2.5, pointRadius:3, pointBackgroundColor:'#D92B2B', tension:.35, fill:true, yAxisID:'y2', order:1 }
+      ]},
+      options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#111', titleColor:'#fff', bodyColor:'#ccc'} },
+        scales:{ x:{grid:{display:false}, ticks:{color:'#888', font:{size:10}}}, y1:{position:'left', grid:{color:'#eee'}, ticks:{color:'#888', font:{size:10}, callback:function(v){return v+'M€';}}}, y2:{position:'right', grid:{drawOnChartArea:false}, ticks:{color:'#D92B2B', font:{size:10}}} }
+      }
+    });
+  }
+
+  var mortalityEl = document.getElementById('chartFrontexMortality');
+  if (mortalityEl) {
+    new Chart(mortalityEl, {
+      type: 'bar',
+      data: { labels: frontYears, datasets: [
+        { type:'bar', label:'Traversées (×1000)', data:frontArrivals.map(function(a){return Math.round(a/1000);}), backgroundColor:'rgba(0,0,255,.12)', yAxisID:'y1', order:2 },
+        { type:'line', label:'Morts documentés', data:frontDeaths, borderColor:'#D92B2B', backgroundColor:'rgba(217,43,43,.1)', borderWidth:3, pointRadius:4, pointBackgroundColor:'#D92B2B', tension:.35, fill:true, yAxisID:'y2', order:1 }
+      ]},
+      options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#111', titleColor:'#fff', bodyColor:'#ccc'} },
+        scales:{ x:{grid:{display:false}, ticks:{color:'#888', font:{size:10}}}, y1:{position:'left', grid:{color:'#eee'}, ticks:{color:'#888', font:{size:10}, callback:function(v){return v+'k';}}}, y2:{position:'right', grid:{drawOnChartArea:false}, ticks:{color:'#D92B2B', font:{size:10}}} }
+      }
+    });
+  }
+
+
 }); // end DOMContentLoaded
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const blue = '#0000FF';
+  const red = '#D92B2B';
+
+  const chart3El = document.getElementById('chart3');
+  if (chart3El && window.Chart) {
+    new Chart(chart3El, {
+      type: 'bar',
+      data: {
+        labels: [2016,2017,2018,2019,2020,2021,2022,2023,2024,2025],
+        datasets: [
+          {label:'CMR (Méd. Centrale)',data:[181460,119389,24815,14876,36435,68315,105575,158032,66855,51154],backgroundColor:'rgba(217,43,43,0.82)',stack:'routes'},
+          {label:'EMR (Méd. Orientale)',data:[194438,40276,57836,81338,21611,32157,52826,78954,78084,38810],backgroundColor:'rgba(217,43,43,0.55)',stack:'routes'},
+          {label:'WMR (Méd. Occ.)',data:[13406,27409,62991,29762,18838,28629,15519,17086,17127,14598],backgroundColor:'rgba(217,43,43,0.35)',stack:'routes'},
+          {label:'WAAR (Atl. Ouest)',data:[672,425,1307,2687,23023,22316,15675,39766,46843,12878],backgroundColor:'rgba(217,43,43,0.18)',stack:'routes'},
+        ]
+      },
+      options: {
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{legend:{labels:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#888',boxWidth:12}},tooltip:{backgroundColor:'#111',titleColor:'#fff',bodyColor:'#ccc'}},
+        scales:{
+          x:{ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#888'},grid:{color:'#EEEEEE'},stacked:true},
+          y:{ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#888',callback:v=>v>=1000?(v/1000)+'k':v},grid:{color:'#EEEEEE'},stacked:true}
+        }
+      }
+    });
+  }
+
+  const rndTree = [
+    {group:'Bénéficiaires industriels', label:'Thales', value:33},
+    {group:'Bénéficiaires industriels', label:'Finmeccanica', value:28},
+    {group:'Bénéficiaires industriels', label:'Airbus', value:22},
+    {group:'Bénéficiaires industriels', label:'Safran', value:8},
+    {group:'Technologies', label:'Drones de détection', value:12},
+    {group:'Technologies', label:'Biométrie', value:10},
+    {group:'Technologies', label:'Capteurs thermiques', value:8},
+    {group:'Technologies', label:'Détection olfactive', value:4}
+  ];
+
+  const chartRNDEl = document.getElementById('chartRND');
+  if (chartRNDEl && window.Chart) {
+    new Chart(chartRNDEl, {
+      type: 'treemap',
+      data: {
+        datasets: [{
+          tree: rndTree,
+          key: 'value',
+          groups: ['group', 'label'],
+          spacing: 1.5,
+          borderWidth: 0,
+          backgroundColor: function(ctx) {
+            const raw = ctx.raw || {};
+            const g = raw.g || raw._data?.group || '';
+            const v = raw.v || raw._data?.value || 1;
+            const alpha = Math.max(0.18, Math.min(0.92, v / 36));
+            return g === 'Technologies' ? `rgba(17,17,17,${alpha})` : `rgba(0,0,100,${alpha})`;
+          },
+          labels: {
+            display: true,
+            color: '#FFFFFF',
+            font: { family: 'Source Sans 3, Helvetica Neue, Helvetica, Arial', size: 13, weight: '700' },
+            formatter: function(ctx) {
+              const d = ctx.raw?._data || {};
+              return d.label ? [d.label, d.value + ' projets'] : '';
+            }
+          }
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#111',
+            titleColor: 'white',
+            bodyColor: '#ccc',
+            callbacks: {
+              title: function(items) { return items[0]?.raw?._data?.label || ''; },
+              label: function(item) {
+                const d = item.raw?._data || {};
+                return ' ' + (d.group || 'R&D') + ' · ' + d.value + ' projets';
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+});
+</script>
+
 </body>
 </html>
