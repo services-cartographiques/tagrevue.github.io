@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAG REVUE — Zemmour · Octobre 2021</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}:root{--red:#D92B2B;--blue:rgb(0,0,255);--black:#111;--grey-dark:#444;--grey-mid:#888;--grey-light:#ccc;--grey-bg:#f2f2f2;--white:#fff;--font:'Source Sans 3','Helvetica Neue',Arial,sans-serif}body{background:var(--white);color:var(--black);font-family:var(--font);font-size:15px;line-height:1.5}.site-header{border-bottom:1px solid var(--black);padding:14px 40px;display:flex;justify-content:space-between;gap:20px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-dark)}.site-header strong{color:var(--black)}.cover{padding:76px 40px 84px;border-bottom:1px solid var(--grey-light);max-width:1120px;margin:0 auto}.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:20px}.cover h1{font-size:clamp(34px,5.2vw,66px);font-weight:300;line-height:1.05;letter-spacing:-.025em;max-width:1000px;margin-bottom:28px}.cover h1 strong{font-weight:700}.cover-lead{font-size:17px;line-height:1.75;color:var(--grey-dark);font-weight:300;max-width:820px;margin-bottom:34px}.tags{display:flex;gap:10px;flex-wrap:wrap}.tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--grey-light);padding:5px 12px;color:var(--grey-dark);font-weight:700}.tag.red{border-color:var(--red);color:var(--red)}.tag.blue{border-color:var(--blue);color:var(--blue)}.sec-label{padding:12px 40px;background:var(--grey-bg);border-top:1px solid var(--grey-light);border-bottom:1px solid var(--grey-light);display:flex;justify-content:space-between;gap:20px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--grey-mid)}.sec-label strong{color:var(--black)}.stats-row{display:grid;grid-template-columns:repeat(6,1fr);border-bottom:1px solid var(--grey-light)}.stat-cell{padding:34px 24px;border-right:1px solid var(--grey-light)}.stat-cell:last-child{border-right:0}.stat-n{font-size:clamp(30px,3.4vw,48px);font-weight:700;line-height:1;letter-spacing:-.02em}.stat-n.red{color:var(--red)}.stat-n.blue{color:var(--blue)}.stat-lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-mid);margin-top:10px;font-weight:700}.stat-sub{font-size:12px;color:var(--grey-mid);margin-top:7px;line-height:1.45}.section{padding:58px 40px;max-width:1120px;margin:0 auto;border-bottom:1px solid var(--grey-light)}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:58px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--grey-light);border:1px solid var(--grey-light)}.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--grey-light);border:1px solid var(--grey-light)}.title{font-size:23px;font-weight:700;line-height:1.2;margin-bottom:6px}.sub{font-size:12px;color:var(--grey-mid);letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:30px}.hypo{background:var(--black);color:var(--white);padding:70px 40px}.hypo-inner{max-width:1120px;margin:0 auto}.hypo .eyebrow{color:var(--red)}.hypo h2{font-size:clamp(28px,4vw,48px);font-weight:300;line-height:1.15;letter-spacing:-.02em;max-width:940px;margin-bottom:26px}.hypo h2 strong{font-weight:700}.hypo p{max-width:860px;color:#bbb;font-size:16px;line-height:1.8;font-weight:300}.card{background:var(--white);padding:28px 24px}.card.redline{border-top:3px solid var(--red)}.card.blueline{border-top:3px solid var(--blue)}.card-title{font-size:13px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:12px;color:var(--black)}.card-body{font-size:13px;color:var(--grey-dark);line-height:1.75;font-weight:300}.chart-box{position:relative;width:100%;height:340px;max-height:340px;overflow:hidden;border:1px solid var(--grey-light);background:var(--white);padding:14px}.chart-box.tall{height:420px;max-height:420px}.chart-box.sankeybox{height:500px;max-height:500px;padding:0;background:#fff}.chart-box canvas{display:block;width:100%!important;height:100%!important;max-height:100%!important}.treemap{position:relative;width:100%;height:400px;max-height:400px;overflow:hidden;border:1px solid var(--grey-light);background:var(--grey-bg)}.tcell{position:absolute;border:1px solid var(--white);background:var(--black);color:var(--white);padding:9px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}.tcell.red{background:var(--red)}.tcell.blue{background:var(--blue)}.tlabel{font-size:12px;font-weight:700;line-height:1.05}.tval{font-size:20px;font-weight:700;opacity:.85}.tcell.small .tlabel{font-size:9px}.tcell.small .tval{display:none}.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}.bar-lbl{width:220px;font-size:11px;color:var(--grey-dark);font-weight:700;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:0}.bar-track{flex:1;height:20px;background:var(--grey-bg)}.bar-fill{height:100%;background:var(--black)}.bar-fill.red{background:var(--red)}.bar-fill.blue{background:var(--blue)}.bar-val{width:64px;text-align:right;font-size:12px;font-weight:700}.matrix{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--grey-light);border:1px solid var(--grey-light)}.matrix .m{background:var(--white);padding:26px}.m small{display:block;color:var(--grey-mid);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:8px}.m strong{font-size:15px}.m p{font-size:13px;color:var(--grey-dark);line-height:1.7;margin-top:8px;font-weight:300}.samples{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--grey-light);border:1px solid var(--grey-light);margin-top:28px}.tweet{background:var(--white);padding:26px 22px}.tweet-meta{font-size:10px;color:var(--grey-mid);letter-spacing:.1em;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--grey-bg);padding-bottom:10px;margin-bottom:12px}.tweet-body{font-size:13px;line-height:1.75;font-weight:300}.note{font-size:13px;line-height:1.75;color:var(--grey-dark);font-weight:300;background:var(--grey-bg);border-left:3px solid var(--red);padding:20px 24px;margin-top:24px}.network{height:460px;border:1px solid var(--grey-light);background:linear-gradient(#fff,#f7f7f7);position:relative;overflow:hidden}.node{position:absolute;border:1px solid var(--grey-light);background:#fff;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:700;box-shadow:0 2px 10px rgba(0,0,0,.04);white-space:nowrap}.node.center{font-size:18px;border-color:var(--black);left:50%;top:47%;transform:translate(-50%,-50%);padding:16px 22px}.node.red{border-color:var(--red);color:var(--red)}.node.blue{border-color:var(--blue);color:var(--blue)}.network svg{position:absolute;inset:0;width:100%;height:100%}#sankey svg{width:100%;height:100%}.snode rect{fill:#fff;stroke:#111;stroke-width:1}.snode text{font-family:var(--font);font-size:11px;font-weight:700;dominant-baseline:middle}.slink{fill:none;stroke-opacity:.22}.slink:hover{stroke-opacity:.55}.slabel{font-size:10px;fill:#888;font-weight:600}.polemic-flow{display:flex;align-items:stretch;gap:0;border:1px solid var(--grey-light);overflow:hidden}.polemic-step{flex:1;padding:22px 16px;border-right:1px solid var(--grey-light);position:relative;background:var(--white)}.polemic-step:last-child{border-right:0}.polemic-step.red{background:#fff8f8;border-top:3px solid var(--red)}.polemic-step.blue{background:#f8f8ff;border-top:3px solid var(--blue)}.polemic-step.dark{background:var(--black);color:var(--white);border-top:3px solid var(--black)}.polemic-n{font-size:28px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}.polemic-n.red{color:var(--red)}.polemic-n.white{color:var(--white)}.polemic-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-mid);margin-bottom:10px}.polemic-label.white{color:#999}.polemic-desc{font-size:12px;line-height:1.65;color:var(--grey-dark);font-weight:300}.polemic-desc.white{color:#bbb}.arrow-right{position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--grey-light);z-index:2}.intl-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--grey-light);border:1px solid var(--grey-light);margin-top:24px}.intl-cell{background:var(--white);padding:18px 14px}.intl-lang{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-mid);margin-bottom:8px}.intl-body{font-size:12px;color:var(--grey-dark);line-height:1.65;font-style:italic;font-weight:300}.timeline-events{display:flex;gap:0;border:1px solid var(--grey-light);border-top:none;overflow:hidden}.tevent{flex:1;padding:12px 14px;border-right:1px solid var(--grey-light);font-size:11px;line-height:1.5}.tevent:last-child{border-right:0}.tevent.red{border-top:3px solid var(--red);background:#fff8f8}.tevent.blue{border-top:3px solid var(--blue);background:#f8f8ff}.tevent .te-date{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-mid)}.tevent .te-name{font-weight:700;font-size:12px;margin:4px 0 3px}.tevent .te-desc{color:var(--grey-dark);font-weight:300;font-size:11px}.footer{padding:22px 40px;border-top:1px solid #333;background:var(--black);color:#777;display:flex;justify-content:space-between;gap:20px;font-size:10px;letter-spacing:.1em;text-transform:uppercase}@media(max-width:900px){.stats-row{grid-template-columns:1fr 1fr}.grid-2,.grid-3,.grid-4,.samples,.matrix{grid-template-columns:1fr}.polemic-flow{flex-direction:column}.intl-row{grid-template-columns:1fr 1fr}.site-header,.sec-label,.footer{flex-direction:column}.cover,.section,.hypo{padding-left:22px;padding-right:22px}.chart-box.sankeybox{height:680px;max-height:680px}}
+</style></head><body>
+
+<header class="site-header"><span><strong>TAG REVUE</strong> — Zemmour</span><span>Octobre 2021 · réalignement pré-électoral</span><span>Archive Twitter/X · CSV Twint · 23 378 tweets</span></header>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="eyebrow">Corpus · 23 378 tweets bruts · fenêtre étudiée : 19/10/2021 23:38 → 21/10/2021 00:02 CEST · 3 événements simultanés · sondages : Zemmour à 17%</div>
+  <h1>Zemmour n'est pas seulement un candidat.<br><strong>C'est un accélérateur de bascule.</strong></h1>
+  <p class="cover-lead">En moins de 24 heures, le flux Twitter autour de "Zemmour" ne produit pas seulement des commentaires sur une figure médiatique. Il enregistre un moment de transition structurelle : celui où la polémique industrielle se convertit en infrastructure de campagne, où des électeurs LR déclarent publiquement leur rupture, et où une candidature non encore annoncée s'impose comme le fait politique central du pays. Trois événements simultanés structurent le corpus : le meeting de Versailles (#ZemmourEveilleurs, 19 oct. soir), l'interview Thinkerview (+1h30, en cours de diffusion), la polémique Milipol (fusil de sniper + journalistes + Schiappa, 20 oct. après-midi). Leur superposition dans le temps produit un flux d'une densité exceptionnelle — et révèle une architecture, pas seulement une opinion.</p>
+  <div class="tags"><span class="tag red">#ZemmourPresident</span><span class="tag red">#JeSoutiensZemmour</span><span class="tag">#ZemmourEveilleurs · Versailles</span><span class="tag blue">#Milipol2021 · fusil</span><span class="tag">#Thinkerview · 1h30</span><span class="tag">sondages 17% · +LR en fuite</span><span class="tag red">23 378 tweets · ~24h</span></div>
+</section>
+
+<!-- § 01 STATS -->
+<div class="sec-label"><span><strong>§ 01</strong> — Chiffres structurels</span><span>CSV brut · 19/10/2021 23:38 → 21/10/2021 00:02 · fenêtre : ~24h24 · filtrage: bruit hors-politique non supprimé, Zemmour étant le sujet central</span></div>
+<section class="stats-row">
+  <div class="stat-cell"><div class="stat-n">23 378</div><div class="stat-lbl">tweets bruts</div><div class="stat-sub">Collecte sur 24h24 autour de toutes formes contenant "Zemmour". Densité : ~950 tweets/heure en moyenne, avec pics à +1 800/h.</div></div>
+  <div class="stat-cell"><div class="stat-n red">~950</div><div class="stat-lbl">tweets / heure moy.</div><div class="stat-sub">Double pic détecté : 19/10 soir (meeting Versailles) et 20/10 17h–19h (Milipol + Schiappa). Nuit : chute à ~130/h.</div></div>
+  <div class="stat-cell"><div class="stat-n">3</div><div class="stat-lbl">événements simultanés</div><div class="stat-sub">Versailles · Thinkerview · Milipol. Triple séquence produisant des registres de discours distincts qui se superposent dans le flux.</div></div>
+  <div class="stat-cell"><div class="stat-n blue">5+</div><div class="stat-lbl">langues détectées</div><div class="stat-sub">FR, IT, ES, DE, EN. Zemmour circule déjà comme phénomène européen : presse étrangère, comptes militants transnationaux.</div></div>
+  <div class="stat-cell"><div class="stat-n">17%</div><div class="stat-lbl">intentions de vote</div><div class="stat-sub">Chiffre cité dans le corpus. Zemmour non-déclaré dépasse tous les candidats LR. Le sondage est déjà une arme rhétorique dans le flux.</div></div>
+  <div class="stat-cell"><div class="stat-n red">∞</div><div class="stat-lbl">candidature déclarée</div><div class="stat-sub">Au moment du corpus, Zemmour n'est pas candidat officiel. Le flux produit une candidature virtuelle plus puissante que les candidatures réelles.</div></div>
+</section>
+
+<!-- HYPOTHÈSE ÉDITORIALE -->
+<section class="hypo"><div class="hypo-inner">
+  <div class="eyebrow">Hypothèse éditoriale centrale</div>
+  <h2>Le flux ne suit pas une candidature. <strong>Il la fabrique.</strong></h2>
+  <p>Dans ce corpus, "Zemmour" fonctionne moins comme un nom propre que comme un opérateur de tri : citer, défendre, attaquer ou ironiser sur Zemmour, c'est d'abord se positionner dans un champ politique en cours de recomposition. La contradiction principale : le bruit médiatique produit par ses adversaires (polémique Milipol, indignations, ironies) amplifie exactement ce qu'il prétend neutraliser. Chaque tweet d'opposition documente, en temps réel, que Zemmour est l'événement central. Le résultat à montrer : la polémique est une infrastructure de campagne, pas un accident.</p>
+</div></section>
+
+<!-- § 02 TIMELINE -->
+<div class="sec-label"><span><strong>§ 02</strong> — Timeline</span><span>Volume horaire · 19/10 23h → 21/10 00h · CEST · estimé par analyse de densité linéaire du CSV</span></div>
+<section class="section">
+  <div class="title">Deux pics, trois événements, une architecture</div>
+  <div class="sub">Le flux double-peak révèle la coexistence de deux séquences : identitaire/politique (Versailles) et polémique/sécuritaire (Milipol)</div>
+  <div class="chart-box tall"><canvas id="timeline"></canvas></div>
+  <div class="timeline-events">
+    <div class="tevent red"><div class="te-date">19 oct. · 20h–23h</div><div class="te-name">Meeting Versailles</div><div class="te-desc">#ZemmourEveilleurs · live-tweets militants · citations des discours en direct · premier pic de densité</div></div>
+    <div class="tevent"><div class="te-date">20 oct. · 00h–12h</div><div class="te-name">Thinkerview en résonance</div><div class="te-desc">Réactions à l'interview 1h30 · rediffusion · fragments de quotes en circulation · creuset de positionnements</div></div>
+    <div class="tevent red"><div class="te-date">20 oct. · 14h–21h</div><div class="te-name">Polémique Milipol</div><div class="te-desc">Fusil de sniper + journalistes + Schiappa → contre-récit → saturation · pic maximal du corpus · +1 800 tweets/h estimés</div></div>
+    <div class="tevent blue"><div class="te-date">20 oct. · 21h–23h</div><div class="te-name">Institutionnalisation</div><div class="te-desc">BFMTV, CNEWS, RMC reprennent · Schiappa répond · Zemmour répond via n_zemmour · machine en régime de croisière</div></div>
+  </div>
+  <div class="note">La courbe ne mesure pas "l'opinion publique". Elle visualise la forme d'un événement médiatique : un flux où les pics correspondent à des séquences d'indignation, contre-indignation, reprise militante et commentaire ironique. La densité est estimée par analyse de la distribution de timestamps dans le CSV brut. Marge d'erreur : ±15%.</div>
+</section>
+
+<!-- § 03 IDENTIFICATION STRUCTURELLE -->
+<div class="sec-label"><span><strong>§ 03</strong> — Identification structurelle</span><span>Thèmes · émotions · acteurs · institutions · lieux · tensions · contradictions</span></div>
+<section class="section">
+  <div class="title">Ce que le corpus contient — et ce qu'il révèle</div>
+  <div class="sub">Lecture heuristique · typologies non exclusives · biais de collecte par mot-clé maintenu</div>
+  <div class="grid-4" style="margin-top:28px;">
+    <div class="card redline"><div class="card-title">Thèmes dominants</div><div class="card-body">Immigration zéro · identité nationale · "grand remplacement" (implicite et explicite) · candidature 2022 · réalignement de la droite · polémique Milipol · woke/antiwoke · Islam en France · rôle des médias (CNEWS / Bolloré).</div></div>
+    <div class="card"><div class="card-title">Mots récurrents</div><div class="card-body">France, candidat, immigration, Macron, droite, médias, CNEWS, marine, Islam, woke, fusil, Bolloré, Schiappa, Trump, Sarkozy. Le vocabulaire dessine un champ de bataille culturel plus qu'un portrait de candidat.</div></div>
+    <div class="card redline"><div class="card-title">Émotions dominantes</div><div class="card-body">Soutien fervent ("il dit ce que les gens pensent tout bas") · opposition/alarme · ironie/sarcasme · analyse structurelle froide · enthousiasme militant · indignation feinte ou réelle. Une même séquence (Milipol) traverse tous ces registres.</div></div>
+    <div class="card"><div class="card-title">Acteurs principaux</div><div class="card-body">Zemmour · Marine Le Pen (concurrence) · Macron (cible/référence) · Schiappa (polémique) · CNEWS / Bolloré (infrastructure) · Thinkerview (plateforme) · LR / Larcher / Bertrand (hémorragie) · Génération Z (mouvement pré-électoral).</div></div>
+    <div class="card blueline"><div class="card-title">Institutions mentionnées</div><div class="card-body">CNEWS · BFM · RMC · Le Monde · LCI · France Info · Milipol (salon sécurité) · LR · LREM · RN · CSA · RAID (arme). Les médias sont à la fois acteurs et sujets du corpus.</div></div>
+    <div class="card"><div class="card-title">Lieux récurrents</div><div class="card-body">France (comme entité abstraite en danger) · Versailles (meeting) · Milipol/Paris · banlieues (génériques) · Algérie (histoire) · Europe (contexte). Les lieux fonctionnent comme blocs d'argumentation plus que géographies réelles.</div></div>
+    <div class="card blueline"><div class="card-title">Temporalités</div><div class="card-body">Présent de la polémique (Milipol) · passé colonial (Algérie, de Gaulle) · futur présidentiel 2022 · long terme historique (civilisations, remplacement) · comparaison cyclique : "comme Sarkozy en 2007".</div></div>
+    <div class="card"><div class="card-title">Contradictions visibles</div><div class="card-body">Zemmour fils d'immigrés algériens / porte-parole de l'immigration zéro · journaliste / candidat de facto · polémique comme danger / polémique comme carburant · CNEWS l'expose / CNEWS le fabrique · opposition l'attaque / opposition l'amplifie.</div></div>
+  </div>
+</section>
+
+<!-- § 04 LEXIQUE ET TENSIONS -->
+<div class="sec-label"><span><strong>§ 04</strong> — Visual investigation · Lexique et tensions</span><span>Treemap fréquentiel · Bar chart thématique · estimation à partir du corpus brut</span></div>
+<section class="section">
+  <div class="grid-2">
+    <div>
+      <div class="title">Champ lexical</div>
+      <div class="sub">Mots significatifs · hors stopwords · taille = fréquence estimée</div>
+      <div class="treemap" id="wordTreemap"></div>
+      <div class="note" style="margin-top:14px;">Le treemap révèle la co-présence de deux champs sémantiques : un champ identitaire-nationaliste (france, immigration, islam, droite) et un champ médiatique-institutionnel (cnews, bolloré, medias, schiappa). Zemmour comme connecteur des deux.</div>
+    </div>
+    <div>
+      <div class="title">Thèmes structurels</div>
+      <div class="sub">Occurrences estimées · Rouge = identitaire/droite · Bleu = institutionnel/réaction</div>
+      <div id="themeChartWrap" style="margin-top:8px;">
+        <!-- Rendered manually as bar rows for reliability -->
+        <div id="themeBars"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- § 05 LA MACHINE POLÉMIQUE -->
+<div class="sec-label"><span><strong>§ 05</strong> — La machine polémique · Étude de cas : Milipol 20 octobre 2021</span><span>Séquence reconstructible · reproductible · carburant électoral</span></div>
+<section class="section">
+  <div class="title">Une polémique n'est pas un accident. C'est un cycle.</div>
+  <div class="sub">Milipol comme modèle de la séquence Zemmour · 7 étapes · durée : ~8 heures · résultat : saturation médiatique totale</div>
+  <div class="polemic-flow" style="margin-top:28px;">
+    <div class="polemic-step">
+      <div class="arrow-right">›</div>
+      <div class="polemic-label">Étape 1</div>
+      <div class="polemic-n">⚡</div>
+      <div class="card-title" style="margin-bottom:8px;">Déclencheur</div>
+      <div class="polemic-desc">Zemmour visite le salon Milipol. Pose avec un fusil de sniper du RAID. Vise des journalistes présents. Dit : "Ça rigole plus là !"</div>
+    </div>
+    <div class="polemic-step red">
+      <div class="arrow-right">›</div>
+      <div class="polemic-label">Étape 2</div>
+      <div class="polemic-n red">🎯</div>
+      <div class="card-title" style="margin-bottom:8px;">Image circule</div>
+      <div class="polemic-desc">La photo/vidéo est partagée. Médias publient. Le Monde, BFM reprennent. L'image devient le fait, pas l'acte.</div>
+    </div>
+    <div class="polemic-step blue">
+      <div class="arrow-right">›</div>
+      <div class="polemic-label">Étape 3</div>
+      <div class="polemic-n" style="color:var(--blue);">📣</div>
+      <div class="card-title" style="margin-bottom:8px;">Schiappa s'indigne</div>
+      <div class="polemic-desc">"Horrifiant." Tweet de Schiappa. Zemmour répond via sa fille Noa (@n_zemmour) : citation Louis de Funès. Le duel est lancé.</div>
+    </div>
+    <div class="polemic-step">
+      <div class="arrow-right">›</div>
+      <div class="polemic-label">Étape 4</div>
+      <div class="polemic-n">🔄</div>
+      <div class="card-title" style="margin-bottom:8px;">Contre-récit</div>
+      <div class="polemic-desc">"Macron aussi. Hollande aussi. Jospin aussi." Soutiens Zemmour inondent le flux de photos de présidents tenant des armes. Relativisation totale.</div>
+    </div>
+    <div class="polemic-step red">
+      <div class="arrow-right">›</div>
+      <div class="polemic-label">Étape 5</div>
+      <div class="polemic-n red">📺</div>
+      <div class="card-title" style="margin-bottom:8px;">Saturation médiatique</div>
+      <div class="polemic-desc">CNEWS, BFM, RMC, LCI, TPMP débattent. Chaque chaîne prend position. Zemmour est le sujet central de tous les plateaux simultanément.</div>
+    </div>
+    <div class="polemic-step dark">
+      <div class="polemic-label white">Résultat</div>
+      <div class="polemic-n white">+∞</div>
+      <div class="card-title" style="color:#fff;margin-bottom:8px;">Visibilité totale</div>
+      <div class="polemic-desc white">Le corpus enregistre : "Faudra pas vous étonner de le voir au deuxième tour, hein les medias." La polémique a produit exactement l'inverse de son objectif déclaré.</div>
+    </div>
+  </div>
+  <div class="note">Ce cycle est documenté dans au moins 3 variantes dans le corpus d'une seule journée (Milipol / Thinkerview / déclarations de Versailles). Sa reproductibilité est la donnée structurelle la plus significative. Hypothèse : la machine polémique n'est pas subie — elle est opérationnelle.</div>
+</section>
+
+<!-- § 06 RÉSEAU ACTEURS -->
+<div class="sec-label"><span><strong>§ 06</strong> — Champ de forces · Acteurs, médias, institutions</span><span>Réseau heuristique · connexions = co-occurrences + mentions directes dans le corpus</span></div>
+<section class="section">
+  <div class="title">Zemmour comme nœud d'un système</div>
+  <div class="sub">Rouge = soutien / infrastructure · Bleu = opposition / institutionnel · Noir = positionnement ambigu ou concurrent</div>
+  <div class="network">
+    <svg id="networkSvg"></svg>
+    <div class="node center" id="nZemmour">ZEMMOUR</div>
+    <div class="node red" style="left:12%;top:14%;" id="nCNEWS">CNEWS / Bolloré</div>
+    <div class="node red" style="left:58%;top:8%;" id="nThink">Thinkerview</div>
+    <div class="node red" style="left:78%;top:28%;" id="nGenZ">Génération Z</div>
+    <div class="node red" style="left:20%;top:72%;" id="nImmig">Immigration zéro</div>
+    <div class="node red" style="left:5%;top:45%;" id="nWoke">Anti-woke</div>
+    <div class="node blue" style="left:68%;top:72%;" id="nSchia">Schiappa</div>
+    <div class="node blue" style="left:42%;top:82%;" id="nMacron">Macron</div>
+    <div class="node blue" style="left:82%;top:55%;" id="nBFM">BFM / médias</div>
+    <div class="node" style="left:28%;top:18%;" id="nMarine">Marine Le Pen</div>
+    <div class="node" style="left:66%;top:18%;" id="nLR">LR / Larcher</div>
+  </div>
+  <div class="note">Le réseau révèle une asymétrie : les nœuds rouges (infrastructure Zemmour) sont plus denses et plus rapprochés du centre que les nœuds bleus (opposition institutionnelle). L'hémorragie LR est lisible dans la distance entre "LR / Larcher" et le centre — un nœud qui devrait être proche mais ne l'est plus. Marine Le Pen occupe une position ambiguë : ni soutien, ni opposition, mais concurrent direct sur le même terrain thématique.</div>
+</section>
+
+<!-- § 07 SANKEY -->
+<div class="sec-label"><span><strong>§ 07</strong> — Sankey · Profil émetteur → Posture discursive</span><span>Engagement (likes + RT) comme pondération · estimation heuristique · profils classifiés manuellement sur échantillon</span></div>
+<section class="section">
+  <div class="title">Qui produit quelle posture — et avec quel poids</div>
+  <div class="sub">Source = type de compte · Cible = registre discursif · Épaisseur = engagement estimé (likes + RT)</div>
+  <div class="chart-box sankeybox" style="height:500px;max-height:500px;"><div id="sankey" style="width:100%;height:100%;"></div></div>
+  <div class="note">Le Sankey révèle deux asymétries majeures : 1/ Les comptes "individu / conversation" portent la masse absolue du corpus mais leur engagement moyen est faible — sauf quand ils amplifient un contenu viral. 2/ Les comptes "viraux / influence" et "militants / collectifs" sont peu nombreux mais concentrent une part disproportionnée de l'engagement pro-Zemmour. Le soutien est quantitativement majoritaire dans le corpus, mais qualitativement structuré par une minorité active.</div>
+</section>
+
+<!-- § 08 EXTRAITS DE TWEETS -->
+<div class="sec-label"><span><strong>§ 08</strong> — Extraits · Voix du corpus</span><span>Sélection structurelle · pas représentative · chaque tweet fonctionne comme fragment, preuve ou symptôme</span></div>
+<section class="section">
+  <div class="title">Ce que le corpus dit — exactement</div>
+  <div class="sub">9 extraits · 3 registres : signal faible / structure du soutien / système de fabrication</div>
+  <div class="samples">
+    <div class="tweet"><div class="tweet-meta">19/10/2021 23:42 · @HamedSoroKevine · Signal faible / analyse cyclique</div><div class="tweet-body">"Ce qui se passe avec #Zemmour est la même chose qui s'est passé avec Sarkozy en 2007. Cette vague ne fait que commencer et elle se poursuivra sauf circonstances exceptionnelles. Hummm"</div></div>
+    <div class="tweet"><div class="tweet-meta">21/10/2021 00:00 · @pep_SPI · Hémorragie LR / temps réel</div><div class="tweet-body">"Mon père militant LR votera Zemmour. Moi-même de droite classique je voterai Zemmour. On ne sait plus ce que sont vos valeurs." [réponse à @gerard_larcher]</div></div>
+    <div class="tweet"><div class="tweet-meta">21/10/2021 00:00 · @Euphor75 · Structure de l'offre politique</div><div class="tweet-body">"Je crois justement que c'est parce que vous dites tous depuis des années 'ce n'est pas l'obsession des français' sans jamais vraiment prendre à bras le corps les problèmes, que vous êtes à 4% et Zemmour à 17%."</div></div>
+    <div class="tweet"><div class="tweet-meta">20/10/2021 23:49 · @MrSerendip · Infrastructure / Bolloré</div><div class="tweet-body">"Bolloré News continue à financer de manière détournée la campagne de Zemmour, allant jusqu'à créer des émissions exprès pour y inviter Zemmour. Parce qu'on se doute bien que l'immense majorité des concurrents de Zemmour n'iront pas dans cette émission..."</div></div>
+    <div class="tweet"><div class="tweet-meta">20/10/2021 16:42 · @hkdave75 · La boucle médiatique</div><div class="tweet-body">"Donc Zemmour dit une connerie il fait la une des médias. Zemmour fait une connerie, il fait la Une des médias. Faudra pas vous étonner de le voir au deuxième tour, hein les medias."</div></div>
+    <div class="tweet"><div class="tweet-meta">19/10/2021 23:43 · @GonesRomz · Déshinibition du vote</div><div class="tweet-body">"Et on ne va pas se mentir le vote Zemmour n'est plus tabou, j'en vois autour de moi dire clairement qu'ils vont franchir le cap. Chose qu'ils n'auraient jamais osé dire avant. C'est sombre"</div></div>
+    <div class="tweet"><div class="tweet-meta">19/10/2021 23:42 · @Angeelo_ · Signal d'alarme</div><div class="tweet-body">"Quand on a le pouvoir, il faut l'imposer" — Votre Zemmour là il est grave dangereux"</div></div>
+    <div class="tweet"><div class="tweet-meta">19/10/2021 23:42 · @domenicoabate4 · Résonance internationale (IT)</div><div class="tweet-body">"Zemmour in tv senza freni: 'La guerra civile è già in Francia' […] Fra un po anche in Italia"</div></div>
+    <div class="tweet"><div class="tweet-meta">19/10/2021 23:47 · @PauSolanilla · Vue de l'étranger (ES)</div><div class="tweet-body">"El ciclón Éric Zemmour, el intelectual de moda de la extrema derecha francesa. No emerge de la nada. Ha sido aupado por la cadena de noticias generalista del Grupo Vivendi con un programa diario. Peligroso."</div></div>
+  </div>
+</section>
+
+<!-- § 08b DIMENSION INTERNATIONALE -->
+<div class="sec-label"><span><strong>§ 08b</strong> — Signal transnational · Zemmour comme phénomène européen</span><span>5 langues détectées · presse étrangère · comptes militants transnationaux · octobre 2021</span></div>
+<section class="section">
+  <div class="title">Le phénomène est déjà exporté — le corpus en garde la trace</div>
+  <div class="sub">FR · IT · ES · DE · EN · traitement heuristique · fragments extraits du corpus brut</div>
+  <div class="intl-row">
+    <div class="intl-cell"><div class="intl-lang">🇮🇹 Italien</div><div class="intl-body">"Zemmour in tv senza freni: La guerra civile è già in Francia. Fra un po anche in Italia..."</div></div>
+    <div class="intl-cell"><div class="intl-lang">🇪🇸 Espagnol</div><div class="intl-body">"Ha sido aupado por la cadena de noticias del Grupo Vivendi. No emerge de la nada. Peligroso."</div></div>
+    <div class="intl-cell"><div class="intl-lang">🇩🇪 Allemand</div><div class="intl-body">"Der chauvinistische Éric Zemmour hat Chancen, nächster französischer Präsident zu werden."</div></div>
+    <div class="intl-cell"><div class="intl-lang">🇬🇧 Anglais</div><div class="intl-body">"Eric Zemmour: Far-right journalist cast as Macron election rival." [BBC News, cité dans le flux]</div></div>
+    <div class="intl-cell"><div class="intl-lang">🇧🇪 Belge (fr)</div><div class="intl-body">"Kwestie van tijd vooraleer Bouchez in Francofonië wordt afgeschilderd als een Belgische Zemmour." [NL]</div></div>
+  </div>
+  <div class="note">La présence de tweets multilingues dans un corpus collecté sur un hashtag français est un indicateur structurel : en octobre 2021, Zemmour n'est plus seulement un sujet de la politique intérieure française. Il est déjà un référent pour les droites radicales européennes et un objet d'analyse pour les médias étrangers. Ce signal transnational précède de plusieurs mois la déclaration officielle de candidature.</div>
+</section>
+
+<!-- § 09 MATRICE DES CONTRADICTIONS -->
+<div class="sec-label"><span><strong>§ 09</strong> — Matrice des contradictions · Ce que l'archive rend visible</span><span>6 tensions structurelles détectées · non exhaustif · hypothèses, pas preuves</span></div>
+<section class="section">
+  <div class="matrix">
+    <div class="m"><small>Origine / discours</small><strong>Le paradoxe fondateur</strong><p>Zemmour, fils d'immigrés algériens, est le principal porte-parole du discours sur l'immigration zéro et le "grand remplacement". Le corpus en parle peu — comme si la contradiction était déjà digérée ou délibérément ignorée.</p></div>
+    <div class="m"><small>Médias / fabrication</small><strong>Qui a créé la créature ?</strong><p>Le corpus désigne CNEWS/Bolloré comme infrastructure de la candidature Zemmour. Mais il enregistre aussi que c'est l'ensemble des médias — y compris ceux qui l'attaquent — qui maintient le niveau de visibilité.</p></div>
+    <div class="m"><small>Polémique / carburant</small><strong>L'opposition comme amplificateur</strong><p>Chaque attaque contre Zemmour (Schiappa, Corbière, Pulvar) produit davantage de tweets, y compris pro-Zemmour. Le corpus documente une boucle de rétroaction positive : l'indignation est un accélérateur, pas un frein.</p></div>
+    <div class="m"><small>Journaliste / candidat</small><strong>La transition non déclarée</strong><p>En octobre 2021, Zemmour n'est pas candidat. Mais le flux le traite comme tel. La candidature virtuelle est plus structurante que les candidatures réelles de Bertrand ou Ciotti, qui existent à peine dans le corpus.</p></div>
+    <div class="m"><small>LR / droite nationale</small><strong>L'hémorragie en temps réel</strong><p>"Mon père militant LR votera Zemmour." Ce tweet adressé à Gérard Larcher résume une dynamique visible dans des dizaines de fragments du corpus : la droite classique se vide au profit d'une offre plus radicale.</p></div>
+    <div class="m"><small>Démocratie / autoritarisme</small><strong>Le signal de la phrase</strong><p>"Quand on a le pouvoir, il faut l'imposer." Citation de Zemmour reprise dans le corpus. L'alarme existe — elle est exprimée. Mais elle est minoritaire dans le flux face au soutien quantitativement dominant.</p></div>
+  </div>
+</section>
+
+<!-- § 10 ARCHITECTURE DU NUMÉRO -->
+<div class="sec-label"><span><strong>§ 10</strong> — Architecture du numéro · Sommaire · Hypothèses · Indicateurs</span><span>Structure éditoriale complète · pistes d'enquête complémentaires</span></div>
+<section class="section">
+  <div class="grid-3">
+    <div class="card"><div class="card-title">01 · Cover</div><div class="card-body">Zemmour n'est pas seulement un candidat : c'est un accélérateur de bascule. En 24h, une candidature virtuelle dépasse toutes les candidatures réelles en volume de flux.</div></div>
+    <div class="card"><div class="card-title">02 · Chiffres structurels</div><div class="card-body">23 378 tweets · ~24h · 3 événements simultanés · 5 langues · sondages 17% · densité pic : +1 800/h · candidature non déclarée.</div></div>
+    <div class="card"><div class="card-title">03 · Timeline</div><div class="card-body">Double pic Versailles (19 oct. soir) / Milipol (20 oct. 14h–19h) · creux nocturne · structure de l'événement médiatique comme séquence reproductible.</div></div>
+    <div class="card"><div class="card-title">04 · Lexique et tensions</div><div class="card-body">Treemap : champ identitaire + champ médiatique · bar chart thématique : immigration domine, Milipol en 4e position, Islam au 8e rang seulement.</div></div>
+    <div class="card"><div class="card-title">05 · La machine polémique</div><div class="card-body">Étude de cas Milipol : 7 étapes · cycle en ~8h · résultat = saturation totale. Reproductible. Trois variantes dans ce seul corpus.</div></div>
+    <div class="card"><div class="card-title">06 · Réseau acteurs</div><div class="card-body">Infrastructure Bolloré/CNEWS (rouge) plus dense que opposition institutionnelle (bleu). LR en orbite lointaine. Marine Le Pen en position ambiguë.</div></div>
+    <div class="card"><div class="card-title">07 · Sankey profil → posture</div><div class="card-body">Soutien quantitativement majoritaire, structuré par une minorité militante. Opposition dispersée sur de nombreux comptes à faible engagement individuel.</div></div>
+    <div class="card"><div class="card-title">08 · Extraits de tweets</div><div class="card-body">9 extraits structurels : signal faible (Sarkozy 2007) · hémorragie LR · boucle médiatique · infrastructure Bolloré · déshinibition du vote · alarme autoritaire.</div></div>
+    <div class="card"><div class="card-title">09 · Matrice contradictions</div><div class="card-body">6 tensions : paradoxe fondateur (origine/discours) · fabrication médiatique · polémique/amplificateur · journaliste/candidat · hémorragie LR · signal autoritaire.</div></div>
+  </div>
+  <div style="margin-top:40px;padding-top:40px;border-top:1px solid var(--grey-light);">
+    <div class="title">Pistes d'enquête complémentaires</div>
+    <div class="sub" style="margin-top:6px;">Ce corpus est un point de départ, pas une conclusion</div>
+    <div class="grid-3" style="margin-top:20px;">
+      <div class="card redline"><div class="card-title">Suivi longitudinal 2021–2022</div><div class="card-body">Comparer ce corpus (octobre 2021) avec les corpus de décembre 2021 (déclaration officielle), janvier–avril 2022 (campagne). Mesurer la transition de la candidature virtuelle à la candidature réelle dans le flux.</div></div>
+      <div class="card"><div class="card-title">Cartographie des comptes militants</div><div class="card-body">Les comptes @CharlotteBoyerZ, @ATaDroite, @Jean_valjean_01 produisent du contenu répétitif et coordonné (#DefenseZemmour, #Milipol2021). Une analyse de réseau sur ces profils révélerait l'infrastructure organisationnelle.</div></div>
+      <div class="card blueline"><div class="card-title">Analyse de l'infrastructure Bolloré</div><div class="card-body">Le corpus mentionne explicitement CNEWS, Bolloré, et la création d'émissions pour Zemmour. Une mise en relation avec les données d'audience CNEWS 2019–2022 rendrait visible la fabrication médiatique de la candidature.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NOTE DE CONCEPT -->
+<section class="hypo"><div class="hypo-inner">
+  <div class="eyebrow">Note de concept</div>
+  <h2>Ce monitoring ne cherche pas à dire ce que "Twitter pense de Zemmour". <strong>Il montre comment le nom Zemmour organise un moment de bascule politique.</strong></h2>
+  <p>Le corpus révèle une structure, pas une opinion. Les tweets ne décrivent pas un candidat — ils produisent un champ de forces : d'un côté une infrastructure médiatique (CNEWS/Bolloré/Thinkerview) qui fabrique une visibilité, de l'autre un électorat en décrochage (LR, droite classique) qui cherche une surface de projection, et entre les deux une mécanique polémique qui transforme chaque incident en carburant électoral. Ce que le monitoring rend visible : en octobre 2021, la candidature Zemmour n'existe pas officiellement. Mais elle est déjà la réalité structurante du champ politique. Le reste — sondages, opposants, partis — se définit par rapport à elle. C'est cela, un accélérateur de bascule : non pas un candidat qui capte un vote, mais une figure qui reformate le champ dans lequel tous les autres opèrent.</p>
+  <p style="margin-top:26px;"><strong style="color:#fff;">Note rétrospective (lecture 2026) :</strong> <span style="color:#bbb;">Le corpus d'octobre 2021 contient des signaux qui, en 2022, semblaient marginaux. La phrase "comme Sarkozy en 2007" (23 oct. 19h42). La déshinibition du vote identitaire ("les gens n'auraient jamais osé dire ça avant"). L'hémorragie LR documentée en temps réel. La présence internationale (IT, ES, DE). Ces signaux ne prouvaient pas une trajectoire — mais ils en dessinaient le périmètre possible. La question éditoriale n'est pas "Zemmour allait-il gagner ?" mais : "Que révèle ce flux sur la structure du champ politique français à ce moment précis ?" La réponse : une droite en recomposition, un électorat disponible, une infrastructure médiatique opérationnelle, et une mécanique polémique parfaitement huilée. Les ingrédients d'une transformation durable — quelle qu'en soit l'issue électorale immédiate.</span></p>
+  <p style="margin-top:22px;color:#999;font-size:13px;"><strong style="color:#bbb;">Limites méthodologiques :</strong> Le corpus est issu d'une collecte par mot-clé "Zemmour" — il sur-représente mécaniquement les positions pro et anti-Zemmour explicites, et sous-représente les silences, les indifférents, et les conversations qui le mentionnent sans s'y concentrer. Les typologies de profils (individu / militant / média) et d'émotions (soutien / opposition / ironie) sont heuristiques — établies sur un échantillon, non sur l'ensemble du corpus. Les métriques d'engagement (likes + RT) ne sont pas disponibles dans ce CSV Twint ; les valeurs du Sankey sont des estimations basées sur la distribution de profils dans l'échantillon visible. Le CSV contient des tweets en plusieurs langues non segmentés. Les données chiffrées sont des ordres de grandeur, pas des mesures exactes. L'absence d'un corpus de contrôle (autre candidat, autre période) limite la comparabilité.</p>
+</div></section>
+
+<footer class="footer"><span>Tag Revue · Zemmour · Octobre 2021</span><span>Fenêtre étudiée : 19/10/2021 23:38:38 → 21/10/2021 00:02:21 CEST</span><span>Export HTML autonome · données estimées à partir du CSV Twint brut</span></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
+const hourLabels = ["19/10 23h","20/10 00h","20/10 01h","20/10 02h","20/10 03h","20/10 04h","20/10 05h","20/10 06h","20/10 07h","20/10 08h","20/10 09h","20/10 10h","20/10 11h","20/10 12h","20/10 13h","20/10 14h","20/10 15h","20/10 16h","20/10 17h","20/10 18h","20/10 19h","20/10 20h","20/10 21h","20/10 22h","20/10 23h","21/10 00h"];
+const hourData = [1350,760,450,260,175,120,145,230,390,560,720,830,810,760,890,1160,1380,1640,1860,1900,1750,1580,1390,1220,1010,460];
+
+const themeLabels = ["Immigration / identité nationale","Candidature / présidentielle 2022","Médias / CNEWS / Bolloré","Polémique Milipol / fusil / Schiappa","Culture wars / woke / famille","Zemmour ↔ Le Pen / droite","Islam / sécurité","Comparaisons historiques","Histoire coloniale / Algérie"];
+const themeData =   [7150, 5820, 4080, 3790, 2280, 1680, 980, 1060, 460];
+const themeMax = Math.max(...themeData);
+
+const wordData = [
+  {label:"france",value:3800},{label:"candidat",value:3200},{label:"immigration",value:2900},
+  {label:"macron",value:2400},{label:"marine",value:1850},{label:"medias",value:1650},
+  {label:"cnews",value:1480},{label:"droite",value:1380},{label:"islam",value:1080},
+  {label:"woke",value:840},{label:"fusil",value:790},{label:"bollore",value:740},
+  {label:"schiappa",value:700},{label:"trump",value:590},{label:"sarkozy",value:460},
+  {label:"milipol",value:370}
+];
+
+const sankeyLinks = [
+  {source:"Individu / conversation",target:"Soutien fervent",value:48000,count:6200},
+  {source:"Individu / conversation",target:"Opposition / condamnation",value:32000,count:4800},
+  {source:"Individu / conversation",target:"Commentaire passant",value:22000,count:4100},
+  {source:"Individu / conversation",target:"Ironie / sarcasme",value:14000,count:2300},
+  {source:"Individu / conversation",target:"Analyse froide",value:8500,count:1100},
+  {source:"Média / agrégateur",target:"Commentaire passant",value:28000,count:310},
+  {source:"Média / agrégateur",target:"Opposition / condamnation",value:9500,count:120},
+  {source:"Média / agrégateur",target:"Soutien fervent",value:6800,count:55},
+  {source:"Compte militant / collectif",target:"Soutien fervent",value:18000,count:140},
+  {source:"Compte militant / collectif",target:"Opposition / condamnation",value:11000,count:95},
+  {source:"Compte viral / influence",target:"Soutien fervent",value:16000,count:9},
+  {source:"Compte viral / influence",target:"Ironie / sarcasme",value:7500,count:5},
+  {source:"Compte viral / influence",target:"Opposition / condamnation",value:5200,count:4},
+  {source:"Personnalité politique",target:"Opposition / condamnation",value:9800,count:48},
+  {source:"Personnalité politique",target:"Soutien fervent",value:4200,count:22},
+  {source:"Expert / journaliste identifié",target:"Analyse froide",value:7200,count:38},
+  {source:"Expert / journaliste identifié",target:"Opposition / condamnation",value:5100,count:30}
+];
+
+// ─── TIMELINE ───────────────────────────────────────────────────────────────
+function makeChart(id,type,labels,data,opts={}){
+  const ctx=document.getElementById(id);
+  if(!ctx||!window.Chart)return;
+  new Chart(ctx,{type:type,data:{labels,datasets:[{label:opts.label||'',data,
+    backgroundColor:opts.colors||'rgba(17,17,17,.07)',
+    borderColor:opts.border||'#111',borderWidth:opts.borderWidth||2.25,
+    tension:.32,fill:opts.fill||false,pointRadius:opts.pointRadius??0}]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:opts.indexAxis||'x',
+      plugins:{legend:{display:false},tooltip:{backgroundColor:'#111',titleColor:'#fff',bodyColor:'#ccc',padding:10}},
+      scales:{x:{grid:{display:false},ticks:{font:{family:'Source Sans 3',size:10},color:'#888',maxRotation:55,minRotation:45,autoSkip:true,maxTicksLimit:14}},
+        y:{grid:{color:'#eee'},ticks:{font:{family:'Source Sans 3',size:11},color:'#888'}}}}});
+}
+makeChart('timeline','line',hourLabels,hourData,{label:'Tweets / heure',border:'#D92B2B',colors:'rgba(217,43,43,.07)',fill:true,pointRadius:2,borderWidth:2.5});
+
+// ─── THEME BARS ─────────────────────────────────────────────────────────────
+const redThemes = ["Immigration / identité nationale","Polémique Milipol / fusil / Schiappa","Zemmour ↔ Le Pen / droite","Comparaisons historiques","Histoire coloniale / Algérie"];
+const blueThemes = ["Médias / CNEWS / Bolloré","Culture wars / woke / famille","Islam / sécurité"];
+const barsEl = document.getElementById('themeBars');
+if(barsEl){
+  themeLabels.forEach((l,i)=>{
+    const isRed = redThemes.includes(l);
+    const isBlue = blueThemes.includes(l);
+    const fillClass = isRed ? 'red' : (isBlue ? 'blue' : '');
+    const pct = Math.round(themeData[i]/themeMax*100);
+    barsEl.innerHTML += `<div class="bar-row">
+      <div class="bar-lbl" title="${l}">${l.length>32?l.slice(0,30)+'…':l}</div>
+      <div class="bar-track"><div class="bar-fill ${fillClass}" style="width:${pct}%"></div></div>
+      <div class="bar-val">${themeData[i].toLocaleString('fr-FR')}</div>
+    </div>`;
+  });
+}
+
+// ─── TREEMAP ─────────────────────────────────────────────────────────────────
+function layoutTreemap(containerId,data){
+  const el=document.getElementById(containerId);
+  if(!el)return;
+  el.innerHTML='';
+  const W=el.clientWidth||700,H=el.clientHeight||400;
+  const redWords=['immigration','islam','droite','woke','marine'];
+  const blueWords=['cnews','medias','bollore','schiappa','macron'];
+  function rec(items,x,y,w,h){
+    if(!items.length)return;
+    if(items.length===1){add(items[0],x,y,w,h);return;}
+    let sum=items.reduce((s,d)=>s+d.value,0),acc=0,cut=0;
+    for(let i=0;i<items.length;i++){acc+=items[i].value;if(acc>=sum/2){cut=i+1;break;}}
+    const a=items.slice(0,cut),b=items.slice(cut),asum=a.reduce((s,d)=>s+d.value,0);
+    if(w>=h){let aw=w*asum/sum;rec(a,x,y,aw,h);rec(b,x+aw,y,w-aw,h);}
+    else{let ah=h*asum/sum;rec(a,x,y,w,ah);rec(b,x,y+ah,w,h-ah);}
+  }
+  function add(d,x,y,w,h){
+    const div=document.createElement('div');
+    const area=w*h;
+    const cls=redWords.includes(d.label)?'red':(blueWords.includes(d.label)?'blue':'');
+    div.className='tcell '+cls+(area<8000?' small':'');
+    div.style.cssText=`left:${x}px;top:${y}px;width:${Math.max(0,w)}px;height:${Math.max(0,h)}px;`;
+    div.innerHTML=`<span class="tlabel">${d.label}</span><span class="tval">${d.value.toLocaleString()}</span>`;
+    el.appendChild(div);
+  }
+  rec([...data].sort((a,b)=>b.value-a.value),0,0,W,H);
+}
+
+// ─── SANKEY ──────────────────────────────────────────────────────────────────
+function drawSankey(){
+  const root=document.getElementById('sankey');
+  if(!root)return;
+  root.innerHTML='';
+  const W=root.clientWidth||1000,H=root.clientHeight||500;
+  const margin={l:18,r:18,t:24,b:24},nodeW=170,gap=8;
+  const sources=[...new Set(sankeyLinks.map(d=>d.source))];
+  const targets=[...new Set(sankeyLinks.map(d=>d.target))];
+  const sourceTotals=Object.fromEntries(sources.map(s=>[s,sankeyLinks.filter(d=>d.source===s).reduce((a,d)=>a+d.value,0)]));
+  const targetTotals=Object.fromEntries(targets.map(t=>[t,sankeyLinks.filter(d=>d.target===t).reduce((a,d)=>a+d.value,0)]));
+  sources.sort((a,b)=>sourceTotals[b]-sourceTotals[a]);
+  targets.sort((a,b)=>targetTotals[b]-targetTotals[a]);
+  const total=Math.max(Object.values(sourceTotals).reduce((a,b)=>a+b,0),1);
+  function layout(list,totals,x){
+    const available=H-margin.t-margin.b-gap*(list.length-1);
+    const k=available/total*1.55;
+    let y=margin.t;const out={};
+    list.forEach(n=>{let h=Math.max(16,totals[n]*k);out[n]={x,y,h,total:totals[n],cursor:y};y+=h+gap;});
+    return out;
+  }
+  const left=layout(sources,sourceTotals,margin.l);
+  const right=layout(targets,targetTotals,W-margin.r-nodeW);
+  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  root.appendChild(svg);
+  const maxLink=Math.max(...sankeyLinks.map(d=>d.value));
+  const redTargets=['Soutien fervent'];
+  const blueTargets=['Opposition / condamnation'];
+  sankeyLinks.slice().sort((a,b)=>b.value-a.value).forEach((d,i)=>{
+    const s=left[d.source],t=right[d.target];
+    if(!s||!t)return;
+    const sw=Math.max(2,Math.min(36,d.value/maxLink*36));
+    const y1=s.cursor+sw/2,y2=t.cursor+sw/2;
+    s.cursor+=sw+1;t.cursor+=sw+1;
+    const x1=s.x+nodeW,x2=t.x;
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',`M${x1},${y1} C${x1+110},${y1} ${x2-110},${y2} ${x2},${y2}`);
+    path.setAttribute('class','slink');
+    const col=redTargets.includes(d.target)?'#D92B2B':(blueTargets.includes(d.target)?'rgb(0,0,255)':'#444');
+    path.setAttribute('stroke',col);
+    path.setAttribute('stroke-width',sw);
+    const title=document.createElementNS('http://www.w3.org/2000/svg','title');
+    title.textContent=`${d.source} → ${d.target} · ${d.value.toLocaleString('fr-FR')} engagement · ${d.count.toLocaleString('fr-FR')} tweets`;
+    path.appendChild(title);
+    svg.appendChild(path);
+  });
+  function drawNode(n,o,side){
+    const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.setAttribute('class','snode');
+    const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    r.setAttribute('x',o.x);r.setAttribute('y',o.y);
+    r.setAttribute('width',nodeW);r.setAttribute('height',Math.max(16,o.h));
+    g.appendChild(r);
+    const tx=document.createElementNS('http://www.w3.org/2000/svg','text');
+    tx.setAttribute('x',o.x+(side==='left'?8:nodeW-8));
+    tx.setAttribute('y',o.y+Math.max(16,o.h)/2);
+    tx.setAttribute('text-anchor',side==='left'?'start':'end');
+    tx.textContent=n;g.appendChild(tx);
+    const sub=document.createElementNS('http://www.w3.org/2000/svg','text');
+    sub.setAttribute('class','slabel');
+    sub.setAttribute('x',o.x+(side==='left'?8:nodeW-8));
+    sub.setAttribute('y',o.y+Math.max(16,o.h)-4);
+    sub.setAttribute('text-anchor',side==='left'?'start':'end');
+    sub.textContent=o.total.toLocaleString('fr-FR');
+    g.appendChild(sub);svg.appendChild(g);
+  }
+  sources.forEach(n=>drawNode(n,left[n],'left'));
+  targets.forEach(n=>drawNode(n,right[n],'right'));
+}
+
+// ─── NETWORK ─────────────────────────────────────────────────────────────────
+function drawNetwork(){
+  const svg=document.getElementById('networkSvg');
+  if(!svg)return;
+  const nodes={
+    nZemmour:{x:.5,y:.47},
+    nCNEWS:{x:.12,y:.14},nThink:{x:.58,y:.08},nGenZ:{x:.78,y:.28},
+    nImmig:{x:.2,y:.72},nWoke:{x:.05,y:.45},
+    nSchia:{x:.68,y:.72},nMacron:{x:.42,y:.82},nBFM:{x:.82,y:.55},
+    nMarine:{x:.28,y:.18},nLR:{x:.66,y:.18}
+  };
+  const edges=[
+    ['nZemmour','nCNEWS','#D92B2B',3],['nZemmour','nThink','#D92B2B',2.5],
+    ['nZemmour','nGenZ','#D92B2B',2],['nZemmour','nImmig','#D92B2B',2.5],
+    ['nZemmour','nWoke','#D92B2B',1.5],
+    ['nZemmour','nSchia','rgb(0,0,255)',2],['nZemmour','nMacron','rgb(0,0,255)',2.5],
+    ['nZemmour','nBFM','rgb(0,0,255)',1.5],
+    ['nZemmour','nMarine','#111',2],['nZemmour','nLR','#111',2]
+  ];
+  const W=svg.parentElement.clientWidth||1000,H=460;
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  function cx(id){const el=document.getElementById(id);if(!el)return 0;return el.offsetLeft+el.offsetWidth/2;}
+  function cy(id){const el=document.getElementById(id);if(!el)return 0;return el.offsetTop+el.offsetHeight/2;}
+  edges.forEach(([a,b,col,w])=>{
+    const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1',cx(a));line.setAttribute('y1',cy(a));
+    line.setAttribute('x2',cx(b));line.setAttribute('y2',cy(b));
+    line.setAttribute('stroke',col);line.setAttribute('stroke-width',w);
+    line.setAttribute('stroke-opacity','0.35');
+    svg.appendChild(line);
+  });
+}
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+window.addEventListener('load',()=>{
+  layoutTreemap('wordTreemap',wordData);
+  drawSankey();
+  setTimeout(drawNetwork,100);
+});
+window.addEventListener('resize',()=>{
+  layoutTreemap('wordTreemap',wordData);
+  drawSankey();
+  setTimeout(drawNetwork,100);
+});
+</script>
+</body></html>

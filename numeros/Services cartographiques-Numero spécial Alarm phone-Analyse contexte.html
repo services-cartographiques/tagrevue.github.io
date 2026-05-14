@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAG REVUE — #frontières · Analyse migrations/Frontex</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+  --red: #D92B2B;           /* migrations / décès / traversées */
+  --blue: #0000FF;          /* financements / Frontex — bleu RVB 100% */
+  --black: #111111;
+  --grey-dark: #444444;
+  --grey-mid: #888888;
+  --grey-light: #CCCCCC;
+  --grey-bg: #F2F2F2;
+  --white: #FFFFFF;
+  --font: 'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+.header {
+  border-bottom: 1px solid var(--black);
+  padding: 14px 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grey-dark);
+}
+.header strong, .header span:first-child { color: var(--black); font-weight: 700; }
+.header-mid { text-align: center; }
+.header-right { text-align: right; }
+
+.cover {
+  padding: 72px 40px 80px;
+  border-bottom: 1px solid var(--grey-light);
+  max-width: 1120px;
+  min-height: auto;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+}
+.cover-number {
+  position: absolute;
+  right: 0;
+  bottom: 24px;
+  font-size: clamp(90px, 18vw, 220px);
+  line-height: .8;
+  letter-spacing: -0.05em;
+  color: var(--grey-bg);
+  font-weight: 700;
+  pointer-events: none;
+  z-index: -1;
+}
+.cover-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
+.tag {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--grey-light);
+  padding: 5px 12px;
+  color: var(--grey-dark);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.tag:nth-child(2) { border-color: var(--blue); color: var(--blue); }
+.tag:nth-child(3) { border-color: var(--red); color: var(--red); }
+.cover-body { max-width: 820px; }
+.cover-kicker {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.cover-title {
+  font-size: clamp(32px, 4.5vw, 58px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  max-width: 900px;
+  margin-bottom: 28px;
+  font-style: normal;
+}
+.cover-title strong, .cover-title br + text { font-weight: 700; }
+.cover-lead {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--grey-dark);
+  max-width: 700px;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+.cover-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 0; }
+.cover-meta > div {
+  border: 1px solid var(--grey-light);
+  padding: 12px 16px;
+  min-width: 190px;
+}
+.meta-label {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+  font-weight: 600;
+}
+.meta-value { font-size: 12px; font-weight: 700; margin-top: 4px; color: var(--black); }
+
+.section-divider {
+  padding: 12px 40px;
+  background: var(--grey-bg) !important;
+  color: var(--grey-mid) !important;
+  border-top: 1px solid var(--grey-light) !important;
+  border-bottom: 1px solid var(--grey-light) !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.section-divider span:first-child { color: var(--black); font-weight: 700; }
+
+.stats-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  background: var(--white);
+  color: var(--black);
+  padding: 0;
+  border-bottom: 1px solid var(--grey-light);
+}
+.stat-block { padding: 36px 32px; border-right: 1px solid var(--grey-light); }
+.stat-block:last-child { border-right: none; }
+.stat-number {
+  font-size: clamp(30px, 3.5vw, 46px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--black);
+}
+.stat-block:nth-child(1) .stat-number,
+.stat-block:nth-child(3) .stat-number { color: var(--blue); }
+.stat-block:nth-child(2) .stat-number,
+.stat-block:nth-child(4) .stat-number,
+.stat-accent { color: var(--red); }
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+  margin-top: 10px;
+  font-weight: 600;
+}
+.stat-sub { font-size: 12px; color: var(--grey-mid); margin-top: 6px; line-height: 1.5; }
+
+.chart-section, .money-section, .dtm-section, .tweets-section, .concept-section {
+  padding: 56px 40px;
+  max-width: 1120px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--grey-light);
+  border-top: none;
+  background: var(--white);
+  color: var(--black);
+}
+.chart-title, .money-title, .dtm-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1.2;
+  font-style: normal;
+}
+.chart-subtitle, .money-subtitle, .dtm-subtitle, .chart-label {
+  font-size: 12px;
+  color: var(--grey-mid);
+  opacity: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.chart-box { position: relative; min-height: 0; }
+.chart-box canvas, .dtm-section canvas {
+  display: block;
+  width: 100% !important;
+  max-width: 100%;
+  height: 260px !important;
+  max-height: 260px !important;
+}
+.dtm-section canvas#chart3 { height: 240px !important; max-height: 240px !important; }
+.canvas-limiter {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  max-height: 260px;
+  overflow: hidden;
+}
+.canvas-limiter canvas { height: 100% !important; max-height: 100% !important; }
+.chart-legend { display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey-dark); }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.chart-note { font-size: 11px; color: var(--grey-mid); opacity: 1; margin-top: 14px; font-style: italic; line-height: 1.6; }
+.source-pill { display:inline-block; background:var(--grey-bg); padding:2px 8px; font-size:9px; letter-spacing:0.1em; margin-right:6px; margin-top:4px; }
+
+.key-finding {
+  background: var(--grey-bg);
+  color: var(--black);
+  padding: 20px 24px;
+  margin: 36px 0 0;
+  border-left: 3px solid var(--red);
+}
+.key-finding-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey-mid); margin-bottom: 12px; font-weight: 600; opacity: 1; }
+.key-finding-text { font-size: 15px; line-height: 1.75; color: var(--grey-dark); font-style: normal; font-weight: 300; }
+.key-finding-text strong { font-size: 1em; color: var(--red); font-weight: 700; }
+
+.money-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.sector-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.sector-label { width: 160px; flex-shrink: 0; font-size: 12px; color: var(--grey-dark); font-weight: 600; text-align: right; }
+.sector-track { flex: 1; height: 18px; background: var(--grey-bg); overflow: hidden; }
+.sector-fill { height: 100%; background: var(--blue); }
+.sector-value { width: 72px; flex-shrink: 0; font-size: 12px; font-weight: 700; color: var(--blue); text-align: right; }
+.rnd-section, .operations-section { padding: 56px 40px; max-width: 1120px; margin: 0 auto; border-bottom: 1px solid var(--grey-light); background: var(--white); }
+.rnd-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 60px; align-items: start; }
+.canvas-limiter-treemap { position: relative; width: 100%; height: 360px; max-height: 360px; overflow: hidden; }
+.canvas-limiter-treemap canvas { height: 100% !important; max-height: 100% !important; width: 100% !important; display: block; }
+.rnd-note { font-size: 13px; line-height: 1.7; color: var(--grey-dark); font-weight: 300; padding: 20px 24px; border-left: 3px solid var(--blue); background: var(--grey-bg); }
+.ops-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--grey-light); border: 1px solid var(--grey-light); margin-top: 36px; }
+.op-card { background: var(--white); padding: 28px 24px; }
+.op-name { font-size: 15px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.op-zone { font-size: 10px; color: var(--grey-mid); letter-spacing: .1em; text-transform: uppercase; font-weight: 600; margin-bottom: 16px; }
+.op-amount { font-size: 32px; font-weight: 700; color: var(--blue); line-height: 1; letter-spacing: -.02em; }
+.op-amountlabel { font-size: 10px; color: var(--grey-mid); letter-spacing: .1em; text-transform: uppercase; font-weight: 600; margin-top: 6px; }
+.op-body { font-size: 12px; color: var(--grey-dark); line-height: 1.65; margin-top: 14px; font-weight: 300; }
+.concept-section.concept-blue .concept-label { color: var(--blue); }
+.concept-section.concept-blue .concept-body strong { color: var(--blue); }
+@media (max-width: 820px) {
+  .rnd-grid, .ops-grid { grid-template-columns: 1fr; }
+  .rnd-section, .operations-section { padding-left: 20px; padding-right: 20px; }
+  .sector-label { width: 130px; }
+}
+
+.bar-row { display: flex; align-items: center; gap: 14px; margin-bottom: 13px; }
+.bar-label { width: 120px; flex-shrink: 0; font-size: 12px; color: var(--grey-dark); font-weight: 600; text-align: right; letter-spacing: 0; text-transform: none; }
+.bar-track { flex: 1; height: 20px; background: var(--grey-bg); position: relative; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--blue); }
+.bar-value { width: 64px; flex-shrink: 0; font-size: 12px; font-weight: 700; color: var(--blue); text-align: right; }
+.money-section > div:nth-child(2) .bar-fill { background: var(--blue); }
+.money-section > div:nth-child(2) .bar-row:nth-of-type(3) .bar-fill { background: var(--red) !important; }
+.money-section > div:nth-child(2) .bar-row:nth-of-type(3) .bar-value { color: var(--red) !important; }
+
+.route-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--grey-light); border: 1px solid var(--grey-light); margin: 36px 0 40px; }
+.route-card { background: var(--white); border: none; padding: 28px 24px; }
+.route-name { font-size: 12px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; opacity: 1; }
+.route-peak { font-size: 32px; font-weight: 700; color: var(--red); line-height: 1; letter-spacing: -0.02em; }
+.route-peaklabel { font-size: 10px; color: var(--grey-mid); opacity: 1; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; font-weight: 600; }
+.route-note { font-size: 12px; color: var(--grey-dark); opacity: 1; line-height: 1.6; margin-top: 12px; font-weight: 300; }
+
+.tweets-section { background: var(--white); }
+.tweets-header { color: var(--black); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 36px; display: flex; align-items: center; gap: 16px; font-weight: 700; }
+.tweets-header::after { content:''; flex:1; height:1px; background:var(--grey-light); }
+.tweet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--grey-light); border: 1px solid var(--grey-light); }
+.tweet-card { background: var(--white); border: none; padding: 28px 24px; }
+.tweet-meta { font-size: 10px; letter-spacing: 0.1em; color: var(--grey-mid); text-transform: uppercase; margin-bottom: 12px; font-weight: 600; }
+.tweet-text { font-size: 13px; line-height: 1.75; color: var(--black); font-weight: 300; }
+.tweet-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+.tweet-tag { font-size: 10px; letter-spacing: 0.08em; color: var(--red); border: 1px solid rgba(217,43,43,.35); padding: 2px 8px; }
+.tweet-engagement { margin-top: 14px; font-size: 10px; color: var(--grey-mid); letter-spacing: 0.06em; }
+
+.concept-section { display: grid; grid-template-columns: 300px 1fr; gap: 48px; }
+.concept-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey-mid); padding-top: 6px; font-weight: 700; opacity: 1; }
+.concept-body { font-size: 15px; line-height: 1.8; color: var(--grey-dark); font-style: normal; font-weight: 300; }
+.concept-body strong { font-size: 1em; font-weight: 700; color: var(--red); }
+
+.footer {
+  padding: 20px 40px;
+  border-top: 1px solid #333;
+  background: var(--black);
+  color: #777;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 1;
+}
+.footer-mid { text-align: center; }
+.footer-right { text-align: right; }
+
+@media (max-width: 820px) {
+  .header, .footer { grid-template-columns: 1fr; gap: 6px; text-align: left; }
+  .header-mid, .header-right, .footer-mid, .footer-right { text-align: left; }
+  .stats-section { grid-template-columns: 1fr 1fr; }
+  .chart-grid, .money-section, .concept-section { grid-template-columns: 1fr; gap: 40px; }
+  .route-grid, .tweet-grid { grid-template-columns: 1fr; }
+  .cover, .chart-section, .money-section, .tweets-section, .dtm-section, .concept-section { padding-left: 20px; padding-right: 20px; }
+  .section-divider { padding-left: 20px; padding-right: 20px; flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span>TAG REVUE — @001</span>
+  <span class="header-mid">Données ouvertes · algorithme · 2025</span>
+  <span class="header-right">V1 mise à jour · mai 2025</span>
+</div>
+
+<div class="cover">
+  <div class="cover-tags">
+    <div class="tag">#frontières</div>
+    <div class="tag">#argent</div>
+    <div class="tag">#morts</div>
+  </div>
+  <div class="cover-body">
+    <div class="cover-kicker">Tag Revue — numéro thématique migrations</div>
+    <div class="cover-title">922 millions d'euros de budget,<br>1,27% de taux de mortalité.<br>La frontière ne sauve pas.</div>
+    <div class="cover-lead">Le budget de Frontex a été multiplié par 153 en vingt ans. Pendant ce temps, le taux de mortalité des traversées méditerranéennes — morts pour 100 personnes ayant tenté le passage — n'a pas baissé. Il oscille structurellement entre 1% et 1,7% depuis 2016. Ce numéro croise les données financières (Frontex, EU R&D), les flux migratoires (DTM/IOM), les incidents mortels et les alertes de détresse en temps réel d'Alarm Phone.</div>
+    <div class="cover-meta">
+      <div><div class="meta-label">Sources primaires</div><div class="meta-value">Frontex · IOM · DTM Europe · Alarm Phone</div></div>
+      <div><div class="meta-label">Période</div><div class="meta-value">2008 — 2026</div></div>
+      <div><div class="meta-label">Lignes de données</div><div class="meta-value">~15 000</div></div>
+    </div>
+  </div>
+  <div class="cover-number">01</div>
+</div>
+
+<div class="section-divider"><span>§ 01 — Les chiffres structurels</span><span>Frontex · IOM Missing Migrants · DTM Europe Q3 2025</span></div>
+
+<div class="stats-section">
+  <div class="stat-block">
+    <div class="stat-number">922<span style="font-size:.45em;opacity:.6"> M€</span></div>
+    <div class="stat-label">Budget Frontex 2024</div>
+    <div class="stat-sub">×153 depuis 2005. En 2008 : 37M€ de subventions. En 2024 : 285M€.</div>
+  </div>
+  <div class="stat-block">
+    <div class="stat-number"><span class="stat-accent">1,27</span><span style="font-size:.5em;opacity:.8">%</span></div>
+    <div class="stat-label">Taux de mortalité Méd. 2024</div>
+    <div class="stat-sub">2 573 morts / 208 909 traversées (DTM + IOM). En 2017, pic à 1,67% malgré la chute des flux.</div>
+  </div>
+  <div class="stat-block">
+    <div class="stat-number">2<span style="font-size:.5em;opacity:.6"> Mrd€</span></div>
+    <div class="stat-label">Subventions Frontex 2008–2024</div>
+    <div class="stat-sub">Versés aux États membres. Top : Allemagne 369M€, Italie 314M€, Espagne 188M€.</div>
+  </div>
+  <div class="stat-block">
+    <div class="stat-number"><span class="stat-accent">33 170</span></div>
+    <div class="stat-label">Morts Méditerranée 2014–2024</div>
+    <div class="stat-sub">Source IOM Missing Migrants Project. Chiffre plancher — les disparitions sans corps non comptées.</div>
+  </div>
+</div>
+
+<!-- MAIN CHART -->
+<div class="chart-section">
+  <div class="chart-title">La frontière tue plus, pas moins</div>
+  <div class="chart-subtitle">Trois séries croisées · 2016–2024 · sources multiples</div>
+
+  <div class="chart-grid">
+    <div class="chart-box">
+      <div class="chart-label">Subventions Frontex vs décès (IOM)</div>
+      <div class="canvas-limiter"><canvas id="chart1"></canvas></div>
+      <div class="chart-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#0000FF"></div>Grants Frontex (M€)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#D92B2B"></div>Décès Méditerranée</div>
+      </div>
+      <div class="chart-note">Sources : Statewatch / frontex-grants CSV (Statewatch.org, 2025) · IOM Missing Migrants Project (missingmigrants.iom.int)</div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-label">Taux de mortalité (morts / 100 traversées)</div>
+      <div class="canvas-limiter"><canvas id="chart2"></canvas></div>
+      <div class="chart-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#D92B2B"></div>Taux mortalité %</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#0000FF"></div>Traversées tentées (DTM)</div>
+      </div>
+      <div class="chart-note">Sources : DTM Europe Q3 2025 (iom.int/dtm) · IOM Missing Migrants · Calcul propre. Le taux reste structurellement entre 1% et 1,7% malgré la chute des flux depuis 2016.</div>
+    </div>
+  </div>
+
+  <div class="key-finding">
+    <div class="key-finding-label">Résultat central</div>
+    <div class="key-finding-text">
+      Entre 2016 et 2024, les traversées méditerranéennes ont été divisées par <strong>1,9×</strong>. Le budget Frontex a augmenté de <strong>+63%</strong>. Le taux de mortalité, lui, est passé de 1,31% à 1,23% — sans tendance à la baisse. En 2017, au moment du pic du budget opérationnel, il atteignait <strong>1,67%</strong> : une personne mourait pour 60 qui traversaient.
+    </div>
+  </div>
+</div>
+
+<!-- DTM ROUTES -->
+<div class="section-divider" style="background:var(--black);color:var(--yellow);border-color:rgba(255,229,0,0.3)"><span>§ 02 — Les routes · DTM Europe Q3 2025</span><span>IOM / DTM · iom.int/dtm · données trimestrielles</span></div>
+
+<div class="dtm-section">
+  <div class="dtm-title">Quatre routes, une pression constante</div>
+  <div class="dtm-subtitle">Arrivées par route maritime · 2016–2025 · Source : DTM Europe (IOM)</div>
+
+  <div class="route-grid">
+    <div class="route-card">
+      <div class="route-name">Méd. Centrale (CMR)</div>
+      <div class="route-peak">181 460</div>
+      <div class="route-peaklabel">Pic 2016 · Libye → Italie/Malta</div>
+      <div class="route-note">2024 : 66 855. Route la plus meurtrière au monde selon l'IOM. Opérations Frontex Poseidon & Triton concentrées ici.</div>
+    </div>
+    <div class="route-card">
+      <div class="route-name">Méd. Orientale (EMR)</div>
+      <div class="route-peak">194 438</div>
+      <div class="route-peaklabel">Pic 2016 · Turquie → Grèce</div>
+      <div class="route-note">2024 : 78 084. Chute post-accord UE-Turquie mars 2016. Opération Poseidon déplacée. Pushbacks documentés.</div>
+    </div>
+    <div class="route-card">
+      <div class="route-name">Atl. Ouest (WAAR)</div>
+      <div class="route-peak">46 843</div>
+      <div class="route-peaklabel">Pic 2024 · W. Afrique → Canaries</div>
+      <div class="route-note">Route en explosion : ×70 entre 2016 et 2024. Reflet du verrouillage des routes centrales. Alarm Phone 2025–26 : 9 alertes Atlantic.</div>
+    </div>
+    <div class="route-card">
+      <div class="route-name">Méd. Occ. (WMR)</div>
+      <div class="route-peak">62 991</div>
+      <div class="route-peaklabel">Pic 2018 · Maroc/Algérie → Espagne</div>
+      <div class="route-note">2024 : 17 127. Route la plus documentée par Alarm Phone 2025–26 : 19 alertes WesternMed, 24 mentions Algeria.</div>
+    </div>
+  </div>
+
+  <div class="canvas-limiter canvas-limiter-wide"><canvas id="chart3"></canvas></div>
+  <div style="font-size:10px;opacity:.4;margin-top:16px;font-style:italic;">Source : DTM Europe Q3 2025 — IOM. Données trimestrielles compilées par route et pays d'arrivée. iom.int/dtm</div>
+</div>
+
+<!-- MONEY -->
+<div class="section-divider"><span>§ 03 — L'argent · Statewatch / Frontex grants</span><span>statewatch.org · CSV public · 13 454 lignes</span></div>
+
+<div class="money-section">
+  <div>
+    <div class="money-title">Qui reçoit l'argent</div>
+    <div class="money-subtitle">Subventions Frontex 2008–2024 par État membre (M€)</div>
+    <div class="bar-row"><div class="bar-label">Allemagne</div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="bar-value">369,6</div></div>
+    <div class="bar-row"><div class="bar-label">Italie</div><div class="bar-track"><div class="bar-fill" style="width:85%"></div></div><div class="bar-value">314,4</div></div>
+    <div class="bar-row"><div class="bar-label">Espagne</div><div class="bar-track"><div class="bar-fill" style="width:51%"></div></div><div class="bar-value">187,7</div></div>
+    <div class="bar-row"><div class="bar-label">Grèce</div><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><div class="bar-value">148,5</div></div>
+    <div class="bar-row"><div class="bar-label">Portugal</div><div class="bar-track"><div class="bar-fill" style="width:34%"></div></div><div class="bar-value">126,3</div></div>
+    <div class="bar-row"><div class="bar-label">France</div><div class="bar-track"><div class="bar-fill" style="width:29%"></div></div><div class="bar-value">107,0</div></div>
+    <div class="bar-row"><div class="bar-label">Pays-Bas</div><div class="bar-track"><div class="bar-fill" style="width:27%"></div></div><div class="bar-value">100,6</div></div>
+    <div style="font-size:10px;color:var(--grey-mid);margin-top:20px;font-style:italic;">Source : Statewatch.org, frontex-grants CSV, 2025. Total 2 Mrd€ sur 17 ans.</div>
+  </div>
+  <div>
+    <div class="money-title">À quoi sert l'argent ?</div>
+    <div class="money-subtitle">Ventilation par secteur · total 2008–2024</div>
+    <div class="sector-row"><div class="sector-label">Frontières terrestres</div><div class="sector-track"><div class="sector-fill" style="width:100%"></div></div><div class="sector-value">~560 M€</div></div>
+    <div class="sector-row"><div class="sector-label">Frontières maritimes</div><div class="sector-track"><div class="sector-fill" style="width:85%"></div></div><div class="sector-value">~480 M€</div></div>
+    <div class="sector-row"><div class="sector-label">Expulsions / retours</div><div class="sector-track"><div class="sector-fill" style="width:55%;background:var(--red)"></div></div><div class="sector-value" style="color:var(--red)">~310 M€</div></div>
+    <div class="sector-row"><div class="sector-label">Frontières aériennes</div><div class="sector-track"><div class="sector-fill" style="width:42%"></div></div><div class="sector-value">~240 M€</div></div>
+    <div class="sector-row"><div class="sector-label">Corps permanent</div><div class="sector-track"><div class="sector-fill" style="width:28%"></div></div><div class="sector-value">~160 M€</div></div>
+    <div class="sector-row"><div class="sector-label">Équipements lourds</div><div class="sector-track"><div class="sector-fill" style="width:20%"></div></div><div class="sector-value">~115 M€</div></div>
+    <div style="font-size:10px;color:var(--grey-mid);margin-top:20px;font-style:italic;">Niveau de détail repris de la maquette transmise : secteurs consolidés 2008–2024, montants arrondis.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span>§ 04 — Côté R&D · industrie de surveillance</span><span>Fonds UE Horizon · Money Trails / Corporate Europe Observatory</span></div>
+<div class="rnd-section">
+  <div class="rnd-grid">
+    <div>
+      <div class="money-title">Côté R&D : qui construit les outils ?</div>
+      <div class="money-subtitle">Treemap · nombre de projets cités par bénéficiaire industriel</div>
+      <div class="canvas-limiter-treemap"><canvas id="chartRND"></canvas></div>
+      <div style="font-size:11px;color:var(--grey-mid);margin-top:14px;font-style:italic;">Données reprises de la section “Côté R&D” : 223 M€ · 38 projets · Thales, Finmeccanica, Airbus, Safran et familles technologiques associées.</div>
+    </div>
+    <div class="rnd-note">
+      <strong style="color:var(--blue);">223 M€ de fonds UE additionnels</strong> via Horizon ont financé 38 projets de surveillance. Les bénéficiaires industriels cités concentrent les dispositifs de détection : drones, biométrie, capteurs thermiques, détection olfactive et contrôle de véhicules.
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>§ 05 — Les opérations</span><span>Des noms de dieux grecs pour nommer les eaux</span></div>
+<div class="operations-section">
+  <div class="money-title">Les opérations — des noms de dieux grecs pour nommer les eaux</div>
+  <div class="money-subtitle">Opérations permanentes Frontex en Méditerranée · financement total sur durée de vie</div>
+  <div class="ops-grid">
+    <div class="op-card"><div class="op-name">POSEIDON</div><div class="op-zone">Mer Égée · Grèce / Turquie</div><div class="op-amount">251,7<span style="font-size:.55em;color:var(--grey-mid)"> M€</span></div><div class="op-amountlabel">Subventions Frontex 2008–2018</div><div class="op-body">Opération la plus financée. Pic en 2016 : 68,1 M€ — l'année record des morts en Méditerranée.</div></div>
+    <div class="op-card"><div class="op-name">TRITON</div><div class="op-zone">Méditerranée centrale · Italie</div><div class="op-amount">145,7<span style="font-size:.55em;color:var(--grey-mid)"> M€</span></div><div class="op-amountlabel">2014–2018</div><div class="op-body">Successeur de Mare Nostrum. Zone d'opération réduite, fréquence des naufrages augmentée.</div></div>
+    <div class="op-card"><div class="op-name">HERMES</div><div class="op-zone">Mer de Sicile · Lampedusa</div><div class="op-amount">40,1<span style="font-size:.55em;color:var(--grey-mid)"> M€</span></div><div class="op-amountlabel">2008–2015</div><div class="op-body">Opération Lampedusa. Naufrage du 3 octobre 2013 : 366 morts à 1 km des côtes.</div></div>
+    <div class="op-card"><div class="op-name">INDALO</div><div class="op-zone">Mer d'Alboran · Espagne</div><div class="op-amount">45,6<span style="font-size:.55em;color:var(--grey-mid)"> M€</span></div><div class="op-amountlabel">2008–2021</div><div class="op-body">Route Maroc–Espagne. Avec Alarm Phone 2025–26 : toujours active, alertes quotidiennes.</div></div>
+  </div>
+</div>
+
+<div class="concept-section concept-blue">
+  <div class="concept-label">Note de concept</div>
+  <div class="concept-body">
+    Tag Revue est une publication construite à partir du web en temps réel. Ce numéro croise <strong>quatre régimes de données</strong> : les chiffres institutionnels (IOM, Frontex), les flux financiers (Statewatch CSV, Money Trails), les alertes opérationnelles en direct (Alarm Phone), et le bruit du réseau (hashtag #migrants, 17 500 tweets). L'argument n'est pas formulé — il est <em>rendu visible</em>. Les données parlent dans leur forme brute : la courbe du budget monte, celle des morts ne descend pas.<br><br>
+    Ce numéro serait produit en partenariat avec Alarm Phone, dont les tweets constituent la matière première éditoriale — un journal de bord des eaux que Frontex est censée surveiller.
+  </div>
+</div>
+
+<!-- TWEETS -->
+<div class="section-divider" style="background:var(--black);color:var(--yellow);border-color:rgba(255,229,0,0.3)"><span>§ 04 — La voix d'Alarm Phone</span><span>@alarm_phone · 2022 & 2025–2026</span></div>
+
+<div class="tweets-section">
+  <div class="tweets-header">Alertes de détresse en temps réel — données récoltées @alarm_phone</div>
+  <div class="tweet-grid">
+    <div class="tweet-card">
+      <div class="tweet-meta">@alarm_phone · 26 oct. 2022 · Méditerranée centrale</div>
+      <div class="tweet-text">🆘 ~35 people adrift 80 nautical miles off Malta! We are in contact with about 35 people on board a drifting boat in distress. They report that they have been at sea for 2 days. They are exhausted and in urgent need of assistance.</div>
+      <div class="tweet-tags"><span class="tweet-tag">#Malta</span><span class="tweet-tag">#RescueNOW</span><span class="tweet-tag">#DontLetThemDrown</span></div>
+      <div class="tweet-engagement">20 RT · 26 likes · Autorités contactées : EU, Malta MRCC</div>
+    </div>
+    <div class="tweet-card">
+      <div class="tweet-meta">@alarm_phone · 20 avr. 2026 · Méditerranée occidentale</div>
+      <div class="tweet-text">🆘 in the Western Med! We were alerted to a boat with 19 people that left from Algeria towards Spain 4 days ago. Relatives are getting more and more worried. We ask for rescue now!</div>
+      <div class="tweet-tags"><span class="tweet-tag">#Algeria</span><span class="tweet-tag">#Spain</span><span class="tweet-tag">#WesternMed</span></div>
+      <div class="tweet-engagement">2 RT · 7 likes · 57 tweets évoquent une attente de plusieurs heures</div>
+    </div>
+    <div class="tweet-card">
+      <div class="tweet-meta">@alarm_phone · 25 oct. 2022 · Méditerranée centrale</div>
+      <div class="tweet-text">Both boats, carrying more than 1,300 people in distress, are still out at sea! We spoke to persons on the boats who are scared of drowning. We alerted authorities over 15 hours ago, why have rescue operations not yet taken place?!</div>
+      <div class="tweet-tags"><span class="tweet-tag">#Mediterranean</span><span class="tweet-tag">1300 personnes</span></div>
+      <div class="tweet-engagement">37 RT · 44 likes · Sans réponse depuis 15h</div>
+    </div>
+    <div class="tweet-card">
+      <div class="tweet-meta">@alarm_phone · 2026 · Méditerranée occidentale</div>
+      <div class="tweet-text">🆘in the #WesternMed! We've lost track of a boat carrying ~19 people that started from AïnTemouch towards Almeria. It's been more than 48 hours. The authorities are informed and we hope they'll be found soon!</div>
+      <div class="tweet-tags"><span class="tweet-tag">#WesternMed</span><span class="tweet-tag">#AïnTemouch</span><span class="tweet-tag">#Almeria</span></div>
+      <div class="tweet-engagement">10 RT · 15 likes · Contact perdu · 48 alertes "perdu de vue" en 2025–26</div>
+    </div>
+  </div>
+  <div style="color:rgba(255,229,0,.3);font-size:10px;margin-top:28px;letter-spacing:.08em;line-height:1.8">
+    Corpus total : 293 tweets @alarm_phone juil. 2025–avr. 2026 · 100 tweets oct. 2022 · 78/293 tweets mentionnent "rescue" · 66/293 mentionnent "authorities" · 48/293 : perte de contact avec l'embarcation
+  </div>
+</div>
+
+<div class="concept-section">
+  <div class="concept-label">Note méthodologique</div>
+  <div class="concept-body">
+    Ce numéro croise cinq jeux de données ouverts : subventions Frontex 2008–2024 (Statewatch CSV, 13 454 lignes), décès en Méditerranée (IOM Missing Migrants), arrivées par route (DTM Europe Q3 2025, IOM), projets R&D EU (Money Trails), et tweets @alarm_phone (2022, 2025–2026). L'<strong>INDICATEUR CLÉ</strong> n'est pas le nombre brut de morts — il est le taux de mortalité : morts pour 100 traversées. Ce taux permet de contrôler la variation des flux et de mesurer si la politique de surveillance améliore ou non la sécurité des passages. La réponse, sur 9 ans de données, est <em>structurellement non</em>.
+  </div>
+</div>
+
+<div class="footer">
+  <span>Tag Revue · @001 · V1 mise à jour mai 2025</span>
+  <span class="footer-mid">Statewatch · IOM · DTM · alarm_phone · Twitter/X</span>
+  <span class="footer-right">données ouvertes · CC BY</span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@2.3.0/dist/chartjs-chart-treemap.min.js"></script>
+<script>
+Chart.defaults.font.family = 'Source Sans 3, Helvetica Neue, Helvetica, Arial';
+Chart.defaults.color = '#444';
+
+const blue = '#0000FF';
+const red = '#D92B2B';
+
+const rndTree = [
+  {group:'Bénéficiaires industriels', label:'Thales', value:33},
+  {group:'Bénéficiaires industriels', label:'Finmeccanica', value:28},
+  {group:'Bénéficiaires industriels', label:'Airbus', value:22},
+  {group:'Bénéficiaires industriels', label:'Safran', value:8},
+  {group:'Technologies', label:'Drones de détection', value:12},
+  {group:'Technologies', label:'Biométrie', value:10},
+  {group:'Technologies', label:'Capteurs thermiques', value:8},
+  {group:'Technologies', label:'Détection olfactive', value:4}
+];
+
+if (document.getElementById('chartRND')) {
+  new Chart(document.getElementById('chartRND'), {
+    type: 'treemap',
+    data: {
+      datasets: [{
+        tree: rndTree,
+        key: 'value',
+        groups: ['group', 'label'],
+        spacing: 1.5,
+        borderWidth: 0,
+        backgroundColor: function(ctx) {
+          const raw = ctx.raw || {};
+          const g = raw.g || raw._data?.group || '';
+          const v = raw.v || raw._data?.value || 1;
+          const alpha = Math.max(0.18, Math.min(0.92, v / 36));
+          return g === 'Technologies' ? `rgba(17,17,17,${alpha})` : `rgba(0,0,100,${alpha})`;
+        },
+        labels: {
+          display: true,
+          color: '#FFFFFF',
+          font: { family: 'Source Sans 3, Helvetica Neue, Helvetica, Arial', size: 13, weight: '700' },
+          formatter: function(ctx) {
+            const d = ctx.raw?._data || {};
+            return d.label ? [d.label, d.value + ' projets'] : '';
+          }
+        }
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#111',
+          titleColor: 'white',
+          bodyColor: '#ccc',
+          callbacks: {
+            title: function(items) { return items[0]?.raw?._data?.label || ''; },
+            label: function(item) {
+              const d = item.raw?._data || {};
+              return ' ' + (d.group || 'R&D') + ' · ' + d.value + ' projets';
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+const years = [2016,2017,2018,2019,2020,2021,2022,2023,2024];
+const grants = [172.7,194.5,179.0,179.6,153.8,210.7,242.5,300.3,285.3];
+const deaths = [5097,3139,2337,1885,1440,2047,2411,3155,2573];
+const arrivals = [389976,187499,146949,128663,99907,151417,189595,293838,208909];
+const mortalityRate = years.map((_,i) => +((deaths[i]/arrivals[i])*100).toFixed(2));
+
+// Chart 1 - Grants vs Deaths
+new Chart(document.getElementById('chart1'),{
+  type:'bar',data:{labels:years,datasets:[
+    {type:'bar',label:'Subventions Frontex (M€)',data:grants,backgroundColor:'rgba(0,0,255,0.85)',yAxisID:'y1',order:2},
+    {type:'line',label:'Décès Méditerranée',data:deaths,borderColor:'#D92B2B',backgroundColor:'rgba(217,43,43,0.07)',borderWidth:2.5,pointBackgroundColor:'#D92B2B',pointRadius:4,tension:0.3,fill:true,yAxisID:'y2',order:1}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#111',titleColor:'#fff',bodyColor:'#ccc',callbacks:{label:c=>c.datasetIndex===0?`Frontex: ${c.parsed.y}M€`:`Morts: ${c.parsed.y.toLocaleString('fr')}`}}},
+  scales:{x:{ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#111'},grid:{color:'rgba(0,0,0,0.05)'}},
+  y1:{position:'left',ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#111',callback:v=>v+'M€'},grid:{color:'rgba(0,0,0,0.05)'}},
+  y2:{position:'right',ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#D92B2B'},grid:{drawOnChartArea:false}}}}
+});
+
+// Chart 2 - Mortality rate
+new Chart(document.getElementById('chart2'),{
+  type:'bar',data:{labels:years,datasets:[
+    {type:'bar',label:'Traversées (×1000)',data:arrivals.map(a=>Math.round(a/1000)),backgroundColor:'rgba(26,111,168,0.12)',yAxisID:'y1',order:2},
+    {type:'line',label:'Taux mortalité (%)',data:mortalityRate,borderColor:'#D92B2B',backgroundColor:'rgba(217,43,43,0.1)',borderWidth:3,pointBackgroundColor:'#D92B2B',pointRadius:5,pointHoverRadius:7,tension:0.4,fill:true,yAxisID:'y2',order:1}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#111',titleColor:'#fff',bodyColor:'#ccc',callbacks:{label:c=>c.datasetIndex===0?`Traversées: ${(c.parsed.y*1000).toLocaleString('fr')}`:`Taux mortalité: ${c.parsed.y}%`}}},
+  scales:{x:{ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#111'},grid:{color:'rgba(0,0,0,0.05)'}},
+  y1:{position:'left',ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'rgba(0,0,0,0.4)',callback:v=>v+'k'},grid:{color:'rgba(0,0,0,0.04)'}},
+  y2:{position:'right',min:0,max:2.5,ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#D92B2B',callback:v=>v+'%'},grid:{drawOnChartArea:false}}}}
+});
+
+// Chart 3 - Routes stacked
+new Chart(document.getElementById('chart3'),{
+  type:'bar',
+  data:{labels:[2016,2017,2018,2019,2020,2021,2022,2023,2024,2025],
+  datasets:[
+    {label:'CMR (Méd. Centrale)',data:[181460,119389,24815,14876,36435,68315,105575,158032,66855,51154],backgroundColor:'rgba(217,43,43,0.82)',stack:'routes'},
+    {label:'EMR (Méd. Orientale)',data:[194438,40276,57836,81338,21611,32157,52826,78954,78084,38810],backgroundColor:'rgba(217,43,43,0.55)',stack:'routes'},
+    {label:'WMR (Méd. Occ.)',data:[13406,27409,62991,29762,18838,28629,15519,17086,17127,14598],backgroundColor:'rgba(217,43,43,0.35)',stack:'routes'},
+    {label:'WAAR (Atl. Ouest)',data:[672,425,1307,2687,23023,22316,15675,39766,46843,12878],backgroundColor:'rgba(217,43,43,0.18)',stack:'routes'},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#888',boxWidth:12}},tooltip:{backgroundColor:'#111',titleColor:'#fff',bodyColor:'#ccc'}},
+  scales:{x:{ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#888'},grid:{color:'#EEEEEE'},stacked:true},
+  y:{ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#888',callback:v=>v>=1000?(v/1000)+'k':v},grid:{color:'#EEEEEE'},stacked:true}}}
+});
+</script>
+</body>
+</html>

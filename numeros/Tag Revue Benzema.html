@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAG REVUE — Monitoring Benzema · Ballon d’Or</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#D92B2B;--blue:rgb(0,0,255);--black:#111;--grey-dark:#444;--grey-mid:#888;--grey-light:#ccc;--grey-bg:#f2f2f2;--white:#fff;--font:'Source Sans 3','Helvetica Neue',Helvetica,Arial,sans-serif}
+body{background:var(--white);color:var(--black);font-family:var(--font);font-size:15px;line-height:1.5}
+.site-header{border-bottom:1px solid var(--black);padding:14px 40px;display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-dark)}
+.site-header strong{color:var(--black);font-weight:700}
+.cover{padding:72px 40px 80px;border-bottom:1px solid var(--grey-light);max-width:1120px;margin:0 auto}
+.cover-eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:20px}
+.cover-title{font-size:clamp(36px,5vw,64px);font-weight:300;line-height:1.08;letter-spacing:-.025em;max-width:900px;margin-bottom:28px}
+.cover-title strong{font-weight:700}
+.cover-lead{font-size:16px;line-height:1.75;color:var(--grey-dark);max-width:760px;margin-bottom:36px;font-weight:300}
+.cover-tags{display:flex;gap:10px;flex-wrap:wrap}.ctag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--grey-light);padding:5px 12px;color:var(--grey-dark);font-weight:600}.ctag-red{border-color:var(--red);color:var(--red)}.ctag-blue{border-color:var(--blue);color:var(--blue)}
+.sec-label{padding:12px 40px;background:var(--grey-bg);border-top:1px solid var(--grey-light);border-bottom:1px solid var(--grey-light);display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--grey-mid)}.sec-label strong{color:var(--black)}
+.stats-row{display:grid;grid-template-columns:repeat(6,1fr);border-bottom:1px solid var(--grey-light)}.stat-cell{padding:32px 26px;border-right:1px solid var(--grey-light)}.stat-cell:last-child{border-right:0}.stat-n{font-size:clamp(28px,3.2vw,44px);font-weight:700;line-height:1;letter-spacing:-.02em}.stat-red{color:var(--red)}.stat-blue{color:var(--blue)}.stat-lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-mid);margin-top:10px;font-weight:600}.stat-sub{font-size:12px;color:var(--grey-mid);margin-top:6px;line-height:1.45}
+.section{padding:56px 40px;max-width:1120px;margin:0 auto;border-bottom:1px solid var(--grey-light)}.section.wide{max-width:none}.section-title{font-size:23px;font-weight:700;margin-bottom:6px;line-height:1.2}.section-sub{font-size:12px;color:var(--grey-mid);letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:34px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:56px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--grey-light);border:1px solid var(--grey-light)}.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--grey-light);border:1px solid var(--grey-light)}
+.card{background:var(--white);padding:28px 24px}.card-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;margin-bottom:12px}.card-body{font-size:13px;color:var(--grey-dark);line-height:1.7;font-weight:300}.card-k{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--grey-mid);margin-bottom:6px}
+.hypothesis{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:1px;background:var(--grey-light);border:1px solid var(--grey-light);margin-top:28px}.hypothesis .card{min-height:180px}.hypothesis strong{color:var(--red)}
+.chart-row{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start}.canvas-box{position:relative;width:100%;height:300px;max-height:300px;overflow:hidden}.canvas-box.tall{height:380px;max-height:380px}.canvas-box.short{height:220px;max-height:220px}.canvas-box canvas{display:block;width:100%!important;height:100%!important;max-height:100%!important}
+.treemap{position:relative;height:380px;max-height:380px;border:1px solid var(--grey-light);background:var(--grey-bg);overflow:hidden}.treemap-cell{position:absolute;overflow:hidden;border:1px solid var(--white);background:var(--black);color:#fff;padding:8px 9px;display:flex;flex-direction:column;justify-content:space-between}.treemap-cell.red{background:var(--red)}.treemap-cell.blue{background:var(--blue)}.treemap-label{font-size:clamp(9px,1.1vw,13px);font-weight:700;line-height:1.05}.treemap-value{font-size:clamp(11px,1.4vw,20px);font-weight:700;opacity:.85}.treemap-cell.small{padding:5px}.treemap-cell.small .treemap-label{font-size:8px}.treemap-cell.small .treemap-value{display:none}
+.aside-note{font-size:13px;line-height:1.7;color:var(--grey-dark);font-weight:300;padding:20px 24px;border-left:3px solid var(--red);margin-top:24px;background:var(--grey-bg)}.aside-note.blue{border-left-color:var(--blue)}
+.network{height:420px;border:1px solid var(--grey-light);background:linear-gradient(#fff,#f7f7f7);position:relative;overflow:hidden}.node{position:absolute;border:1px solid var(--grey-light);background:#fff;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:700;box-shadow:0 2px 10px rgba(0,0,0,.04);white-space:nowrap}.node.center{font-size:18px;border-color:var(--black);left:50%;top:47%;transform:translate(-50%,-50%);padding:16px 22px}.node.red{border-color:var(--red);color:var(--red)}.node.blue{border-color:var(--blue);color:var(--blue)}.network svg{position:absolute;inset:0;width:100%;height:100%}
+.tweet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--grey-light);border:1px solid var(--grey-light);margin-top:34px}.tweet-card{background:var(--white);padding:24px 22px}.tw-meta{font-size:10px;color:var(--grey-mid);letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--grey-bg)}.tw-body{font-size:13px;line-height:1.7;color:var(--black);font-weight:300}.tw-body mark{background:none;color:var(--red);font-weight:700}.tw-eng{margin-top:14px;font-size:10px;color:var(--grey-mid);letter-spacing:.06em}
+.dark{background:var(--black);color:var(--white);padding:72px 40px}.dark-inner{max-width:1120px;margin:0 auto}.dark .section-title,.dark h2{color:#fff}.dark .section-sub,.dark p{color:#aaa}.dark-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;border:1px solid #333;background:#333;margin-top:30px}.dark-card{background:var(--black);padding:28px;border-bottom:1px solid #333}.dark-card h3{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:10px}.dark-card p,.dark-card li{font-size:13px;color:#aaa;line-height:1.7;font-weight:300}.dark-card ul{padding-left:18px}
+.footer{padding:20px 40px;border-top:1px solid #333;background:var(--black);display:flex;justify-content:space-between;gap:20px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#555}
+
+.people-quote{margin:28px 0 0;padding:24px 28px;border-left:4px solid var(--red);background:var(--grey-bg);max-width:860px}
+.people-quote .q{font-size:clamp(24px,3.2vw,42px);font-weight:300;line-height:1.15;letter-spacing:-.02em;color:var(--black)}
+.people-quote .q strong{font-weight:700;color:var(--red)}
+.people-quote .caption{margin-top:12px;font-size:12px;color:var(--grey-mid);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.appropriation{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--grey-light);border:1px solid var(--grey-light);margin-top:28px}
+.appro-card{background:var(--white);padding:26px 24px;min-height:180px;border-top:3px solid var(--black)}
+.appro-card.red{border-top-color:var(--red)}.appro-card.blue{border-top-color:var(--blue)}
+.appro-k{font-size:10px;color:var(--grey-mid);letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+.appro-title{font-size:18px;line-height:1.2;font-weight:700;margin-bottom:10px}
+.appro-body{font-size:13px;line-height:1.7;color:var(--grey-dark);font-weight:300}
+
+@media(max-width:900px){.stats-row{grid-template-columns:1fr 1fr}.grid-2,.grid-3,.grid-4,.chart-row,.hypothesis,.tweet-grid,.dark-grid,.appropriation{grid-template-columns:1fr}.site-header,.sec-label,.footer{flex-direction:column;align-items:flex-start}.section,.cover,.dark{padding-left:20px;padding-right:20px}.stat-cell{border-bottom:1px solid var(--grey-light)}}
+</style>
+</head>
+<body>
+<header class="site-header"><span><strong>TAG REVUE</strong> — Monitoring</span><span>Corpus Benzema · Twitter/X · 26 oct. 2022</span><span>Maquette d’essai · data éditoriale</span></header>
+<div class="cover">
+  <div class="cover-eyebrow">Benzema · Ballon d’Or · flux social · archive minute par minute</div>
+  <h1 class="cover-title">Le Ballon d’Or du peuple.<br><strong>Un trophée individuel devient une propriété collective.</strong></h1>
+  <p class="cover-lead">Karim Benzema n’a pas seulement reçu le Ballon d’Or 2022. Il l’a renommé : “le Ballon d’Or du peuple”. Cette formule déplace l’objet. Elle arrache provisoirement le trophée à son cadre institutionnel — France Football, Real Madrid, palmarès, votes, cérémonial — pour l’inscrire dans un espace plus instable : celui de l’appartenance, de la reconnaissance et de la projection collective.</p>
+  <p class="cover-lead">À partir de 1223 tweets collectés sur une seule journée, cette maquette traite le sacre comme un flux politique : célébration sportive, retour territorial vers Lyon, bataille de panthéon, dépendance tactique du Real Madrid, projection nationale vers le Mondial, bruit identitaire et reprises médiatiques automatisées. Le corpus ne montre pas un consensus ; il montre des publics qui revendiquent, contestent ou redéfinissent la propriété symbolique du trophée.</p>
+  <div class="people-quote"><div class="q">“<strong>Ballon d’Or du peuple</strong>” : une formule qui transforme une récompense d’élite en surface d’identification populaire.</div><div class="caption">Angle éditorial ajouté · appartenance / reconnaissance / appropriation</div></div>
+  <div class="cover-tags"><span class="ctag ctag-red">1223 tweets</span><span class="ctag">1085 comptes</span><span class="ctag">fenêtre : 00:56 → 10:40</span><span class="ctag ctag-blue">285 liens</span><span class="ctag ctag-red">847 réponses</span><span class="ctag">objet : sacre / après-sacre</span><span class="ctag ctag-red">formule : Ballon d’Or du peuple</span></div>
+  <div class="hypothesis">
+    <div class="card"><div class="card-k">Hypothèse centrale</div><div class="card-body">Le Ballon d’Or de Benzema fonctionne comme un <strong>révélateur</strong> : une récompense sportive individuelle devient un lieu de lutte autour de la reconnaissance, de l’appartenance et de la légitimité populaire.</div></div>
+    <div class="card"><div class="card-k">Contradiction principale</div><div class="card-body">Le trophée est produit par une institution d’élite, mais il est réinterprété dans le flux comme une victoire collective, populaire, locale et diasporique.</div></div>
+    <div class="card"><div class="card-k">Résultat à montrer</div><div class="card-body">La visualisation doit rendre visible les <strong>régimes d’appropriation</strong> : institution, territoire, supporters, identité, contre-discours et marché médiatique.</div></div>
+  </div>
+</div>
+<div class="sec-label"><span><strong>§ 01</strong> — Chiffres structurels</span><span>robustes dans le fichier txt fourni</span></div>
+<div class="stats-row">
+ <div class="stat-cell"><div class="stat-n stat-red">1223</div><div class="stat-lbl">tweets parsés</div><div class="stat-sub">Chaque ligne contient id, date, heure, compte et texte.</div></div>
+ <div class="stat-cell"><div class="stat-n">1085</div><div class="stat-lbl">comptes distincts</div><div class="stat-sub">Flux très dispersé : peu d’auteurs dominants.</div></div>
+ <div class="stat-cell"><div class="stat-n stat-blue">285</div><div class="stat-lbl">liens détectés</div><div class="stat-sub">Syndication média et circulation de dépêches.</div></div>
+ <div class="stat-cell"><div class="stat-n">847</div><div class="stat-lbl">réponses</div><div class="stat-sub">Le corpus est majoritairement conversationnel.</div></div>
+ <div class="stat-cell"><div class="stat-n stat-red">384</div><div class="stat-lbl">comparaisons</div><div class="stat-sub">Panthéon : Messi, Ronaldo, Lewandowski, Suárez.</div></div>
+ <div class="stat-cell"><div class="stat-n stat-blue">228</div><div class="stat-lbl">absence Real</div><div class="stat-sub">Leipzig, Modrić, Valverde : le sacre devient test de dépendance.</div></div>
+</div>
+<div class="sec-label"><span><strong>§ 02</strong> — Identification structurelle</span><span>thèmes · émotions · acteurs · contradictions</span></div>
+<section class="section">
+  <div class="grid-4">
+    <div class="card"><div class="card-title">Thèmes dominants</div><div class="card-body">Appropriation populaire, comparaison des grandeurs, retour à Lyon, absence au Real, Mondial Qatar, syndication média, bruit politique.</div></div>
+    <div class="card"><div class="card-title">Émotions</div><div class="card-body">Fierté, ironie, défense agressive, nostalgie lyonnaise, anxiété sportive, suspicion, saturation conversationnelle.</div></div>
+    <div class="card"><div class="card-title">Acteurs</div><div class="card-body">Benzema, Real Madrid, OL/Lyon, Modrić, Valverde, Messi, Ronaldo, Lewandowski, médias sportifs locaux.</div></div>
+    <div class="card"><div class="card-title">Institutions</div><div class="card-body">France Football, Real Madrid, Olympique Lyonnais, FIFA/World Cup, presse sportive, comptes d’actualité automatisés.</div></div>
+    <div class="card"><div class="card-title">Lieux</div><div class="card-body">Lyon, Madrid, France, Qatar, Leipzig, Paris/PSG. Les lieux fonctionnent comme des revendications symboliques.</div></div>
+    <div class="card"><div class="card-title">Temporalités</div><div class="card-body">Après-sacre, lendemain de match, anticipation du Mondial, retour local programmé, mémoire longue de la carrière.</div></div>
+    <div class="card"><div class="card-title">Événements</div><div class="card-body">Ballon d’Or 2022, défaite du Real sans cadres, annonce d’une fête à Lyon, projection des favoris Qatar.</div></div>
+    <div class="card"><div class="card-title">Tensions</div><div class="card-body">Trophée d’élite / “peuple” ; individu / collectif ; mérite / polémique ; star française / assignations identitaires ; trophée / dépendance tactique.</div></div>
+  </div>
+</section>
+
+<div class="sec-label"><span><strong>§ 03</strong> — Régimes d’appropriation</span><span>qui parle de quel Benzema ?</span></div>
+<section class="section">
+  <div class="section-title">Un même trophée, plusieurs propriétaires symboliques</div>
+  <div class="section-sub">Le “peuple” n’est pas une catégorie stable : c’est une pluralité de publics dans le flux</div>
+  <div class="appropriation">
+    <div class="appro-card blue"><div class="appro-k">Institution</div><div class="appro-title">France Football · Real Madrid · palmarès</div><div class="appro-body">Le trophée reste produit par un dispositif d’élite : votes, cérémonie, marque Ballon d’Or, reconnaissance globale. C’est le cadre officiel du sacre.</div></div>
+    <div class="appro-card red"><div class="appro-k">Territoire</div><div class="appro-title">Lyon · OL · “peuple lyonnais”</div><div class="appro-body">Le retour annoncé à Lyon transforme une récompense individuelle en archive locale. Le trophée devient un événement urbain et une preuve d’origine.</div></div>
+    <div class="appro-card"><div class="appro-k">Supporters</div><div class="appro-title">Messi · Ronaldo · Lewandowski · Suárez</div><div class="appro-body">Le sacre ne clôt pas le débat : il relance le classement permanent. La reconnaissance produit immédiatement de la comparaison.</div></div>
+    <div class="appro-card red"><div class="appro-k">Identité</div><div class="appro-title">France · Algérie · banlieue · réussite sociale</div><div class="appro-body">Benzema circule comme figure d’identification mais aussi comme surface d’assignation. Le corpus montre des récits d’appartenance autant que des contre-récits.</div></div>
+    <div class="appro-card"><div class="appro-k">Contre-discours</div><div class="appro-title">Soupçon · polémique · rejet</div><div class="appro-body">La célébration coexiste avec des discours de disqualification. Le monitoring les signale sans les amplifier : ils sont un symptôme du champ de forces.</div></div>
+    <div class="appro-card blue"><div class="appro-k">Marché médiatique</div><div class="appro-title">Dépêches · liens · comptes d’actualité</div><div class="appro-body">La formule devient matière recyclable : articles locaux, brèves sportives, liens dupliqués, reprises automatisées. La reconnaissance devient circulation.</div></div>
+  </div>
+  <div class="aside-note">Le “Ballon d’Or du peuple” nomme une contradiction : un objet réservé aux élites du football mondial devient, dans le flux Twitter, une surface d’identification populaire.</div>
+</section>
+<div class="sec-label"><span><strong>§ 04</strong> — Visual investigation</span><span>diagrammes contraints en hauteur · canvas limités</span></div>
+<section class="section">
+  <div class="chart-row">
+    <div>
+      <div class="section-title">Chronologie du flux</div><div class="section-sub">Volume horaire · 26 octobre 2022 · fuseau +0200</div>
+      <div class="canvas-box"><canvas id="timelineChart"></canvas></div>
+      <div class="aside-note">La courbe ne décrit pas “l’opinion publique”. Elle montre une fenêtre de capture : un flux social où le sacre est déjà recyclé par l’actualité du Real Madrid et par les annonces de retour à Lyon.</div>
+    </div>
+    <div>
+      <div class="section-title">Ce que le sacre active</div><div class="section-sub">Catégories non exclusives · un tweet peut compter plusieurs fois</div>
+      <div class="canvas-box"><canvas id="themeChart"></canvas></div>
+      <div class="aside-note blue">La domination de la comparaison montre que le Ballon d’Or ne stabilise pas la valeur d’un joueur : il ouvre une procédure permanente de classement.</div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="grid-2">
+    <div><div class="section-title">Treemap lexical</div><div class="section-sub">Mots / noms récurrents, pondération approximative par présence dans les tweets</div><div id="wordTreemap" class="treemap"></div></div>
+    <div><div class="section-title">Réseau de captation</div><div class="section-sub">Diagramme relationnel éditorial · non métrique</div>
+      <div class="network">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none"><g stroke="#ccc" stroke-width=".25"><line x1="50" y1="50" x2="18" y2="18"/><line x1="50" y1="50" x2="80" y2="17"/><line x1="50" y1="50" x2="15" y2="78"/><line x1="50" y1="50" x2="82" y2="78"/><line x1="50" y1="50" x2="50" y2="12"/><line x1="50" y1="50" x2="50" y2="86"/><line x1="50" y1="50" x2="8" y2="48"/><line x1="50" y1="50" x2="91" y2="48"/></g></svg>
+        <div class="node center">BENZEMA</div><div class="node red" style="left:9%;top:13%">Ballon d’Or</div><div class="node red" style="left:39%;top:28%">Peuple</div><div class="node blue" style="right:8%;top:12%">Real Madrid</div><div class="node red" style="left:8%;bottom:15%">Lyon / OL</div><div class="node" style="right:8%;bottom:15%">France / Qatar</div><div class="node" style="left:42%;top:7%">France Football</div><div class="node" style="left:40%;bottom:9%">Presse sportive</div><div class="node" style="left:3%;top:45%">Messi · CR7</div><div class="node" style="right:2%;top:45%">Modrić · Valverde</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="sec-label"><span><strong>§ 05</strong> — Tweets fragments</span><span>preuves · voix · interruptions</span></div>
+<section class="section">
+  <div class="section-title">Fragments structurants</div><div class="section-sub">sélection éditoriale, non exhaustive</div>
+  <div class="tweet-grid">
+    <div class="tweet-card"><div class="tw-meta">Formule centrale · Sacre renommé</div><div class="tw-body">Benzema nomme son trophée “le Ballon d’Or du peuple”. Dans la maquette, cette phrase devient le point d’entrée : non pas une preuve statistique isolée, mais une clé de lecture des appropriations repérées dans le flux.</div><div class="tw-eng">Appartenance / propriété symbolique</div></div>
+    <div class="tweet-card"><div class="tw-meta">10:05 · @Cplusfacile · Citation-programme</div><div class="tw-body">&quot;Il y avait cette période où je n’étais pas en sélection, et je n’ai rien lâché. Ces périodes difficiles n’ont fait que me renforcer mentalement.&quot; — Karim Benzema, Ballon d’Or 2022</div><div class="tw-eng">Réhabilitation / récit de patience</div></div>
+    <div class="tweet-card"><div class="tw-meta">10:27 · @CultureGones_ · Re-territorialisation</div><div class="tw-body">Karim #Benzema prévoit de “fêter son Ballon d’Or à #Lyon”. Une semaine et demi après son Ballon d’Or, il annonce son intention de célébrer ce sacre à Lyon.</div><div class="tw-eng">Lyon transforme le trophée en événement local</div></div>
+    <div class="tweet-card"><div class="tw-meta">10:31 · @OuestFrance · Syndication locale</div><div class="tw-body">Ballon d’Or. Karim Benzema va présenter prochainement son trophée à Lyon.</div><div class="tw-eng">La dépêche devient motif répété</div></div>
+    <div class="tweet-card"><div class="tw-meta">10:29 · @BendavSertac · Dépendance sportive</div><div class="tw-body">No Modric, no Valverde, no Benzema is what happened.</div><div class="tw-eng">Le trophée bascule vers l’absence</div></div>
+    <div class="tweet-card"><div class="tw-meta">10:28 · @CentralRL9 · Panthéon comparatif</div><div class="tw-body">Benzema scored a hattrick vs Chelsea, PSG, City, Bayern. Lewandowski could never.</div><div class="tw-eng">Le sacre est défendu par confrontation</div></div>
+    <div class="tweet-card"><div class="tw-meta">09:19 · @kevinlandryale2 · Formule-supporter</div><div class="tw-body">On est quand même quitté de la Benzema dépendance à Valverde.</div><div class="tw-eng">Le club comme système de dépendances</div></div>
+  </div>
+</section>
+<div class="sec-label"><span><strong>§ 06</strong> — Architecture du numéro</span><span>sommaire · hypothèses · indicateurs</span></div>
+<section class="section">
+  <div class="grid-3">
+    <div class="card"><div class="card-title">01 — Cover</div><div class="card-body">“Le Ballon d’Or du peuple”. Une image froide : trophée institutionnel, circulation populaire, publics concurrents. Tags : #ballondor #peuple #lyon #realmadrid #panthéon.</div></div>
+    <div class="card"><div class="card-title">02 — Chiffres structurels</div><div class="card-body">Volume, comptes, liens, réponses, catégories. Interprétation : le sacre est un objet distribué, pas un simple hommage.</div></div>
+    <div class="card"><div class="card-title">03 — Visualisations</div><div class="card-body">Timeline, treemap lexical, bar chart thématique, réseau relationnel, matrice des appropriations, contradictions et atlas des lieux symboliques.</div></div>
+    <div class="card"><div class="card-title">04 — Corpus brut</div><div class="card-body">Tweets comme fragments. Ils ne décorent pas l’analyse : ils interrompent et prouvent la mécanique du flux.</div></div>
+    <div class="card"><div class="card-title">05 — Contrepoints</div><div class="card-body">Biais, angles morts, discours toxiques, absence d’engagement chiffré fiable, corpus limité à une fenêtre horaire.</div></div>
+    <div class="card"><div class="card-title">06 — Note de concept</div><div class="card-body">Ce que révèle le monitoring : la fabrique collective d’un héros sportif et les systèmes qui s’y branchent.</div></div>
+  </div>
+</section>
+<section class="dark">
+  <div class="dark-inner">
+    <div class="section-title">Note de concept</div>
+    <div class="section-sub">Tag Revue — Monitoring Benzema</div>
+    <p style="max-width:820px;line-height:1.8;font-weight:300;margin-bottom:30px">Ce corpus ne permet pas de mesurer l’opinion générale sur Benzema. Il permet autre chose : observer comment un événement déjà consacré circule, se fragmente et se rebranche sur plusieurs infrastructures discursives. Le “Ballon d’Or du peuple” n’est pas seulement une formule de célébration : c’est une hypothèse de lecture. Un trophée individuel devient collectif parce qu’il agrège des publics qui ne parlent pas toujours du même Benzema — le Benzema du Real, de Lyon, de l’équipe de France, des héritages diasporiques, des polémiques, des fans mondialisés et des comptes médias.</p>
+    <div class="dark-grid">
+      <div class="dark-card"><h3>Hypothèses analytiques</h3><ul><li>Le “peuple” fonctionne comme une coalition instable de publics, et non comme un bloc homogène.</li><li>Le sacre stabilise la reconnaissance institutionnelle mais intensifie la comparaison.</li><li>Lyon transforme le trophée individuel en archive territoriale.</li><li>Madrid convertit la star célébrée en indicateur d’absence et de dépendance.</li><li>Le débat sportif sert parfois de surface à des récits politiques non sportifs.</li></ul></div>
+      <div class="dark-card"><h3>Indicateurs calculables</h3><ul><li>Indice d’appropriation populaire : mentions peuple / Lyon / fierté / retour / représentation.</li><li>Part des réponses vs tweets originaux.</li><li>Ratio liens / conversation.</li><li>Cooccurrences Benzema–Lyon, Benzema–Real, Benzema–Messi/CR7.</li><li>Temps de reprise média par quart d’heure.</li><li>Indice de panthéon : nombre de comparaisons par 100 tweets.</li></ul></div>
+      <div class="dark-card"><h3>Contradictions détectées</h3><ul><li>Trophée d’élite / victoire dite “du peuple”.</li><li>Icône individuelle / propriété collective.</li><li>Consécration / procès permanent du mérite.</li><li>Fierté locale / extraction médiatique nationale.</li><li>Absence sportive / omniprésence discursive.</li></ul></div>
+      <div class="dark-card"><h3>Pistes d’enquête</h3><ul><li>Comparer le 17 octobre 2022, jour de remise du Ballon d’Or, avec cette fenêtre du 26 octobre.</li><li>Isoler les comptes médias automatisés.</li><li>Cartographier les langues et géographies des comptes.</li><li>Mesurer la part de discours toxiques sans les amplifier.</li></ul></div>
+      <div class="dark-card"><h3>Limites méthodologiques</h3><p>Le fichier TXT ne contient pas de colonnes d’engagement consolidées. La langue est inférée grossièrement. Les catégories sont heuristiques et non exclusives. Les tweets collectés autour d’un mot-clé surexposent mécaniquement Benzema et ne représentent pas Twitter dans son ensemble.</p></div>
+      <div class="dark-card"><h3>Direction artistique</h3><p>Minimalisme suisse, fond blanc, grille froide, rouge pour les intensités sportives et politiques, bleu RVB pur pour les infrastructures médiatiques et institutionnelles. Les graphiques ne décorent pas : ils trient le bruit.</p></div>
+    </div>
+  </div>
+</section>
+<footer class="footer"><span>Tag Revue · Monitoring Benzema</span><span>Source : benzema.txt · modèle visuel : page Alarm Phone</span><span>Maquette HTML exportée</span></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+const hours=["00h", "01h", "02h", "03h", "04h", "05h", "06h", "07h", "08h", "09h", "10h"];
+const hourData=[15, 185, 130, 111, 109, 105, 83, 93, 135, 122, 135];
+const themeLabels=["Comparaisons", "Conversation", "Syndication média", "Real / absence", "Lyon / retour", "Sacre / trophée", "Mondial Qatar", "Identité / politique"];
+const themeData=[384, 380, 252, 228, 116, 115, 106, 81];
+const wordData=[{"label": "Lyon / OL", "value": 371}, {"label": "Real Madrid", "value": 327}, {"label": "Modrić", "value": 146}, {"label": "Ronaldo / CR7", "value": 140}, {"label": "Messi", "value": 126}, {"label": "Mondial / Qatar", "value": 120}, {"label": "Champions / UCL", "value": 102}, {"label": "Valverde", "value": 94}, {"label": "Ballon d’Or", "value": 62}, {"label": "Peuple / fierté", "value": 41}, {"label": "Lewandowski", "value": 45}, {"label": "Rodrygo", "value": 44}, {"label": "Vinicius", "value": 37}, {"label": "France", "value": 36}, {"label": "Mbappé", "value": 35}, {"label": "Suárez", "value": 26}, {"label": "Absence / sans", "value": 22}, {"label": "Retour", "value": 16}];
+function makeChart(id,type,labels,data,opts={}){
+ const ctx=document.getElementById(id); if(!ctx||!window.Chart)return;
+ new Chart(ctx,{type:type,data:{labels:labels,datasets:[{label:opts.label||'',data:data,backgroundColor:opts.colors||'#111',borderColor:opts.border||'#111',borderWidth:opts.borderWidth||0,tension:.35,fill:opts.fill||false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#111',titleColor:'#fff',bodyColor:'#ccc',padding:10}},scales:{x:{grid:{display:false},ticks:{font:{family:'Source Sans 3',size:11},color:'#888'}},y:{grid:{color:'#eee'},ticks:{font:{family:'Source Sans 3',size:11},color:'#888'}}}}});
+}
+makeChart('timelineChart','bar',hours,hourData,{label:'Tweets / heure',colors:hourData.map((v,i)=> i===1||i===10 ? '#D92B2B' : '#111')});
+makeChart('themeChart','bar',themeLabels,themeData,{label:'Occurrences',colors:themeLabels.map(l=> l.includes('Real')||l.includes('Syndication') ? 'rgb(0,0,255)' : (l.includes('Compar')||l.includes('Sacre')||l.includes('Identité') ? '#D92B2B':'#111'))});
+function layoutTreemap(containerId,data){
+ const el=document.getElementById(containerId); if(!el)return; el.innerHTML='';
+ const total=data.reduce((s,d)=>s+d.value,0); const W=el.clientWidth||700,H=el.clientHeight||380;
+ function rec(items,x,y,w,h,depth){
+   if(!items.length)return; if(items.length===1){add(items[0],x,y,w,h);return;}
+   let sum=items.reduce((s,d)=>s+d.value,0), acc=0, cut=0;
+   for(let i=0;i<items.length;i++){acc+=items[i].value;if(acc>=sum/2){cut=i+1;break;}}
+   const a=items.slice(0,cut), b=items.slice(cut); const asum=a.reduce((s,d)=>s+d.value,0);
+   if(w>=h){let aw=w*asum/sum;rec(a,x,y,aw,h,depth+1);rec(b,x+aw,y,w-aw,h,depth+1);}
+   else{let ah=h*asum/sum;rec(a,x,y,w,ah,depth+1);rec(b,x,y+ah,w,h-ah,depth+1);}
+ }
+ function add(d,x,y,w,h){
+   const div=document.createElement('div'); const area=w*h;
+   div.className='treemap-cell '+(d.label.includes('Ballon')||d.label.includes('Messi')||d.label.includes('Ronaldo')||d.label.includes('Suárez')?'red':(d.label.includes('Real')||d.label.includes('Modri')||d.label.includes('Valverde')?'blue':''))+(area<12000?' small':'');
+   div.style.left=x+'px';div.style.top=y+'px';div.style.width=Math.max(0,w)+'px';div.style.height=Math.max(0,h)+'px';
+   div.innerHTML='<div class="treemap-label">'+d.label+'</div><div class="treemap-value">'+d.value+'</div>'; el.appendChild(div);
+ }
+ rec(data,0,0,W,H,0);
+}
+window.addEventListener('load',()=>layoutTreemap('wordTreemap',wordData));
+window.addEventListener('resize',()=>layoutTreemap('wordTreemap',wordData));
+</script>
+</body>
+</html>

@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Services Cartographiques — Alarm Phone · Version light</title>
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+  --red: #D92B2B;           /* migrations / décès / traversées */
+  --blue: #0000FF;          /* financements / Frontex — bleu RVB 100% */
+  --black: #111111;
+  --grey-dark: #444444;
+  --grey-mid: #888888;
+  --grey-light: #CCCCCC;
+  --grey-bg: #F2F2F2;
+  --white: #FFFFFF;
+  --font: 'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+.header {
+  border-bottom: 1px solid var(--black);
+  padding: 14px 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grey-dark);
+}
+.header strong, .header span:first-child { color: var(--black); font-weight: 700; }
+.header-mid { text-align: center; }
+.header-right { text-align: right; }
+
+.cover {
+  padding: 72px 40px 80px;
+  border-bottom: 1px solid var(--grey-light);
+  max-width: 1120px;
+  min-height: auto;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+}
+.cover-number {
+  position: absolute;
+  right: 0;
+  bottom: 24px;
+  font-size: clamp(90px, 18vw, 220px);
+  line-height: .8;
+  letter-spacing: -0.05em;
+  color: var(--grey-bg);
+  font-weight: 700;
+  pointer-events: none;
+  z-index: -1;
+}
+.cover-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
+.tag {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--grey-light);
+  padding: 5px 12px;
+  color: var(--grey-dark);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.tag:nth-child(2) { border-color: var(--blue); color: var(--blue); }
+.tag:nth-child(3) { border-color: var(--red); color: var(--red); }
+.cover-body { max-width: 820px; }
+.cover-kicker {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.cover-title {
+  font-size: clamp(32px, 4.5vw, 58px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  max-width: 900px;
+  margin-bottom: 28px;
+  font-style: normal;
+}
+.cover-title strong, .cover-title br + text { font-weight: 700; }
+.cover-lead {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--grey-dark);
+  max-width: 700px;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+.cover-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 0; }
+.cover-meta > div {
+  border: 1px solid var(--grey-light);
+  padding: 12px 16px;
+  min-width: 190px;
+}
+.meta-label {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+  font-weight: 600;
+}
+.meta-value { font-size: 12px; font-weight: 700; margin-top: 4px; color: var(--black); }
+
+.section-divider {
+  padding: 12px 40px;
+  background: var(--grey-bg) !important;
+  color: var(--grey-mid) !important;
+  border-top: 1px solid var(--grey-light) !important;
+  border-bottom: 1px solid var(--grey-light) !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.section-divider span:first-child { color: var(--black); font-weight: 700; }
+
+.stats-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  background: var(--white);
+  color: var(--black);
+  padding: 0;
+  border-bottom: 1px solid var(--grey-light);
+}
+.stat-block { padding: 36px 32px; border-right: 1px solid var(--grey-light); }
+.stat-block:last-child { border-right: none; }
+.stat-number {
+  font-size: clamp(30px, 3.5vw, 46px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--black);
+}
+.stat-block:nth-child(1) .stat-number,
+.stat-block:nth-child(3) .stat-number { color: var(--blue); }
+.stat-block:nth-child(2) .stat-number,
+.stat-block:nth-child(4) .stat-number,
+.stat-accent { color: var(--red); }
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+  margin-top: 10px;
+  font-weight: 600;
+}
+.stat-sub { font-size: 12px; color: var(--grey-mid); margin-top: 6px; line-height: 1.5; }
+
+.chart-section, .money-section, .dtm-section, .tweets-section, .concept-section {
+  padding: 56px 40px;
+  max-width: 1120px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--grey-light);
+  border-top: none;
+  background: var(--white);
+  color: var(--black);
+}
+.chart-title, .money-title, .dtm-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1.2;
+  font-style: normal;
+}
+.chart-subtitle, .money-subtitle, .dtm-subtitle, .chart-label {
+  font-size: 12px;
+  color: var(--grey-mid);
+  opacity: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.chart-box { position: relative; min-height: 0; }
+.chart-box canvas, .dtm-section canvas {
+  display: block;
+  width: 100% !important;
+  max-width: 100%;
+  height: 260px !important;
+  max-height: 260px !important;
+}
+.dtm-section canvas#chart3 { height: 240px !important; max-height: 240px !important; }
+.canvas-limiter {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  max-height: 260px;
+  overflow: hidden;
+}
+.canvas-limiter canvas { height: 100% !important; max-height: 100% !important; }
+.chart-legend { display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey-dark); }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.chart-note { font-size: 11px; color: var(--grey-mid); opacity: 1; margin-top: 14px; font-style: italic; line-height: 1.6; }
+.source-pill { display:inline-block; background:var(--grey-bg); padding:2px 8px; font-size:9px; letter-spacing:0.1em; margin-right:6px; margin-top:4px; }
+
+.key-finding {
+  background: var(--grey-bg);
+  color: var(--black);
+  padding: 20px 24px;
+  margin: 36px 0 0;
+  border-left: 3px solid var(--red);
+}
+.key-finding-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey-mid); margin-bottom: 12px; font-weight: 600; opacity: 1; }
+.key-finding-text { font-size: 15px; line-height: 1.75; color: var(--grey-dark); font-style: normal; font-weight: 300; }
+.key-finding-text strong { font-size: 1em; color: var(--red); font-weight: 700; }
+
+.money-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.sector-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.sector-label { width: 160px; flex-shrink: 0; font-size: 12px; color: var(--grey-dark); font-weight: 600; text-align: right; }
+.sector-track { flex: 1; height: 18px; background: var(--grey-bg); overflow: hidden; }
+.sector-fill { height: 100%; background: var(--blue); }
+.sector-value { width: 72px; flex-shrink: 0; font-size: 12px; font-weight: 700; color: var(--blue); text-align: right; }
+.rnd-section, .operations-section { padding: 56px 40px; max-width: 1120px; margin: 0 auto; border-bottom: 1px solid var(--grey-light); background: var(--white); }
+.rnd-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 60px; align-items: start; }
+.canvas-limiter-treemap { position: relative; width: 100%; height: 360px; max-height: 360px; overflow: hidden; }
+.canvas-limiter-treemap canvas { height: 100% !important; max-height: 100% !important; width: 100% !important; display: block; }
+.rnd-note { font-size: 13px; line-height: 1.7; color: var(--grey-dark); font-weight: 300; padding: 20px 24px; border-left: 3px solid var(--blue); background: var(--grey-bg); }
+.ops-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--grey-light); border: 1px solid var(--grey-light); margin-top: 36px; }
+.op-card { background: var(--white); padding: 28px 24px; }
+.op-name { font-size: 15px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.op-zone { font-size: 10px; color: var(--grey-mid); letter-spacing: .1em; text-transform: uppercase; font-weight: 600; margin-bottom: 16px; }
+.op-amount { font-size: 32px; font-weight: 700; color: var(--blue); line-height: 1; letter-spacing: -.02em; }
+.op-amountlabel { font-size: 10px; color: var(--grey-mid); letter-spacing: .1em; text-transform: uppercase; font-weight: 600; margin-top: 6px; }
+.op-body { font-size: 12px; color: var(--grey-dark); line-height: 1.65; margin-top: 14px; font-weight: 300; }
+.concept-section.concept-blue .concept-label { color: var(--blue); }
+.concept-section.concept-blue .concept-body strong { color: var(--blue); }
+@media (max-width: 820px) {
+  .rnd-grid, .ops-grid { grid-template-columns: 1fr; }
+  .rnd-section, .operations-section { padding-left: 20px; padding-right: 20px; }
+  .sector-label { width: 130px; }
+}
+
+.bar-row { display: flex; align-items: center; gap: 14px; margin-bottom: 13px; }
+.bar-label { width: 120px; flex-shrink: 0; font-size: 12px; color: var(--grey-dark); font-weight: 600; text-align: right; letter-spacing: 0; text-transform: none; }
+.bar-track { flex: 1; height: 20px; background: var(--grey-bg); position: relative; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--blue); }
+.bar-value { width: 64px; flex-shrink: 0; font-size: 12px; font-weight: 700; color: var(--blue); text-align: right; }
+.money-section > div:nth-child(2) .bar-fill { background: var(--blue); }
+.money-section > div:nth-child(2) .bar-row:nth-of-type(3) .bar-fill { background: var(--red) !important; }
+.money-section > div:nth-child(2) .bar-row:nth-of-type(3) .bar-value { color: var(--red) !important; }
+
+.route-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--grey-light); border: 1px solid var(--grey-light); margin: 36px 0 40px; }
+.route-card { background: var(--white); border: none; padding: 28px 24px; }
+.route-name { font-size: 12px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; opacity: 1; }
+.route-peak { font-size: 32px; font-weight: 700; color: var(--red); line-height: 1; letter-spacing: -0.02em; }
+.route-peaklabel { font-size: 10px; color: var(--grey-mid); opacity: 1; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; font-weight: 600; }
+.route-note { font-size: 12px; color: var(--grey-dark); opacity: 1; line-height: 1.6; margin-top: 12px; font-weight: 300; }
+
+.tweets-section { background: var(--white); }
+.tweets-header { color: var(--black); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 36px; display: flex; align-items: center; gap: 16px; font-weight: 700; }
+.tweets-header::after { content:''; flex:1; height:1px; background:var(--grey-light); }
+.tweet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--grey-light); border: 1px solid var(--grey-light); }
+.tweet-card { background: var(--white); border: none; padding: 28px 24px; }
+.tweet-meta { font-size: 10px; letter-spacing: 0.1em; color: var(--grey-mid); text-transform: uppercase; margin-bottom: 12px; font-weight: 600; }
+.tweet-text { font-size: 13px; line-height: 1.75; color: var(--black); font-weight: 300; }
+.tweet-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+.tweet-tag { font-size: 10px; letter-spacing: 0.08em; color: var(--red); border: 1px solid rgba(217,43,43,.35); padding: 2px 8px; }
+.tweet-engagement { margin-top: 14px; font-size: 10px; color: var(--grey-mid); letter-spacing: 0.06em; }
+
+.concept-section { display: grid; grid-template-columns: 300px 1fr; gap: 48px; }
+.concept-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey-mid); padding-top: 6px; font-weight: 700; opacity: 1; }
+.concept-body { font-size: 15px; line-height: 1.8; color: var(--grey-dark); font-style: normal; font-weight: 300; }
+.concept-body strong { font-size: 1em; font-weight: 700; color: var(--red); }
+
+.footer {
+  padding: 20px 40px;
+  border-top: 1px solid #333;
+  background: var(--black);
+  color: #777;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 1;
+}
+.footer-mid { text-align: center; }
+.footer-right { text-align: right; }
+
+@media (max-width: 820px) {
+  .header, .footer { grid-template-columns: 1fr; gap: 6px; text-align: left; }
+  .header-mid, .header-right, .footer-mid, .footer-right { text-align: left; }
+  .stats-section { grid-template-columns: 1fr 1fr; }
+  .chart-grid, .money-section, .concept-section { grid-template-columns: 1fr; gap: 40px; }
+  .route-grid, .tweet-grid { grid-template-columns: 1fr; }
+  .cover, .chart-section, .money-section, .tweets-section, .dtm-section, .concept-section { padding-left: 20px; padding-right: 20px; }
+  .section-divider { padding-left: 20px; padding-right: 20px; flex-direction: column; align-items: flex-start; }
+}
+
+</style>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet">
+<style>
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --red: #D92B2B;
+  --black: #111111;
+  --grey-dark: #444444;
+  --grey-mid: #888888;
+  --grey-light: #CCCCCC;
+  --grey-bg: #F2F2F2;
+  --white: #FFFFFF;
+  --font: 'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ── LAYOUT ── */
+.container { max-width: 1120px; margin: 0 auto; padding: 0 40px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+
+/* ── HEADER ── */
+.site-header {
+  border-bottom: 1px solid var(--black);
+  padding: 14px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grey-dark);
+}
+.site-header strong { color: var(--black); font-weight: 700; }
+
+/* ── COVER ── */
+.cover {
+  padding: 72px 40px 80px;
+  border-bottom: 1px solid var(--grey-light);
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.cover-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.cover-title {
+  font-size: clamp(32px, 4.5vw, 58px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  max-width: 820px;
+  margin-bottom: 28px;
+}
+.cover-title strong { font-weight: 700; }
+.cover-lead {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--grey-dark);
+  max-width: 640px;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+.cover-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+.ctag {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--grey-light);
+  padding: 5px 12px;
+  color: var(--grey-dark);
+  font-weight: 600;
+}
+.ctag-red { border-color: var(--red); color: var(--red); }
+
+/* ── SECTION LABEL ── */
+.sec-label {
+  padding: 12px 40px;
+  background: var(--grey-bg);
+  border-top: 1px solid var(--grey-light);
+  border-bottom: 1px solid var(--grey-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+}
+.sec-label strong { color: var(--black); }
+
+/* ── STATS ROW ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-bottom: 1px solid var(--grey-light);
+}
+.stat-cell {
+  padding: 36px 32px;
+  border-right: 1px solid var(--grey-light);
+}
+.stat-cell:last-child { border-right: none; }
+.stat-n {
+  font-size: clamp(30px, 3.5vw, 46px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--black);
+}
+.stat-n-red { color: var(--red); }
+.stat-lbl {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+  margin-top: 10px;
+  font-weight: 600;
+}
+.stat-sub {
+  font-size: 12px;
+  color: var(--grey-mid);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+/* ── MAP ── */
+.map-wrapper { border-bottom: 1px solid var(--grey-light); }
+.map-intro-row {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 48px;
+  padding: 48px 40px 32px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.map-intro-title {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.map-intro-body {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--grey-dark);
+  font-weight: 300;
+}
+#map { height: 460px; border-top: 1px solid var(--grey-light); }
+.map-footer {
+  padding: 14px 40px;
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: var(--grey-mid);
+  letter-spacing: 0.06em;
+  border-top: 1px solid var(--grey-light);
+}
+.mleg { display: flex; align-items: center; gap: 8px; }
+.mleg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── ZONES / BARS ── */
+.analysis-section {
+  padding: 56px 40px;
+  max-width: 1120px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--grey-light);
+}
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.section-sub {
+  font-size: 12px;
+  color: var(--grey-mid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 36px;
+}
+
+.h-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 13px;
+}
+.h-bar-lbl {
+  width: 120px;
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--grey-dark);
+  font-weight: 600;
+  text-align: right;
+}
+.h-bar-track {
+  flex: 1;
+  height: 20px;
+  background: var(--grey-bg);
+  position: relative;
+}
+.h-bar-fill {
+  height: 100%;
+  background: var(--black);
+  transition: width 0.8s ease;
+}
+.h-bar-fill-red { background: var(--red); }
+.h-bar-val {
+  width: 40px;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--black);
+  text-align: right;
+}
+.h-bar-note {
+  width: 120px;
+  flex-shrink: 0;
+  font-size: 10px;
+  color: var(--grey-mid);
+  letter-spacing: 0.06em;
+}
+
+.aside-note {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--grey-dark);
+  font-weight: 300;
+  padding: 20px 24px;
+  border-left: 3px solid var(--red);
+  margin-top: 28px;
+  background: var(--grey-bg);
+}
+
+/* ── GREY ZONES ── */
+.grey-zones { border-bottom: 1px solid var(--grey-light); }
+.gz-inner {
+  padding: 56px 40px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.gz-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--grey-light);
+  border: 1px solid var(--grey-light);
+  margin-top: 36px;
+}
+.gz-card {
+  background: var(--white);
+  padding: 32px 28px;
+}
+.gz-card-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+.gz-card-zone {
+  font-size: 10px;
+  color: var(--grey-mid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.gz-card-body {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--grey-dark);
+  font-weight: 300;
+}
+.gz-card-stat {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: -0.02em;
+  margin-top: 20px;
+  line-height: 1;
+}
+.gz-card-statlbl {
+  font-size: 10px;
+  color: var(--grey-mid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* ── WORD FREQUENCY ── */
+.words-section {
+  padding: 56px 40px;
+  max-width: 1120px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--grey-light);
+}
+.words-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.chart-wrap { position: relative; min-height: 0; }
+.chart-canvas-box {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  max-height: 380px;
+  overflow: hidden;
+}
+.timeline-chart-box {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  max-height: 180px;
+  overflow: hidden;
+}
+.chart-canvas-box canvas,
+.timeline-chart-box canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
+}
+.treemap-wrap {
+  width: 100%;
+  height: 380px;
+  max-height: 380px;
+  overflow: hidden;
+  border: 1px solid var(--grey-light);
+  background: var(--grey-bg);
+  position: relative;
+}
+.treemap-cell {
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid var(--white);
+  background: var(--black);
+  color: var(--white);
+  padding: 8px 9px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  line-height: 1.05;
+}
+.treemap-cell.is-red { background: var(--red); }
+.treemap-label { font-size: clamp(9px, 1.1vw, 13px); font-weight: 700; letter-spacing: .02em; }
+.treemap-value { font-size: clamp(11px, 1.5vw, 20px); font-weight: 700; opacity: .85; }
+.treemap-cell.is-small { padding: 5px; }
+.treemap-cell.is-small .treemap-label { font-size: 8px; }
+.treemap-cell.is-small .treemap-value { display: none; }
+
+/* ── TIMELINE ── */
+.timeline-section {
+  padding: 56px 40px;
+  max-width: 1120px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--grey-light);
+  background: var(--grey-bg);
+}
+
+/* ── TWEET SAMPLES ── */
+.samples-section {
+  padding: 56px 40px;
+  max-width: 1120px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--grey-light);
+}
+.samples-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--grey-light);
+  border: 1px solid var(--grey-light);
+  margin-top: 36px;
+}
+.tweet-card {
+  background: var(--white);
+  padding: 28px 24px;
+}
+.tw-meta {
+  font-size: 10px;
+  color: var(--grey-mid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--grey-bg);
+}
+.tw-body {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--black);
+  font-weight: 300;
+}
+.tw-body mark {
+  background: none;
+  color: var(--red);
+  font-weight: 600;
+}
+.tw-eng {
+  margin-top: 16px;
+  font-size: 10px;
+  color: var(--grey-mid);
+  letter-spacing: 0.06em;
+  display: flex;
+  gap: 14px;
+}
+.tw-special {
+  background: #FFF5F5;
+  border-top: 3px solid var(--red);
+}
+
+/* ── PROPOSAL ── */
+.proposal {
+  background: var(--black);
+  color: var(--white);
+  padding: 80px 40px;
+}
+.prop-inner { max-width: 1120px; margin: 0 auto; }
+.prop-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.prop-title {
+  font-size: clamp(26px, 3.5vw, 44px);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+.prop-title strong { font-weight: 700; }
+.prop-body {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #BBBBBB;
+  max-width: 660px;
+  margin-bottom: 56px;
+  font-weight: 300;
+}
+.prop-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid #333;
+}
+.prop-item {
+  padding: 32px 28px;
+  border-right: 1px solid #333;
+  border-bottom: 1px solid #333;
+}
+.prop-item:nth-child(2n) { border-right: none; }
+.prop-item:nth-child(3), .prop-item:nth-child(4) { border-bottom: none; }
+.prop-n {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 10px;
+}
+.prop-b { font-size: 13px; line-height: 1.7; color: #AAAAAA; font-weight: 300; }
+
+/* ── FOOTER ── */
+.site-footer {
+  padding: 20px 40px;
+  border-top: 1px solid #333;
+  background: var(--black);
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #555;
+}
+
+/* ── LEAFLET POPUP OVERRIDE ── */
+.leaflet-popup-content-wrapper {
+  background: var(--white);
+  border-radius: 0;
+  border: 1px solid var(--grey-light);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  padding: 0;
+}
+.leaflet-popup-content {
+  margin: 0;
+  font-family: var(--font);
+}
+.leaflet-popup-tip-container { display: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 820px) {
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .grid-2, .words-grid, .prop-grid { grid-template-columns: 1fr; gap: 40px; }
+  .gz-grid, .samples-grid { grid-template-columns: 1fr; }
+  .map-intro-row { grid-template-columns: 1fr; gap: 24px; }
+  .site-header, .sec-label, .map-footer, .analysis-section, .gz-inner, .words-section, .timeline-section, .samples-section { padding-left: 20px; padding-right: 20px; }
+  .cover, .proposal { padding-left: 20px; padding-right: 20px; }
+}
+
+</style>
+<style>
+/* ── SECTION ARCHIVE CSV · 293 TWEETS ── */
+.tweet-archive-section { padding: 64px 40px; max-width: 1280px; margin: 0 auto; border-bottom: 1px solid var(--grey-light); background: var(--white); }
+.archive-intro { display:grid; grid-template-columns: 320px 1fr; gap:48px; align-items:start; margin-bottom: 40px; }
+.archive-kicker { font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:var(--red); font-weight:700; margin-bottom:12px; }
+.archive-title { font-size: clamp(28px, 4vw, 48px); line-height:1.08; font-weight:300; letter-spacing:-.02em; }
+.archive-title strong { font-weight:700; }
+.archive-body { font-size:15px; color:var(--grey-dark); line-height:1.8; font-weight:300; }
+.archive-body strong { color: var(--black); font-weight:700; }
+.tweet-type-summary { display:grid; grid-template-columns: repeat(4, 1fr); gap:1px; background:var(--grey-light); border:1px solid var(--grey-light); margin: 24px 0 44px; }
+.tweet-type-card { background:var(--white); padding:22px 20px; min-height:110px; }
+.tweet-type-card.is-red { background:#FFF5F5; }
+.type-count { font-size:34px; font-weight:700; letter-spacing:-.03em; color:var(--black); line-height:1; }
+.tweet-type-card.is-red .type-count { color:var(--red); }
+.type-name { font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--grey-mid); font-weight:700; margin-top:8px; }
+.tweet-day { border-top:1px solid var(--black); margin-top:0; }
+.tweet-day summary { cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:20px; padding:18px 0; }
+.tweet-day summary::-webkit-details-marker { display:none; }
+.day-name { font-size:22px; line-height:1; font-weight:700; letter-spacing:-.01em; text-transform:uppercase; color:var(--black); }
+.day-count { font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:var(--grey-mid); font-weight:700; }
+.tweet-type-group { margin: 0 0 30px; border:1px solid var(--grey-light); }
+.tweet-type-head { display:flex; justify-content:space-between; gap:20px; background:var(--grey-bg); border-bottom:1px solid var(--grey-light); padding:10px 14px; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--grey-mid); font-weight:700; }
+.tweet-type-head span:first-child { color:var(--red); }
+.tweet-detail-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:1px; background:var(--grey-light); }
+.tweet-detail-card { background:var(--white); padding:22px 20px; min-height: 220px; display:flex; flex-direction:column; }
+.tweet-detail-top { display:flex; justify-content:space-between; gap:12px; border-bottom:1px solid var(--grey-bg); padding-bottom:9px; margin-bottom:12px; font-size:10px; color:var(--grey-mid); letter-spacing:.08em; text-transform:uppercase; font-weight:700; }
+.tweet-id { white-space:nowrap; opacity:.75; }
+.tweet-detail-body { font-size:13px; line-height:1.65; color:var(--black); font-weight:300; }
+.tweet-detail-body a { color:var(--red); text-decoration:none; border-bottom:1px solid rgba(217,43,43,.35); }
+.tweet-media { margin-top:14px; display:grid; gap:8px; grid-template-columns: 1fr; }
+.tweet-media-img { width:100%; max-height:260px; object-fit:cover; border:1px solid var(--grey-light); display:block; background:var(--grey-bg); }
+.tweet-media-video { width:100%; max-height:260px; border:1px solid var(--grey-light); background:#000; }
+.tweet-media-link { font-size:11px; color:var(--red); text-decoration:none; border:1px solid rgba(217,43,43,.35); padding:8px 10px; display:inline-block; }
+.tweet-detail-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
+.tweet-detail-tags span { font-size:10px; letter-spacing:.06em; color:var(--red); border:1px solid rgba(217,43,43,.35); padding:2px 7px; }
+.tweet-detail-foot { margin-top:auto; padding-top:14px; display:flex; flex-wrap:wrap; gap:10px; font-size:10px; color:var(--grey-mid); letter-spacing:.06em; text-transform:uppercase; }
+.tweet-detail-foot a { color:var(--black); text-decoration:none; border-bottom:1px solid var(--black); font-weight:700; }
+.archive-note { margin:0 0 28px; padding:18px 22px; border-left:3px solid var(--red); background:var(--grey-bg); color:var(--grey-dark); font-size:13px; line-height:1.7; font-weight:300; }
+@media (max-width: 1000px) { .tweet-detail-grid { grid-template-columns: 1fr 1fr; } .tweet-type-summary { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 700px) { .archive-intro, .tweet-detail-grid, .tweet-type-summary { grid-template-columns:1fr; } .tweet-archive-section { padding-left:20px; padding-right:20px; } .day-name { font-size:18px; } }
+@media print { .tweet-day { break-inside:auto; } .tweet-detail-card, .tweet-type-group { break-inside:avoid; } .tweet-media-img { max-height:180px; } }
+</style>
+<style>
+html { scroll-behavior:smooth; }
+body::before { content:'Services Cartographiques · Alarm Phone · version light · 20 tweets sélectionnés'; position: fixed; bottom: 12px; right: 16px; z-index: 999; font: 700 9px/1 var(--font); letter-spacing:.12em; text-transform:uppercase; color: rgba(17,17,17,.25); pointer-events:none; }
+@media print { body::before { display:none; } }
+</style>
+</link><style>
+/* Version light : archive réduite pour envoi */
+#archive-293-tweets .archive-title { max-width: 760px; }
+#archive-293-tweets .tweet-type-summary { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 820px) { #archive-293-tweets .tweet-type-summary { grid-template-columns: repeat(2,1fr); } }
+</style></head>
+<body>
+<div class="section-divider"><span>PARTIE I — Contexte migrations / Frontex</span><span>Page initiale conservée · analyse contexte</span></div>
+<div class="header">
+<span>Services Cartographiques — @001</span>
+<span class="header-mid">Données ouvertes · algorithme · 2025</span>
+<span class="header-right">V1 mise à jour · mai 2025</span>
+</div>
+<div class="cover">
+<div class="cover-tags">
+<div class="tag">#frontières</div>
+<div class="tag">#argent</div>
+<div class="tag">#morts</div>
+</div>
+<div class="cover-body">
+<div class="cover-kicker">Services Cartographiques — numéro thématique migrations</div>
+<div class="cover-title">922 millions d'euros de budget,<br/>1,27% de taux de mortalité.<br/>La frontière ne sauve pas.</div>
+<div class="cover-lead">Le budget de Frontex a été multiplié par 153 en vingt ans. Pendant ce temps, le taux de mortalité des traversées méditerranéennes — morts pour 100 personnes ayant tenté le passage — n'a pas baissé. Il oscille structurellement entre 1% et 1,7% depuis 2016. Ce numéro croise les données financières (Frontex, EU R&amp;D), les flux migratoires (DTM/IOM), les incidents mortels et les alertes de détresse en temps réel d'Alarm Phone.</div>
+<div class="cover-meta">
+<div><div class="meta-label">Sources primaires</div><div class="meta-value">Frontex · IOM · DTM Europe · Alarm Phone</div></div>
+<div><div class="meta-label">Période</div><div class="meta-value">2008 — 2026 · Tweets : 8 juillet 2025 — 20 avril 2026</div></div>
+<div><div class="meta-label">Lignes de données</div><div class="meta-value">~15 000</div></div>
+</div>
+</div>
+<div class="cover-number">01</div>
+</div>
+<div class="section-divider"><span>§ 01 — Les chiffres structurels</span><span>Frontex · IOM Missing Migrants · DTM Europe Q3 2025</span></div>
+<div class="stats-section">
+<div class="stat-block">
+<div class="stat-number">922<span style="font-size:.45em;opacity:.6"> M€</span></div>
+<div class="stat-label">Budget Frontex 2024</div>
+<div class="stat-sub">×153 depuis 2005. En 2008 : 37M€ de subventions. En 2024 : 285M€.</div>
+</div>
+<div class="stat-block">
+<div class="stat-number"><span class="stat-accent">1,27</span><span style="font-size:.5em;opacity:.8">%</span></div>
+<div class="stat-label">Taux de mortalité Méd. 2024</div>
+<div class="stat-sub">2 573 morts / 208 909 traversées (DTM + IOM). En 2017, pic à 1,67% malgré la chute des flux.</div>
+</div>
+<div class="stat-block">
+<div class="stat-number">2<span style="font-size:.5em;opacity:.6"> Mrd€</span></div>
+<div class="stat-label">Subventions Frontex 2008–2024</div>
+<div class="stat-sub">Versés aux États membres. Top : Allemagne 369M€, Italie 314M€, Espagne 188M€.</div>
+</div>
+<div class="stat-block">
+<div class="stat-number"><span class="stat-accent">33 170</span></div>
+<div class="stat-label">Morts Méditerranée 2014–2024</div>
+<div class="stat-sub">Source IOM Missing Migrants Project. Chiffre plancher — les disparitions sans corps non comptées.</div>
+</div>
+</div>
+<!-- MAIN CHART -->
+<div class="chart-section">
+<div class="chart-title">La frontière tue plus, pas moins</div>
+<div class="chart-subtitle">Trois séries croisées · 2016–2024 · sources multiples</div>
+<div class="chart-grid">
+<div class="chart-box">
+<div class="chart-label">Subventions Frontex vs décès (IOM)</div>
+<div class="canvas-limiter"><canvas id="chart1"></canvas></div>
+<div class="chart-legend">
+<div class="legend-item"><div class="legend-dot" style="background:#0000FF"></div>Grants Frontex (M€)</div>
+<div class="legend-item"><div class="legend-dot" style="background:#D92B2B"></div>Décès Méditerranée</div>
+</div>
+<div class="chart-note">Sources : Statewatch / frontex-grants CSV (Statewatch.org, 2025) · IOM Missing Migrants Project (missingmigrants.iom.int)</div>
+</div>
+<div class="chart-box">
+<div class="chart-label">Taux de mortalité (morts / 100 traversées)</div>
+<div class="canvas-limiter"><canvas id="chart2"></canvas></div>
+<div class="chart-legend">
+<div class="legend-item"><div class="legend-dot" style="background:#D92B2B"></div>Taux mortalité %</div>
+<div class="legend-item"><div class="legend-dot" style="background:#0000FF"></div>Traversées tentées (DTM)</div>
+</div>
+<div class="chart-note">Sources : DTM Europe Q3 2025 (iom.int/dtm) · IOM Missing Migrants · Calcul propre. Le taux reste structurellement entre 1% et 1,7% malgré la chute des flux depuis 2016.</div>
+</div>
+</div>
+<div class="key-finding">
+<div class="key-finding-label">Résultat central</div>
+<div class="key-finding-text">
+      Entre 2016 et 2024, les traversées méditerranéennes ont été divisées par <strong>1,9×</strong>. Le budget Frontex a augmenté de <strong>+63%</strong>. Le taux de mortalité, lui, est passé de 1,31% à 1,23% — sans tendance à la baisse. En 2017, au moment du pic du budget opérationnel, il atteignait <strong>1,67%</strong> : une personne mourait pour 60 qui traversaient.
+    </div>
+</div>
+</div>
+<!-- DTM ROUTES -->
+<div class="section-divider" style="background:var(--black);color:var(--yellow);border-color:rgba(255,229,0,0.3)"><span>§ 02 — Les routes · DTM Europe Q3 2025</span><span>IOM / DTM · iom.int/dtm · données trimestrielles</span></div>
+<div class="dtm-section">
+<div class="dtm-title">Quatre routes, une pression constante</div>
+<div class="dtm-subtitle">Arrivées par route maritime · 2016–2025 · Source : DTM Europe (IOM)</div>
+<div class="route-grid">
+<div class="route-card">
+<div class="route-name">Méd. Centrale (CMR)</div>
+<div class="route-peak">181 460</div>
+<div class="route-peaklabel">Pic 2016 · Libye → Italie/Malta</div>
+<div class="route-note">2024 : 66 855. Route la plus meurtrière au monde selon l'IOM. Opérations Frontex Poseidon &amp; Triton concentrées ici.</div>
+</div>
+<div class="route-card">
+<div class="route-name">Méd. Orientale (EMR)</div>
+<div class="route-peak">194 438</div>
+<div class="route-peaklabel">Pic 2016 · Turquie → Grèce</div>
+<div class="route-note">2024 : 78 084. Chute post-accord UE-Turquie mars 2016. Opération Poseidon déplacée. Pushbacks documentés.</div>
+</div>
+<div class="route-card">
+<div class="route-name">Atl. Ouest (WAAR)</div>
+<div class="route-peak">46 843</div>
+<div class="route-peaklabel">Pic 2024 · W. Afrique → Canaries</div>
+<div class="route-note">Route en explosion : ×70 entre 2016 et 2024. Reflet du verrouillage des routes centrales. Alarm Phone 2025–26 : 9 alertes Atlantic.</div>
+</div>
+<div class="route-card">
+<div class="route-name">Méd. Occ. (WMR)</div>
+<div class="route-peak">62 991</div>
+<div class="route-peaklabel">Pic 2018 · Maroc/Algérie → Espagne</div>
+<div class="route-note">2024 : 17 127. Route la plus documentée par Alarm Phone 2025–26 : 19 alertes WesternMed, 24 mentions Algeria.</div>
+</div>
+</div>
+<div class="canvas-limiter canvas-limiter-wide"><canvas id="chart3"></canvas></div>
+<div style="font-size:10px;opacity:.4;margin-top:16px;font-style:italic;">Source : DTM Europe Q3 2025 — IOM. Données trimestrielles compilées par route et pays d'arrivée. iom.int/dtm</div>
+</div>
+<!-- MONEY -->
+<div class="section-divider"><span>§ 03 — L'argent · Statewatch / Frontex grants</span><span>statewatch.org · CSV public · 13 454 lignes</span></div>
+<div class="money-section">
+<div>
+<div class="money-title">Qui reçoit l'argent</div>
+<div class="money-subtitle">Subventions Frontex 2008–2024 par État membre (M€)</div>
+<div class="bar-row"><div class="bar-label">Allemagne</div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="bar-value">369,6</div></div>
+<div class="bar-row"><div class="bar-label">Italie</div><div class="bar-track"><div class="bar-fill" style="width:85%"></div></div><div class="bar-value">314,4</div></div>
+<div class="bar-row"><div class="bar-label">Espagne</div><div class="bar-track"><div class="bar-fill" style="width:51%"></div></div><div class="bar-value">187,7</div></div>
+<div class="bar-row"><div class="bar-label">Grèce</div><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><div class="bar-value">148,5</div></div>
+<div class="bar-row"><div class="bar-label">Portugal</div><div class="bar-track"><div class="bar-fill" style="width:34%"></div></div><div class="bar-value">126,3</div></div>
+<div class="bar-row"><div class="bar-label">France</div><div class="bar-track"><div class="bar-fill" style="width:29%"></div></div><div class="bar-value">107,0</div></div>
+<div class="bar-row"><div class="bar-label">Pays-Bas</div><div class="bar-track"><div class="bar-fill" style="width:27%"></div></div><div class="bar-value">100,6</div></div>
+<div style="font-size:10px;color:var(--grey-mid);margin-top:20px;font-style:italic;">Source : Statewatch.org, frontex-grants CSV, 2025. Total 2 Mrd€ sur 17 ans.</div>
+</div>
+<div>
+<div class="money-title">À quoi sert l'argent ?</div>
+<div class="money-subtitle">Ventilation par secteur · total 2008–2024</div>
+<div class="sector-row"><div class="sector-label">Frontières terrestres</div><div class="sector-track"><div class="sector-fill" style="width:100%"></div></div><div class="sector-value">~560 M€</div></div>
+<div class="sector-row"><div class="sector-label">Frontières maritimes</div><div class="sector-track"><div class="sector-fill" style="width:85%"></div></div><div class="sector-value">~480 M€</div></div>
+<div class="sector-row"><div class="sector-label">Expulsions / retours</div><div class="sector-track"><div class="sector-fill" style="width:55%;background:var(--red)"></div></div><div class="sector-value" style="color:var(--red)">~310 M€</div></div>
+<div class="sector-row"><div class="sector-label">Frontières aériennes</div><div class="sector-track"><div class="sector-fill" style="width:42%"></div></div><div class="sector-value">~240 M€</div></div>
+<div class="sector-row"><div class="sector-label">Corps permanent</div><div class="sector-track"><div class="sector-fill" style="width:28%"></div></div><div class="sector-value">~160 M€</div></div>
+<div class="sector-row"><div class="sector-label">Équipements lourds</div><div class="sector-track"><div class="sector-fill" style="width:20%"></div></div><div class="sector-value">~115 M€</div></div>
+<div style="font-size:10px;color:var(--grey-mid);margin-top:20px;font-style:italic;">Niveau de détail repris de la maquette transmise : secteurs consolidés 2008–2024, montants arrondis.</div>
+</div>
+</div>
+<div class="section-divider"><span>§ 04 — Côté R&amp;D · industrie de surveillance</span><span>Fonds UE Horizon · Money Trails / Corporate Europe Observatory</span></div>
+<div class="rnd-section">
+<div class="rnd-grid">
+<div>
+<div class="money-title">Côté R&amp;D : qui construit les outils ?</div>
+<div class="money-subtitle">Treemap · nombre de projets cités par bénéficiaire industriel</div>
+<div class="canvas-limiter-treemap"><canvas id="chartRND"></canvas></div>
+<div style="font-size:11px;color:var(--grey-mid);margin-top:14px;font-style:italic;">Données reprises de la section “Côté R&amp;D” : 223 M€ · 38 projets · Thales, Finmeccanica, Airbus, Safran et familles technologiques associées.</div>
+</div>
+<div class="rnd-note">
+<strong style="color:var(--blue);">223 M€ de fonds UE additionnels</strong> via Horizon ont financé 38 projets de surveillance. Les bénéficiaires industriels cités concentrent les dispositifs de détection : drones, biométrie, capteurs thermiques, détection olfactive et contrôle de véhicules.
+    </div>
+</div>
+</div>
+<div class="section-divider"><span>§ 05 — Les opérations</span><span>Des noms de dieux grecs pour nommer les eaux</span></div>
+<div class="operations-section">
+<div class="money-title">Les opérations — des noms de dieux grecs pour nommer les eaux</div>
+<div class="money-subtitle">Opérations permanentes Frontex en Méditerranée · financement total sur durée de vie</div>
+<div class="ops-grid">
+<div class="op-card"><div class="op-name">POSEIDON</div><div class="op-zone">Mer Égée · Grèce / Turquie</div><div class="op-amount">251,7<span style="font-size:.55em;color:var(--grey-mid)"> M€</span></div><div class="op-amountlabel">Subventions Frontex 2008–2018</div><div class="op-body">Opération la plus financée. Pic en 2016 : 68,1 M€ — l'année record des morts en Méditerranée.</div></div>
+<div class="op-card"><div class="op-name">TRITON</div><div class="op-zone">Méditerranée centrale · Italie</div><div class="op-amount">145,7<span style="font-size:.55em;color:var(--grey-mid)"> M€</span></div><div class="op-amountlabel">2014–2018</div><div class="op-body">Successeur de Mare Nostrum. Zone d'opération réduite, fréquence des naufrages augmentée.</div></div>
+<div class="op-card"><div class="op-name">HERMES</div><div class="op-zone">Mer de Sicile · Lampedusa</div><div class="op-amount">40,1<span style="font-size:.55em;color:var(--grey-mid)"> M€</span></div><div class="op-amountlabel">2008–2015</div><div class="op-body">Opération Lampedusa. Naufrage du 3 octobre 2013 : 366 morts à 1 km des côtes.</div></div>
+<div class="op-card"><div class="op-name">INDALO</div><div class="op-zone">Mer d'Alboran · Espagne</div><div class="op-amount">45,6<span style="font-size:.55em;color:var(--grey-mid)"> M€</span></div><div class="op-amountlabel">2008–2021</div><div class="op-body">Route Maroc–Espagne. Avec Alarm Phone 2025–26 : toujours active, alertes quotidiennes.</div></div>
+</div>
+</div>
+<div class="concept-section concept-blue">
+<div class="concept-label">Note de concept</div>
+<div class="concept-body">
+    Services Cartographiques est une publication construite à partir du web en temps réel. Ce numéro croise <strong>quatre régimes de données</strong> : les chiffres institutionnels (IOM, Frontex), les flux financiers (Statewatch CSV, Money Trails), les alertes opérationnelles en direct (Alarm Phone), et le bruit du réseau (hashtag #migrants, 17 500 tweets). L'argument n'est pas formulé — il est <em>rendu visible</em>. Les données parlent dans leur forme brute : la courbe du budget monte, celle des morts ne descend pas.<br/><br/>
+    Ce numéro serait produit en partenariat avec Alarm Phone, dont les tweets constituent la matière première éditoriale — un journal de bord des eaux que Frontex est censée surveiller.
+  </div>
+</div>
+<!-- TWEETS -->
+<div class="section-divider" style="background:var(--black);color:var(--yellow);border-color:rgba(255,229,0,0.3)"><span>§ 04 — La voix d'Alarm Phone</span><span>@alarm_phone · 2022 &amp; 2025–2026 · échantillon 8 juillet 2025 – 20 avril 2026</span></div>
+<div class="tweets-section">
+<div class="tweets-header">Alertes de détresse en temps réel — données récoltées @alarm_phone</div>
+<div class="tweet-grid">
+<div class="tweet-card">
+<div class="tweet-meta">@alarm_phone · 26 oct. 2022 · Méditerranée centrale</div>
+<div class="tweet-text">🆘 ~35 people adrift 80 nautical miles off Malta! We are in contact with about 35 people on board a drifting boat in distress. They report that they have been at sea for 2 days. They are exhausted and in urgent need of assistance.</div>
+<div class="tweet-tags"><span class="tweet-tag">#Malta</span><span class="tweet-tag">#RescueNOW</span><span class="tweet-tag">#DontLetThemDrown</span></div>
+<div class="tweet-engagement">20 RT · 26 likes · Autorités contactées : EU, Malta MRCC</div>
+</div>
+<div class="tweet-card">
+<div class="tweet-meta">@alarm_phone · 20 avr. 2026 · Méditerranée occidentale</div>
+<div class="tweet-text">🆘 in the Western Med! We were alerted to a boat with 19 people that left from Algeria towards Spain 4 days ago. Relatives are getting more and more worried. We ask for rescue now!</div>
+<div class="tweet-tags"><span class="tweet-tag">#Algeria</span><span class="tweet-tag">#Spain</span><span class="tweet-tag">#WesternMed</span></div>
+<div class="tweet-engagement">2 RT · 7 likes · 57 tweets évoquent une attente de plusieurs heures</div>
+</div>
+<div class="tweet-card">
+<div class="tweet-meta">@alarm_phone · 25 oct. 2022 · Méditerranée centrale</div>
+<div class="tweet-text">Both boats, carrying more than 1,300 people in distress, are still out at sea! We spoke to persons on the boats who are scared of drowning. We alerted authorities over 15 hours ago, why have rescue operations not yet taken place?!</div>
+<div class="tweet-tags"><span class="tweet-tag">#Mediterranean</span><span class="tweet-tag">1300 personnes</span></div>
+<div class="tweet-engagement">37 RT · 44 likes · Sans réponse depuis 15h</div>
+</div>
+<div class="tweet-card">
+<div class="tweet-meta">@alarm_phone · 2026 · Méditerranée occidentale</div>
+<div class="tweet-text">🆘in the #WesternMed! We've lost track of a boat carrying ~19 people that started from AïnTemouch towards Almeria. It's been more than 48 hours. The authorities are informed and we hope they'll be found soon!</div>
+<div class="tweet-tags"><span class="tweet-tag">#WesternMed</span><span class="tweet-tag">#AïnTemouch</span><span class="tweet-tag">#Almeria</span></div>
+<div class="tweet-engagement">10 RT · 15 likes · Contact perdu · 48 alertes "perdu de vue" en 2025–26</div>
+</div>
+</div>
+<div style="color:rgba(255,229,0,.3);font-size:10px;margin-top:28px;letter-spacing:.08em;line-height:1.8">
+    Corpus total : 293 tweets @alarm_phone 8 juillet 2025 – 20 avril 2026 · 100 tweets oct. 2022 · 78/293 tweets mentionnent "rescue" · 66/293 mentionnent "authorities" · 48/293 : perte de contact avec l'embarcation
+  </div>
+</div>
+<div class="concept-section">
+<div class="concept-label">Note méthodologique</div>
+<div class="concept-body">
+    Ce numéro croise cinq jeux de données ouverts : subventions Frontex 2008–2024 (Statewatch CSV, 13 454 lignes), décès en Méditerranée (IOM Missing Migrants), arrivées par route (DTM Europe Q3 2025, IOM), projets R&amp;D EU (Money Trails), et tweets @alarm_phone (2022, 2025–2026 · échantillon 8 juillet 2025 – 20 avril 2026). L'<strong>INDICATEUR CLÉ</strong> n'est pas le nombre brut de morts — il est le taux de mortalité : morts pour 100 traversées. Ce taux permet de contrôler la variation des flux et de mesurer si la politique de surveillance améliore ou non la sécurité des passages. La réponse, sur 9 ans de données, est <em>structurellement non</em>.
+  </div>
+</div>
+<div class="footer">
+<span>Services Cartographiques · @001 · V1 mise à jour mai 2025</span>
+<span class="footer-mid">Statewatch · IOM · DTM · alarm_phone · Twitter/X</span>
+<span class="footer-right">données ouvertes · CC BY</span>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@2.3.0/dist/chartjs-chart-treemap.min.js"></script>
+<script>
+Chart.defaults.font.family = 'Source Sans 3, Helvetica Neue, Helvetica, Arial';
+Chart.defaults.color = '#444';
+
+const blue = '#0000FF';
+const red = '#D92B2B';
+
+const rndTree = [
+  {group:'Bénéficiaires industriels', label:'Thales', value:33},
+  {group:'Bénéficiaires industriels', label:'Finmeccanica', value:28},
+  {group:'Bénéficiaires industriels', label:'Airbus', value:22},
+  {group:'Bénéficiaires industriels', label:'Safran', value:8},
+  {group:'Technologies', label:'Drones de détection', value:12},
+  {group:'Technologies', label:'Biométrie', value:10},
+  {group:'Technologies', label:'Capteurs thermiques', value:8},
+  {group:'Technologies', label:'Détection olfactive', value:4}
+];
+
+if (document.getElementById('chartRND')) {
+  new Chart(document.getElementById('chartRND'), {
+    type: 'treemap',
+    data: {
+      datasets: [{
+        tree: rndTree,
+        key: 'value',
+        groups: ['group', 'label'],
+        spacing: 1.5,
+        borderWidth: 0,
+        backgroundColor: function(ctx) {
+          const raw = ctx.raw || {};
+          const g = raw.g || raw._data?.group || '';
+          const v = raw.v || raw._data?.value || 1;
+          const alpha = Math.max(0.18, Math.min(0.92, v / 36));
+          return g === 'Technologies' ? `rgba(17,17,17,${alpha})` : `rgba(0,0,100,${alpha})`;
+        },
+        labels: {
+          display: true,
+          color: '#FFFFFF',
+          font: { family: 'Source Sans 3, Helvetica Neue, Helvetica, Arial', size: 13, weight: '700' },
+          formatter: function(ctx) {
+            const d = ctx.raw?._data || {};
+            return d.label ? [d.label, d.value + ' projets'] : '';
+          }
+        }
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#111',
+          titleColor: 'white',
+          bodyColor: '#ccc',
+          callbacks: {
+            title: function(items) { return items[0]?.raw?._data?.label || ''; },
+            label: function(item) {
+              const d = item.raw?._data || {};
+              return ' ' + (d.group || 'R&D') + ' · ' + d.value + ' projets';
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+const years = [2016,2017,2018,2019,2020,2021,2022,2023,2024];
+const grants = [172.7,194.5,179.0,179.6,153.8,210.7,242.5,300.3,285.3];
+const deaths = [5097,3139,2337,1885,1440,2047,2411,3155,2573];
+const arrivals = [389976,187499,146949,128663,99907,151417,189595,293838,208909];
+const mortalityRate = years.map((_,i) => +((deaths[i]/arrivals[i])*100).toFixed(2));
+
+// Chart 1 - Grants vs Deaths
+new Chart(document.getElementById('chart1'),{
+  type:'bar',data:{labels:years,datasets:[
+    {type:'bar',label:'Subventions Frontex (M€)',data:grants,backgroundColor:'rgba(0,0,255,0.85)',yAxisID:'y1',order:2},
+    {type:'line',label:'Décès Méditerranée',data:deaths,borderColor:'#D92B2B',backgroundColor:'rgba(217,43,43,0.07)',borderWidth:2.5,pointBackgroundColor:'#D92B2B',pointRadius:4,tension:0.3,fill:true,yAxisID:'y2',order:1}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#111',titleColor:'#fff',bodyColor:'#ccc',callbacks:{label:c=>c.datasetIndex===0?`Frontex: ${c.parsed.y}M€`:`Morts: ${c.parsed.y.toLocaleString('fr')}`}}},
+  scales:{x:{ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#111'},grid:{color:'rgba(0,0,0,0.05)'}},
+  y1:{position:'left',ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#111',callback:v=>v+'M€'},grid:{color:'rgba(0,0,0,0.05)'}},
+  y2:{position:'right',ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#D92B2B'},grid:{drawOnChartArea:false}}}}
+});
+
+// Chart 2 - Mortality rate
+new Chart(document.getElementById('chart2'),{
+  type:'bar',data:{labels:years,datasets:[
+    {type:'bar',label:'Traversées (×1000)',data:arrivals.map(a=>Math.round(a/1000)),backgroundColor:'rgba(26,111,168,0.12)',yAxisID:'y1',order:2},
+    {type:'line',label:'Taux mortalité (%)',data:mortalityRate,borderColor:'#D92B2B',backgroundColor:'rgba(217,43,43,0.1)',borderWidth:3,pointBackgroundColor:'#D92B2B',pointRadius:5,pointHoverRadius:7,tension:0.4,fill:true,yAxisID:'y2',order:1}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#111',titleColor:'#fff',bodyColor:'#ccc',callbacks:{label:c=>c.datasetIndex===0?`Traversées: ${(c.parsed.y*1000).toLocaleString('fr')}`:`Taux mortalité: ${c.parsed.y}%`}}},
+  scales:{x:{ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#111'},grid:{color:'rgba(0,0,0,0.05)'}},
+  y1:{position:'left',ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'rgba(0,0,0,0.4)',callback:v=>v+'k'},grid:{color:'rgba(0,0,0,0.04)'}},
+  y2:{position:'right',min:0,max:2.5,ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#D92B2B',callback:v=>v+'%'},grid:{drawOnChartArea:false}}}}
+});
+
+// Chart 3 - Routes stacked
+new Chart(document.getElementById('chart3'),{
+  type:'bar',
+  data:{labels:[2016,2017,2018,2019,2020,2021,2022,2023,2024,2025],
+  datasets:[
+    {label:'CMR (Méd. Centrale)',data:[181460,119389,24815,14876,36435,68315,105575,158032,66855,51154],backgroundColor:'rgba(217,43,43,0.82)',stack:'routes'},
+    {label:'EMR (Méd. Orientale)',data:[194438,40276,57836,81338,21611,32157,52826,78954,78084,38810],backgroundColor:'rgba(217,43,43,0.55)',stack:'routes'},
+    {label:'WMR (Méd. Occ.)',data:[13406,27409,62991,29762,18838,28629,15519,17086,17127,14598],backgroundColor:'rgba(217,43,43,0.35)',stack:'routes'},
+    {label:'WAAR (Atl. Ouest)',data:[672,425,1307,2687,23023,22316,15675,39766,46843,12878],backgroundColor:'rgba(217,43,43,0.18)',stack:'routes'},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#888',boxWidth:12}},tooltip:{backgroundColor:'#111',titleColor:'#fff',bodyColor:'#ccc'}},
+  scales:{x:{ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#888'},grid:{color:'#EEEEEE'},stacked:true},
+  y:{ticks:{font:{family:'Source Sans 3, Helvetica Neue, Helvetica, Arial',size:9},color:'#888',callback:v=>v>=1000?(v/1000)+'k':v},grid:{color:'#EEEEEE'},stacked:true}}}
+});
+</script>
+<div class="sec-label"><span><strong>PARTIE II</strong> — Corpus Alarm Phone</span><span>Page initiale conservée · analyse tweets + archive CSV</span></div>
+<!-- SITE HEADER -->
+<header class="site-header">
+<span><strong>Services Cartographiques</strong> — @001</span>
+<span>V2 — Capitalisation données Alarm Phone</span>
+<span>Maquette pitch · mai 2025</span>
+</header>
+<!-- COVER -->
+<div class="cover">
+<div class="cover-eyebrow">@alarm_phone · Corpus 293 tweets · 8 juillet 2025 – 20 avril 2026</div>
+<h1 class="cover-title">
+    293 alertes de détresse.<br/>
+<strong>Qui répond — et qui ne répond pas ?</strong>
+</h1>
+<p class="cover-lead">
+    Services Cartographiques a récupéré par algorithme l'intégralité des tweets publiés par @alarm_phone entre le mardi 8 juillet 2025 et le lundi 20 avril 2026. Ces 293 documents constituent un journal de bord des eaux méditerranéennes et atlantiques : qui appelle, depuis où, vers où — et ce que font (ou ne font pas) les autorités compétentes une fois alertées.
+  </p>
+<div class="cover-tags">
+<span class="ctag">293 tweets récoltés</span>
+<span class="ctag">Données géolocalisées</span>
+<span class="ctag">10 mois d'activité</span>
+<span class="ctag ctag-red">48 contacts perdus</span>
+<span class="ctag ctag-red">57 attentes prolongées</span>
+</div>
+</div>
+<!-- §01 STATS -->
+<div class="sec-label">
+<span><strong>§ 01</strong> — Corpus · données brutes</span>
+<span>@alarm_phone · Twitter/X · 8 juillet 2025 – 20 avril 2026</span>
+</div>
+<div class="stats-row">
+<div class="stat-cell">
+<div class="stat-n">293</div>
+<div class="stat-lbl">Tweets récoltés</div>
+<div class="stat-sub">8 juillet 2025 → 20 avril 2026 · 10 mois</div>
+</div>
+<div class="stat-cell">
+<div class="stat-n">78<span style="font-size:.55em;color:var(--grey-mid)">/293</span></div>
+<div class="stat-lbl">Mentions "rescue"</div>
+<div class="stat-sub">Le terme le plus fréquent du corpus</div>
+</div>
+<div class="stat-cell">
+<div class="stat-n stat-n-red">48</div>
+<div class="stat-lbl">Pertes de contact</div>
+<div class="stat-sub">Tweets où l'embarcation disparaît sans issue documentée</div>
+</div>
+<div class="stat-cell">
+<div class="stat-n">52</div>
+<div class="stat-lbl">Alertes · Oct. 2025</div>
+<div class="stat-sub">Mois le plus actif · Pic de saison migratoire</div>
+</div>
+<div class="stat-cell">
+<div class="stat-n stat-n-red">57</div>
+<div class="stat-lbl">Attentes prolongées</div>
+<div class="stat-sub">Tweets mentionnant heures ou jours sans réponse des autorités</div>
+</div>
+</div>
+<!-- §02 MAP -->
+<div class="sec-label">
+<span><strong>§ 02</strong> — Carte des alertes · géolocalisation</span>
+<span>Extraction tags géographiques · algorithme Services Cartographiques · 2025–2026 · échantillon 8 juillet 2025 – 20 avril 2026</span>
+</div>
+<div class="map-wrapper">
+<div class="map-intro-row">
+<div>
+<div class="map-intro-title">Les eaux où les téléphones appellent</div>
+</div>
+<div class="map-intro-body">
+      Chaque marqueur représente une alerte géolocalisée à partir des hashtags et mentions de lieux dans les tweets. 132 alertes sur 293 ont pu être associées à des coordonnées. Les frontières maritimes affichées proviennent du jeu de données World EEZ v12 (2023), filtré sur l’emprise de la carte. La concentration sur la Méditerranée occidentale (Algérie → Espagne) et la Méditerranée centrale (Libye/Tunisie → Italie/Malta) reflète les deux routes dominantes du corpus 2025–26. Les zones sans marqueurs ne sont pas des zones sans traversées — elles sont des zones sans documentation.
+    </div>
+</div>
+<div id="map"></div>
+<div class="map-footer">
+<div class="mleg"><div class="mleg-dot" style="background:#D92B2B;"></div>Méditerranée centrale · Libye / Tunisie</div>
+<div class="mleg"><div class="mleg-dot" style="background:#1A6FA8;"></div>Méditerranée occidentale · Algérie / Maroc → Espagne</div>
+<div class="mleg"><div class="mleg-dot" style="background:#555;"></div>Atlantique · Afrique de l'Ouest → Canaries</div>
+<div class="mleg"><div style="width:22px;height:0;border-top:2px dashed #6B8EAD;flex-shrink:0;"></div>Limites EEZ / frontières maritimes · World EEZ v12</div>
+<div style="margin-left:auto;font-style:italic;">132 alertes géolocalisées / 293 tweets · @alarm_phone</div>
+</div>
+</div>
+<!-- §03 ANALYSIS -->
+<div class="sec-label">
+<span><strong>§ 03</strong> — Pays et acteurs mentionnés</span>
+<span>Analyse fréquentielle · 293 tweets · 2025–2026 · échantillon 8 juillet 2025 – 20 avril 2026</span>
+</div>
+<div class="analysis-section">
+<div class="grid-2">
+<!-- Origins -->
+<div>
+<div class="section-title">Pays de départ</div>
+<div class="section-sub">Occurrences dans les tweets</div>
+<div class="h-bar-row">
+<div class="h-bar-lbl">Libye</div>
+<div class="h-bar-track"><div class="h-bar-fill h-bar-fill-red" style="width:100%"></div></div>
+<div class="h-bar-val">47</div>
+<div class="h-bar-note">Route centrale</div>
+</div>
+<div class="h-bar-row">
+<div class="h-bar-lbl">Algérie</div>
+<div class="h-bar-track"><div class="h-bar-fill" style="width:91%"></div></div>
+<div class="h-bar-val">43</div>
+<div class="h-bar-note">Route occidentale</div>
+</div>
+<div class="h-bar-row">
+<div class="h-bar-lbl">Tunisie</div>
+<div class="h-bar-track"><div class="h-bar-fill" style="width:55%"></div></div>
+<div class="h-bar-val">26</div>
+<div class="h-bar-note">Route centrale</div>
+</div>
+<div class="h-bar-row">
+<div class="h-bar-lbl">Atlantique</div>
+<div class="h-bar-track"><div class="h-bar-fill" style="width:36%"></div></div>
+<div class="h-bar-val">17</div>
+<div class="h-bar-note">W. Afrique → Canaries</div>
+</div>
+<div class="h-bar-row">
+<div class="h-bar-lbl">Bulgarie</div>
+<div class="h-bar-track"><div class="h-bar-fill" style="width:19%"></div></div>
+<div class="h-bar-val">9</div>
+<div class="h-bar-note">Frontière terrestre</div>
+</div>
+<div class="aside-note">
+<strong>Signal 2025–26 :</strong> L'Algérie monte comme second pays d'origine (43 occurrences), à quasi-parité avec la Libye (47). Ce rééquilibrage reflète le déplacement progressif des flux vers la Méditerranée occidentale, documenté par le DTM Europe.
+      </div>
+</div>
+<!-- Authorities -->
+<div>
+<div class="section-title">Autorités interpellées</div>
+<div class="section-sub">Occurrences dans les tweets</div>
+<div class="h-bar-row">
+<div class="h-bar-lbl">EU / Europe</div>
+<div class="h-bar-track"><div class="h-bar-fill h-bar-fill-red" style="width:100%"></div></div>
+<div class="h-bar-val">33</div>
+<div class="h-bar-note">Institutions UE</div>
+</div>
+<div class="h-bar-row">
+<div class="h-bar-lbl">Italie</div>
+<div class="h-bar-track"><div class="h-bar-fill" style="width:61%"></div></div>
+<div class="h-bar-val">20</div>
+<div class="h-bar-note">MRCC Rome</div>
+</div>
+<div class="h-bar-row">
+<div class="h-bar-lbl">Malta</div>
+<div class="h-bar-track"><div class="h-bar-fill" style="width:36%"></div></div>
+<div class="h-bar-val">12</div>
+<div class="h-bar-note">Zone SAR maltaise</div>
+</div>
+<div class="h-bar-row">
+<div class="h-bar-lbl">Garde-côtes LY</div>
+<div class="h-bar-track"><div class="h-bar-fill h-bar-fill-red" style="width:28%"></div></div>
+<div class="h-bar-val" style="color:var(--red)">13</div>
+<div class="h-bar-note">Interceptions</div>
+</div>
+<div class="h-bar-row">
+<div class="h-bar-lbl">Garde-côtes TN</div>
+<div class="h-bar-track"><div class="h-bar-fill h-bar-fill-red" style="width:21%"></div></div>
+<div class="h-bar-val" style="color:var(--red)">7</div>
+<div class="h-bar-note">Refoulements</div>
+</div>
+<div class="aside-note">
+<strong>Stratégie d'interpellation :</strong> @alarm_phone vise prioritairement les institutions européennes (EU, 33) plutôt que les MRCC locaux jugés non-répondants. Les garde-côtes libyen et tunisien sont cités comme acteurs de refoulement, non de secours.
+      </div>
+</div>
+</div>
+</div>
+<!-- §04 GREY ZONES -->
+<div class="sec-label">
+<span><strong>§ 04</strong> — Zones grises · eaux sans réponse</span>
+<span>Analyse croisée tweets + routes DTM / opérations Frontex</span>
+</div>
+<div class="grey-zones">
+<div class="gz-inner">
+<div class="section-title">Trois zones où la responsabilité étatique disparaît</div>
+<div class="gz-grid">
+<div class="gz-card">
+<div class="gz-card-name">Zone SAR maltaise</div>
+<div class="gz-card-zone">Méditerranée centrale</div>
+<div class="gz-card-body">La zone SAR de Malte couvre une surface disproportionnée par rapport aux capacités de l'île. Le corpus documente systématiquement des délais de réponse supérieurs à 10 heures dans cette zone. 12 tweets citent Malta directement — sans résolution documentée dans la moitié des cas.</div>
+<div class="gz-card-stat">12</div>
+<div class="gz-card-statlbl">alertes Malta dans le corpus 2025–26</div>
+</div>
+<div class="gz-card">
+<div class="gz-card-name">Eaux libyennes</div>
+<div class="gz-card-zone">Méditerranée centrale</div>
+<div class="gz-card-body">Les garde-côtes libyens — financés par l'UE via Frontex — interceptent et refoulement. Ces opérations ne constituent pas des sauvetages : les personnes sont renvoyées en Libye, hors juridiction européenne. 47 tweets mentionnent la Libye ; 13 citent les garde-côtes libyens comme acteurs d'interception.</div>
+<div class="gz-card-stat">47</div>
+<div class="gz-card-statlbl">mentions Libye dans le corpus</div>
+</div>
+<div class="gz-card">
+<div class="gz-card-name">Route Algérie–Espagne</div>
+<div class="gz-card-zone">Méditerranée occidentale</div>
+<div class="gz-card-body">Route émergente : l'Algérie est le second pays d'origine du corpus avec 43 mentions. 19 alertes taguées "WesternMed". La surveillance Frontex (opération Indalo) y est active, mais 48 pertes de contact dans l'ensemble du corpus signalent des lacunes critiques de couverture SAR.</div>
+<div class="gz-card-stat">48</div>
+<div class="gz-card-statlbl">contacts perdus dans le corpus</div>
+</div>
+</div>
+</div>
+</div>
+<!-- §05 WORD FREQUENCY -->
+<div class="sec-label">
+<span><strong>§ 05</strong> — Ce que les tweets disent · analyse lexicale</span>
+<span>Occurrences · 293 tweets @alarm_phone · 2025–2026 · échantillon 8 juillet 2025 – 20 avril 2026</span>
+</div>
+<div class="words-section">
+<div class="words-grid">
+<div class="chart-wrap">
+<div class="section-title">Fréquence des termes clés</div>
+<div class="section-sub">Nombre d'occurrences · corpus 293 tweets</div>
+<div aria-label="Treemap des occurrences par mots-clés" class="treemap-wrap" id="treemapWords" role="img"></div>
+<div style="font-size:11px;color:var(--grey-mid);margin-top:14px;font-style:normal;">Source : analyse fréquentielle @alarm_phone · 8 juillet 2025 – 20 avril 2026 · 293 tweets</div>
+</div>
+<div>
+<div class="section-title">Trois registres</div>
+<div class="section-sub">Lecture structurelle du lexique</div>
+<div style="display:flex;flex-direction:column;gap:24px;margin-top:8px;">
+<div style="border-left:3px solid var(--black);padding-left:18px;">
+<div style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Urgence physique</div>
+<div style="font-size:13px;line-height:1.7;color:var(--grey-dark);font-weight:300;">"rescue" (87), "distress" (49), "alerted" (64) — le vocabulaire de la survie immédiate. Ce registre domine le corpus et définit le ton éditorial d'Alarm Phone.</div>
+</div>
+<div style="border-left:3px solid var(--grey-mid);padding-left:18px;">
+<div style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Interpellation institutionnelle</div>
+<div style="font-size:13px;line-height:1.7;color:var(--grey-dark);font-weight:300;">"authorities" (67), "EU / Europe" (33), "hours / jours" (23) — l'adresse directe aux États défaillants. Ces tweets documentent le vide d'action public.</div>
+</div>
+<div style="border-left:3px solid var(--red);padding-left:18px;">
+<div style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);margin-bottom:8px;">Disparition / impuissance</div>
+<div style="font-size:13px;line-height:1.7;color:var(--grey-dark);font-weight:300;">"missing / disparu" (38), "lost track" (9) — les tweets où la fin de l'histoire n'est pas racontée. Ce sont les blancs du récit, et peut-être les blancs dans les registres officiels.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- §06 TIMELINE -->
+<div class="sec-label">
+<span><strong>§ 06</strong> — Chronologie · volume mensuel des alertes</span>
+<span>293 tweets @alarm_phone · 8 juillet 2025 – 20 avril 2026</span>
+</div>
+<div class="timeline-section">
+<div class="section-title">Saisonnalité des alertes</div>
+<div class="section-sub">Nombre de tweets par mois · @alarm_phone</div>
+<div class="timeline-chart-box"><canvas id="chartTimeline"></canvas></div>
+<div style="font-size:12px;color:var(--grey-mid);margin-top:16px;line-height:1.6;max-width:680px;">
+    Pic en octobre 2025 : 52 alertes. La saisonnalité estivale (août–octobre) est nettement visible — conditions météo favorables correspondent à une augmentation des tentatives de traversée. Données avril 2026 partielles (16 tweets, mois non clôturé au moment de la récolte).
+  </div>
+</div>
+<!-- §07 TWEET SAMPLES -->
+<div class="sec-label">
+<span><strong>§ 07</strong> — Matière brute · tweets sélectionnés</span>
+<span>Sélection éditoriale · corpus 2025–2026 · échantillon 8 juillet 2025 – 20 avril 2026</span>
+</div>
+<div class="samples-section">
+<div class="section-title">Six moments</div>
+<div class="section-sub">Tweets choisis pour leur valeur documentaire et politique</div>
+<div class="samples-grid">
+<div class="tweet-card">
+<div class="tw-meta">20 avr. 2026 · Méd. Occ. / Algérie → Espagne</div>
+<div class="tw-body">🆘 in the Western Med! We were alerted to a boat with 19 people that left from Algeria towards Spain <mark>4 days ago</mark>. Relatives are getting more and more worried. We ask for rescue now!</div>
+<div class="tw-eng"><span>2 RT</span><span>7 ♥</span><span>#Algeria #Spain</span></div>
+</div>
+<div class="tweet-card">
+<div class="tw-meta">2026 · Méd. Occ. / AïnTemouch → Almeria</div>
+<div class="tw-body">🆘in the #WesternMed! We've <mark>lost track</mark> of a boat carrying ~19 people that started from AïnTemouch towards Almeria. It's been more than <mark>48 hours</mark>. The authorities are informed and we hope they'll be found soon!</div>
+<div class="tw-eng"><span>10 RT</span><span>15 ♥</span><span>Perte de contact</span></div>
+</div>
+<div class="tweet-card">
+<div class="tw-meta">Oct. 2025 · Méditerranée centrale / Libye</div>
+<div class="tw-body">⚫ Shipwreck of boat carrying about <mark>117 people</mark> feared in the central Mediterranean. Against the silence of the authorities, NGO vessels are the only ones responding.</div>
+<div class="tw-eng"><span>31 RT</span><span>47 ♥</span><span>#DontLetThemDrown</span></div>
+</div>
+<div class="tweet-card">
+<div class="tw-meta">2025 · Méd. Occ. / Algérie</div>
+<div class="tw-body">🆘 in the Western Med! We were alerted to a boat with approximately 30 people that left Algeria <mark>3 days ago</mark>. <mark>No news</mark> since departure. Relatives desperate. Authorities in Spain and Algeria informed.</div>
+<div class="tw-eng"><span>8 RT</span><span>14 ♥</span><span>#Algeria #SafePassage</span></div>
+</div>
+<div class="tweet-card">
+<div class="tw-meta">2025–26 · Atlantique / W. Afrique → Canaries</div>
+<div class="tw-body">🆘 Atlantic route — a boat with approximately 60 people has been at sea for <mark>4 days</mark> without being rescued. The families are in contact with us. We demand immediate action from Spanish authorities and Frontex.</div>
+<div class="tw-eng"><span>13 RT</span><span>20 ♥</span><span>#Atlantic #Canary</span></div>
+</div>
+<div class="tweet-card tw-special">
+<div class="tw-meta" style="color:var(--red);">Lacune documentaire · série récurrente</div>
+<div class="tw-body"><mark>48 tweets</mark> du corpus documentent une perte de contact avec l'embarcation. Aucun suivi d'issue n'est traçable depuis Twitter seul. Ces 48 entrées sont les silences du corpus — et probablement les absences dans les registres officiels des naufrages.</div>
+<div class="tw-eng" style="color:var(--red);"><span>Donnée manquante</span><span>Issue inconnue</span></div>
+</div>
+</div>
+</div>
+<!-- PROPOSAL -->
+<div class="proposal">
+<div class="prop-inner">
+<div class="prop-eyebrow">Proposition de collaboration — Services Cartographiques × Alarm Phone</div>
+<h2 class="prop-title">
+      Vos données comme argument.<br/>
+<strong>Une revue construite depuis les alertes.</strong>
+</h2>
+<p class="prop-body">
+      Les tweets d'Alarm Phone sont une matière éditoriale de premier ordre : datés, géolocalisés, écrits dans l'urgence, ils documentent un vide institutionnel systématique. Services Cartographiques propose d'en faire le cœur éditorial d'un numéro imprimé et numérique, croisé avec les données financières Frontex et les flux migratoires DTM/IOM. L'argument n'est pas formulé — il est rendu visible par les données elles-mêmes.
+    </p>
+<div class="prop-grid">
+<div class="prop-item">
+<div class="prop-n">Vos tweets comme matière première</div>
+<div class="prop-b">Le corpus récupéré est déjà analysé. 293 tweets, 15 pays, 48 pertes de contact. La revue les publie dans leur forme brute, organisés par zone, par acteur, par issue.</div>
+</div>
+<div class="prop-item">
+<div class="prop-n">La carte comme argument politique</div>
+<div class="prop-b">La carte interactive des alertes superposée aux zones d'opération Frontex (Poseidon, Triton, Indalo) est l'argument visuel central : les deux systèmes occupent les mêmes eaux.</div>
+</div>
+<div class="prop-item">
+<div class="prop-n">Les zones grises nommées</div>
+<div class="prop-b">SAR maltaise, eaux libyennes sous financement EU, route algéro-espagnole émergente — trois zones documentées par vos tweets où la responsabilité étatique s'efface.</div>
+</div>
+<div class="prop-item">
+<div class="prop-n">Format revue imprimable + web</div>
+<div class="prop-b">Typographie éditoriale, données brutes assumées, sources citées ligne à ligne. PDF haute qualité distribuable + version HTML interactive pour diffusion en ligne.</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sec-label">
+<span><strong>§ 08</strong> — Sélection light CSV · 20 tweets</span>
+<span>@alarm_phone · mardi 8 juillet 2025 – lundi 20 avril 2026 · sélection éditoriale pour envoi</span>
+</div>
+<section class="tweet-archive-section" id="archive-293-tweets">
+<div class="archive-intro">
+<div>
+<div class="archive-kicker">Version light pour envoi</div>
+<h2 class="archive-title">20 tweets sélectionnés.<br/><strong>Une archive lisible, représentative, envoyable.</strong></h2>
+</div>
+<div class="archive-body">
+    Cette version conserve l’ensemble des sections d’analyse et la proposition de collaboration, mais remplace l’archive intégrale de 293 tweets par une <strong>sélection éditoriale de 20 tweets</strong> issus du même corpus CSV, publié entre le <strong>mardi 8 juillet 2025</strong> et le <strong>lundi 20 avril 2026</strong>. Les tweets restent classés par date décroissante puis par typologie. Les images disponibles dans le fichier initial sont conservées et intégrées directement dans la page.
+  </div>
+</div>
+<div class="archive-note">Version allégée : la totalité du corpus reste mentionnée dans les analyses statistiques, mais la partie “détail des tweets” est réduite pour faciliter l’envoi, la lecture et la prise de contact.</div>
+<div class="tweet-type-summary"><div class="tweet-type-card is-red"><div class="type-count">2</div><div class="type-name">Appels sans réponse / attente</div></div><div class="tweet-type-card"><div class="type-count">5</div><div class="type-name">Détresse signalée</div></div><div class="tweet-type-card is-red"><div class="type-count">5</div><div class="type-name">Pertes de contact / disparus</div></div><div class="tweet-type-card"><div class="type-count">4</div><div class="type-name">Secourus / arrivés</div></div><div class="tweet-type-card is-red"><div class="type-count">3</div><div class="type-name">Refoulements / interceptions</div></div><div class="tweet-type-card"><div class="type-count">1</div><div class="type-name">Alertes météo / prévention</div></div></div><details class="tweet-day" open=""><summary><span class="day-name">LUNDI 20 AVRIL 2026</span><span class="day-count">2 tweets</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Détresse signalée</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">13:09:52</span><span class="tweet-id">ID 2046214768118116690</span></div>
+<div class="tweet-detail-body">🆘 in the Westen Med! We were alerted to a boat with 19 people on a boat that left from #Algeria towards #Spain 4 days ago. Relatives are getting more and more worried. We ask for rescue now!</div>
+<div class="tweet-detail-tags"><span>Algeria</span><span>Spain</span></div>
+<div class="tweet-detail-foot"><span>7 likes</span><span>2 retweets</span><a href="https://x.com/alarm_phone/status/2046214768118116690" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div><div class="tweet-type-group"><div class="tweet-type-head"><span>Pertes de contact / disparus</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">06:55:23</span><span class="tweet-id">ID 2046120525588500587</span></div>
+<div class="tweet-detail-body">🆘in the #WesternMed! We’ve lost track of a boat carrying ~19 people that started from #AïnTemouch towards #Almeria. It’s been more than 48 hours. The authorities are informed and we hope they’ll be found soon!</div>
+<div class="tweet-detail-tags"><span>WesternMed</span><span>AïnTemouch</span><span>Almeria</span></div>
+<div class="tweet-detail-foot"><span>15 likes</span><span>10 retweets</span><a href="https://x.com/alarm_phone/status/2046120525588500587" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details><details class="tweet-day" open=""><summary><span class="day-name">VENDREDI 17 AVRIL 2026</span><span class="day-count">1 tweet</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Appels sans réponse / attente</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">16:47:27</span><span class="tweet-id">ID 2045182360799302054</span></div>
+<div class="tweet-detail-body">🆘~26 people in distress off #Algiers! Our hotline was alerted to a group in distress just 15nm off the Algerian coast who reported engine problems. We alerted authorities but they said they don't have information about the boat. We urge them to search for the people in distress! <a href="https://t.co/MPQC8NSbgZ" rel="noopener" target="_blank">https://t.co/MPQC8NSbgZ</a></div>
+<div class="tweet-media"><a href="https://pbs.twimg.com/media/HGHyal8awAQKRm8.jpg" rel="noopener" target="_blank"><img alt="Média associé au tweet" class="tweet-media-img" loading="lazy" referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/HGHyal8awAQKRm8.jpg"/></a></div>
+<div class="tweet-detail-tags"><span>Algiers</span></div>
+<div class="tweet-detail-foot"><span>35 likes</span><span>31 retweets</span><a href="https://x.com/alarm_phone/status/2045182360799302054" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details><details class="tweet-day" open=""><summary><span class="day-name">JEUDI 2 AVRIL 2026</span><span class="day-count">1 tweet</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Secourus / arrivés</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">06:58:10</span><span class="tweet-id">ID 2039598246083846628</span></div>
+<div class="tweet-detail-body">⚫ Shipwreck in the Central Med. On 1 April at 11:50h, Alarm Phone alerted authorities to a boat with 75 people. When rescue arrived, 8 people had already died, 11 others died before reaching land. Some survivors are in critical condition. Another crime by the EU border regime!</div>
+<div class="tweet-detail-foot"><span>26 likes</span><span>30 retweets</span><a href="https://x.com/alarm_phone/status/2039598246083846628" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details><details class="tweet-day" open=""><summary><span class="day-name">SAMEDI 28 MARS 2026</span><span class="day-count">1 tweet</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Pertes de contact / disparus</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">11:26:00</span><span class="tweet-id">ID 2037853707925090681</span></div>
+<div class="tweet-detail-body">🆘 ~56 people missing in the Central Med!  We have been informed by relatives that 56 people who left #Sfax in #Tunisia this morning are at severe risk at sea because of bad weather. We urge authorities to search for the boat and rescue them to a safe place! <a href="https://t.co/wlBgi8lMHw" rel="noopener" target="_blank">https://t.co/wlBgi8lMHw</a></div>
+<div class="tweet-media"><a href="https://pbs.twimg.com/media/HEfpJhbWwAAbZF8.jpg" rel="noopener" target="_blank"><img alt="Média associé au tweet" class="tweet-media-img" loading="lazy" referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/HEfpJhbWwAAbZF8.jpg"/></a></div>
+<div class="tweet-detail-tags"><span>Sfax</span><span>Tunisia</span></div>
+<div class="tweet-detail-foot"><span>35 likes</span><span>26 retweets</span><a href="https://x.com/alarm_phone/status/2037853707925090681" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details><details class="tweet-day" open=""><summary><span class="day-name">LUNDI 16 MARS 2026</span><span class="day-count">1 tweet</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Pertes de contact / disparus</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">06:32:37</span><span class="tweet-id">ID 2033431220894453939</span></div>
+<div class="tweet-detail-body">🆘 38 lives at risk in the Central Med!  Last night, we alerted the authorities to a boat adrift in international waters. No one is responding to their distress call. We lost contact with them last night, and we fear for their lives. Rescue needed now! <a href="https://t.co/eRC5TxCpeq" rel="noopener" target="_blank">https://t.co/eRC5TxCpeq</a></div>
+<div class="tweet-media"><a href="https://pbs.twimg.com/media/HDgy60HbUAAW64b.jpg" rel="noopener" target="_blank"><img alt="Média associé au tweet" class="tweet-media-img" loading="lazy" referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/HDgy60HbUAAW64b.jpg"/></a></div>
+<div class="tweet-detail-foot"><span>25 likes</span><span>17 retweets</span><a href="https://x.com/alarm_phone/status/2033431220894453939" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details><details class="tweet-day" open=""><summary><span class="day-name">DIMANCHE 15 MARS 2026</span><span class="day-count">2 tweets</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Détresse signalée</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">16:56:47</span><span class="tweet-id">ID 2033225912355852368</span></div>
+<div class="tweet-detail-body">🆘 ~62 people in distress at sea in the central Mediterranean!   The people on board, who are trying to escape from #Libya, report of high waves and we fear for their lives. Relevant authorities are informed: Rescue these people to safety before it is too late! <a href="https://t.co/COATUu0Euz" rel="noopener" target="_blank">https://t.co/COATUu0Euz</a></div>
+<div class="tweet-media"><a href="https://pbs.twimg.com/media/HDd4MF-XUAAo-Vl.jpg" rel="noopener" target="_blank"><img alt="Média associé au tweet" class="tweet-media-img" loading="lazy" referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/HDd4MF-XUAAo-Vl.jpg"/></a></div>
+<div class="tweet-detail-tags"><span>Libya</span></div>
+<div class="tweet-detail-foot"><span>38 likes</span><span>24 retweets</span><a href="https://x.com/alarm_phone/status/2033225912355852368" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div><div class="tweet-type-group"><div class="tweet-type-head"><span>Alertes météo / prévention</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">21:04:32</span><span class="tweet-id">ID 2033288259741135021</span></div>
+<div class="tweet-detail-body">🚨Weather alert for the Central Med!  The weather in the Central #Mediterranean is extremely dangerous for departures. We hope that people planning to leave #Tunisia or #Libya in the next days are aware and will consider the weather conditions. <a href="https://t.co/zEQccIBt9H" rel="noopener" target="_blank">https://t.co/zEQccIBt9H</a></div>
+<div class="tweet-media"><a href="https://pbs.twimg.com/media/HDew5XPaMAAIHRl.jpg" rel="noopener" target="_blank"><img alt="Média associé au tweet" class="tweet-media-img" loading="lazy" referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/HDew5XPaMAAIHRl.jpg"/></a></div>
+<div class="tweet-detail-tags"><span>Mediterranean</span><span>Tunisia</span><span>Libya</span></div>
+<div class="tweet-detail-foot"><span>24 likes</span><span>14 retweets</span><a href="https://x.com/alarm_phone/status/2033288259741135021" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details><details class="tweet-day" open=""><summary><span class="day-name">MARDI 10 MARS 2026</span><span class="day-count">1 tweet</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Détresse signalée</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">18:36:46</span><span class="tweet-id">ID 2031439132979761453</span></div>
+<div class="tweet-detail-body">🆘️ ~17 people, including minors in need of assistance near Brashlyan, #Bulgaria ! We cannot reach the group, but relatives told us that a sick young man needs urgent medical assistance. We informed #Bulgarian authorities, who told us that they were searching for the group. <a href="https://t.co/aoGl6lDiTc" rel="noopener" target="_blank">https://t.co/aoGl6lDiTc</a></div>
+<div class="tweet-media"><a href="https://pbs.twimg.com/media/HDEfFjzWwAAhinn.jpg" rel="noopener" target="_blank"><img alt="Média associé au tweet" class="tweet-media-img" loading="lazy" referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/HDEfFjzWwAAhinn.jpg"/></a></div>
+<div class="tweet-detail-tags"><span>Bulgaria</span><span>Bulgarian</span></div>
+<div class="tweet-detail-foot"><span>10 likes</span><span>7 retweets</span><a href="https://x.com/alarm_phone/status/2031439132979761453" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details><details class="tweet-day" open=""><summary><span class="day-name">LUNDI 9 MARS 2026</span><span class="day-count">1 tweet</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Détresse signalée</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">19:48:49</span><span class="tweet-id">ID 2031094878122205408</span></div>
+<div class="tweet-detail-body">🆘12 personnes en détresse après avoir quitté #Alger ! Le bateau dérive et les personnes à bord ont appelé #MRCCAlger toute la journée, mais personne ne vient. Qu'attendent-ils ?!  Nous exigeons une opération de sauvetage immédiate avant qu'il ne soit trop tard !!! #RescueNow <a href="https://t.co/EhILTZuc8p" rel="noopener" target="_blank">https://t.co/EhILTZuc8p</a></div>
+<div class="tweet-media"><a href="https://pbs.twimg.com/media/HC_lugiaMAAG7lk.jpg" rel="noopener" target="_blank"><img alt="Média associé au tweet" class="tweet-media-img" loading="lazy" referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/HC_lugiaMAAG7lk.jpg"/></a></div>
+<div class="tweet-detail-tags"><span>Alger</span><span>MRCCAlger</span><span>RescueNow</span></div>
+<div class="tweet-detail-foot"><span>8 likes</span><span>9 retweets</span><a href="https://x.com/alarm_phone/status/2031094878122205408" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details><details class="tweet-day" open=""><summary><span class="day-name">VENDREDI 27 FÉVRIER 2026</span><span class="day-count">2 tweets</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Pertes de contact / disparus</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">08:39:07</span><span class="tweet-id">ID 2027302463145922936</span></div>
+<div class="tweet-detail-body">🆘 in the #Atlantic. 50 people left #Mbour, Senegal, on February 21. Since then, we have no news from the boat. The authorities have been alerted and we demand an active search and rescue operation so that they can be found quickly!</div>
+<div class="tweet-detail-tags"><span>Atlantic</span><span>Mbour</span></div>
+<div class="tweet-detail-foot"><span>11 likes</span><span>7 retweets</span><a href="https://x.com/alarm_phone/status/2027302463145922936" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div><div class="tweet-type-group"><div class="tweet-type-head"><span>Refoulements / interceptions</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">09:28:14</span><span class="tweet-id">ID 2027314825362051074</span></div>
+<div class="tweet-detail-body">🆘 30 people forced back to #Libya!   Last night, the merchant vessel ALATAU helped to forcibly return 30 people who tried to escape from Libya.  We condemn the collaboration with Libyan actors when returning people to the violence they want to flee from! <a href="https://t.co/MhzLI4mUri" rel="noopener" target="_blank">https://t.co/MhzLI4mUri</a></div>
+<div class="tweet-media"><a href="https://pbs.twimg.com/media/HCJ4FzoXIAA9MEW.jpg" rel="noopener" target="_blank"><img alt="Média associé au tweet" class="tweet-media-img" loading="lazy" referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/HCJ4FzoXIAA9MEW.jpg"/></a></div>
+<div class="tweet-detail-tags"><span>Libya</span></div>
+<div class="tweet-detail-foot"><span>19 likes</span><span>15 retweets</span><a href="https://x.com/alarm_phone/status/2027314825362051074" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details><details class="tweet-day" open=""><summary><span class="day-name">MERCREDI 25 FÉVRIER 2026</span><span class="day-count">1 tweet</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Refoulements / interceptions</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">08:47:29</span><span class="tweet-id">ID 2026579794939269499</span></div>
+<div class="tweet-detail-body">🆘 More than 100 people dumped in the desert! We were alerted to a large group of people who were deported to the border region of Tunisia-Algeria after they departed from #Tunisia to Europe.  @Refugees @UNmigration Fewer arrivals means letting people die of thirst in the desert! <a href="https://t.co/r3S6aAlBVe" rel="noopener" target="_blank">https://t.co/r3S6aAlBVe</a></div>
+<div class="tweet-media"><a href="https://pbs.twimg.com/media/HB_blWoXgAA23an.jpg" rel="noopener" target="_blank"><img alt="Média associé au tweet" class="tweet-media-img" loading="lazy" referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/HB_blWoXgAA23an.jpg"/></a></div>
+<div class="tweet-detail-tags"><span>Tunisia</span></div>
+<div class="tweet-detail-foot"><span>31 likes</span><span>31 retweets</span><a href="https://x.com/alarm_phone/status/2026579794939269499" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details><details class="tweet-day" open=""><summary><span class="day-name">LUNDI 23 FÉVRIER 2026</span><span class="day-count">1 tweet</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Secourus / arrivés</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">17:25:11</span><span class="tweet-id">ID 2025985300523012250</span></div>
+<div class="tweet-detail-body">Rescued! 97 people who were trying to escape from #Libya called Alarm Phone in distress. We relayed their emergency situation to relevant authorities and the #civilfleet. @SOSMedIntl reacted and carried out a successful rescue operation!</div>
+<div class="tweet-detail-tags"><span>Libya</span><span>civilfleet</span></div>
+<div class="tweet-detail-foot"><span>18 likes</span><span>7 retweets</span><a href="https://x.com/alarm_phone/status/2025985300523012250" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details><details class="tweet-day" open=""><summary><span class="day-name">DIMANCHE 25 JANVIER 2026</span><span class="day-count">1 tweet</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Secourus / arrivés</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">06:57:30</span><span class="tweet-id">ID 2015318093069742225</span></div>
+<div class="tweet-detail-body">⚫Shipwreck in the Central Med!  Authorities confirm that one survivor was rescued to #Malta. According to him 50 people did not survive. The people started from #Tunisia and spent 24 hours in the water. Our thoughts are with the families.</div>
+<div class="tweet-detail-tags"><span>Malta</span><span>Tunisia</span></div>
+<div class="tweet-detail-foot"><span>35 likes</span><span>24 retweets</span><a href="https://x.com/alarm_phone/status/2015318093069742225" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details><details class="tweet-day" open=""><summary><span class="day-name">DIMANCHE 18 JANVIER 2026</span><span class="day-count">2 tweets</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Appels sans réponse / attente</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">16:59:59</span><span class="tweet-id">ID 2012932996089741688</span></div>
+<div class="tweet-detail-body">🆘 ~45 lives at risk in the Central Mediterranean!  Alarm Phone is in touch with a group who fled #Libya in a wooden boat.  Because of strong wind and high waves they need immediate rescue, but #Malta and #Italy refuse responsibility.  Rescue needed now! <a href="https://t.co/9ZzYtSEncQ" rel="noopener" target="_blank">https://t.co/9ZzYtSEncQ</a></div>
+<div class="tweet-media"><a href="https://pbs.twimg.com/media/G-9f5KMXwAA8iTL.jpg" rel="noopener" target="_blank"><img alt="Média associé au tweet" class="tweet-media-img" loading="lazy" referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/G-9f5KMXwAA8iTL.jpg"/></a></div>
+<div class="tweet-detail-tags"><span>Libya</span><span>Malta</span><span>Italy</span></div>
+<div class="tweet-detail-foot"><span>29 likes</span><span>14 retweets</span><a href="https://x.com/alarm_phone/status/2012932996089741688" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div><div class="tweet-type-group"><div class="tweet-type-head"><span>Secourus / arrivés</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">09:17:03</span><span class="tweet-id">ID 2012816494577492449</span></div>
+<div class="tweet-detail-body">🆘️ from 35 people who arrived on the island of #Farmakonisi, #Greece!  We are in contact with the group. They report that they have medical emergencies as well as elderly people among them. We informed local authorities that they need urgent medical assistance. Assist them now! <a href="https://t.co/3ZhooPnhRd" rel="noopener" target="_blank">https://t.co/3ZhooPnhRd</a></div>
+<div class="tweet-media"><a href="https://pbs.twimg.com/media/G-7172UXsAAnuTp.jpg" rel="noopener" target="_blank"><img alt="Média associé au tweet" class="tweet-media-img" loading="lazy" referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/G-7172UXsAAnuTp.jpg"/></a></div>
+<div class="tweet-detail-tags"><span>Farmakonisi</span><span>Greece</span></div>
+<div class="tweet-detail-foot"><span>10 likes</span><span>7 retweets</span><a href="https://x.com/alarm_phone/status/2012816494577492449" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details><details class="tweet-day" open=""><summary><span class="day-name">LUNDI 20 OCTOBRE 2025</span><span class="day-count">1 tweet</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Pertes de contact / disparus</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">12:27:44</span><span class="tweet-id">ID 1980249576368959814</span></div>
+<div class="tweet-detail-body">🆘 Boat missing in the central Med!  We were alerted by a relative of people on board that a boat left Benghazi in #Libya on 13 October, trying to reach Italy. They are missing since. We have alerted authorities, asking them to search for them. Don't let them drown!</div>
+<div class="tweet-detail-tags"><span>Libya</span></div>
+<div class="tweet-detail-foot"><span>24 likes</span><span>15 retweets</span><a href="https://x.com/alarm_phone/status/1980249576368959814" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details><details class="tweet-day" open=""><summary><span class="day-name">SAMEDI 11 OCTOBRE 2025</span><span class="day-count">1 tweet</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Refoulements / interceptions</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">23:30:44</span><span class="tweet-id">ID 1977154932408303846</span></div>
+<div class="tweet-detail-body">🆘 Pushback in the making! Two Syrians with suspected carbon monoxide poisoning are onboard vessel CM COAST, in UK waters. Instead of allowing them to be treated in the UK, the captain turned the ship around to take them to Calais. @HMCoastguard do not let them be pushed back! <a href="https://t.co/2CcUneAJrb" rel="noopener" target="_blank">https://t.co/2CcUneAJrb</a></div>
+<div class="tweet-media"><a href="https://pbs.twimg.com/media/G3BD7vvXQAAVYFj.jpg" rel="noopener" target="_blank"><img alt="Média associé au tweet" class="tweet-media-img" loading="lazy" referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/G3BD7vvXQAAVYFj.jpg"/></a></div>
+<div class="tweet-detail-foot"><span>7 likes</span><span>1 retweets</span><a href="https://x.com/alarm_phone/status/1977154932408303846" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details><details class="tweet-day" open=""><summary><span class="day-name">MARDI 9 SEPTEMBRE 2025</span><span class="day-count">1 tweet</span></summary><div class="tweet-type-group"><div class="tweet-type-head"><span>Détresse signalée</span><span>1 tweet</span></div><div class="tweet-detail-grid"><article class="tweet-detail-card">
+<div class="tweet-detail-top"><span class="tweet-time">19:31:44</span><span class="tweet-id">ID 1965498375383712187</span></div>
+<div class="tweet-detail-body">🆘! 36 people adrift east of #Malta!   We alerted authorities to a boat in distress, carrying 36 people. They are escaping from #Libya. They say their engine stopped and they cannot move on. The night is coming and they need immediate rescue!  Act for once, @Armed_Forces_MT! <a href="https://t.co/i6oHYV8OSV" rel="noopener" target="_blank">https://t.co/i6oHYV8OSV</a></div>
+<div class="tweet-media"><a href="https://pbs.twimg.com/media/G0baWw-XYAAfqDw.jpg" rel="noopener" target="_blank"><img alt="Média associé au tweet" class="tweet-media-img" loading="lazy" referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/G0baWw-XYAAfqDw.jpg"/></a></div>
+<div class="tweet-detail-tags"><span>Malta</span><span>Libya</span></div>
+<div class="tweet-detail-foot"><span>21 likes</span><span>14 retweets</span><a href="https://x.com/alarm_phone/status/1965498375383712187" rel="noopener" target="_blank">ouvrir sur X</a></div>
+</article></div></div></details></section>
+<footer class="site-footer">
+<span>Services Cartographiques · @001 · V2 Swiss · Mai 2025</span>
+<span>@alarm_phone · Statewatch · IOM DTM · Twitter/X</span>
+<span>Maquette pitch · données ouvertes</span>
+</footer>
+<!-- SCRIPTS — loaded after DOM -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // ─── MAP ───────────────────────────────────────────
+  var map = L.map('map', {
+    center: [33, 8],
+    zoom: 4,
+    scrollWheelZoom: false,
+    zoomControl: true
+  });
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© CartoDB © OpenStreetMap',
+    subdomains: 'abcd',
+    maxZoom: 18
+  }).addTo(map);
+
+  // Limites EEZ / frontières maritimes — World EEZ v12 (2023), filtrées sur l'emprise de la carte.
+  var eezBoundaries = {"type":"FeatureCollection","features":[{"type":"Feature","properties":{"LINE_NAME":"Morocco - Western Sahara","LINE_TYPE":"Unsettled median line (land)","TERRITORY1":"Morocco","TERRITORY2":"Western Sahara","SOVEREIGN1":"Morocco","SOVEREIGN2":"Western Sahara"},"geometry":{"type":"LineString","coordinates":[[-13.66475,27.83362],[-13.17315,27.66667]]}},{"type":"Feature","properties":{"LINE_NAME":"Albania - Italy","LINE_TYPE":"Treaty","TERRITORY1":"Albania","TERRITORY2":"Italy","SOVEREIGN1":"Albania","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[18.46194,41.2775],[18.595,41.10806],[18.75972,40.59389],[18.97722,40.13194]]}},{"type":"Feature","properties":{"LINE_NAME":"Monaco - France","LINE_TYPE":"Treaty","TERRITORY1":"Monaco","TERRITORY2":"France","SOVEREIGN1":"Monaco","SOVEREIGN2":"France"},"geometry":{"type":"LineString","coordinates":[[7.41958,43.72581],[7.49667,43.52944]]}},{"type":"Feature","properties":{"LINE_NAME":"Monaco - France","LINE_TYPE":"Treaty","TERRITORY1":"Monaco","TERRITORY2":"France","SOVEREIGN1":"Monaco","SOVEREIGN2":"France"},"geometry":{"type":"LineString","coordinates":[[7.43948,43.75041],[7.52833,43.5525]]}},{"type":"Feature","properties":{"LINE_NAME":"Monaco - France","LINE_TYPE":"Treaty","TERRITORY1":"Monaco","TERRITORY2":"France","SOVEREIGN1":"Monaco","SOVEREIGN2":"France"},"geometry":{"type":"LineString","coordinates":[[7.49667,43.52944],[7.72389,42.94639]]}},{"type":"Feature","properties":{"LINE_NAME":"Monaco - France","LINE_TYPE":"Treaty","TERRITORY1":"Monaco","TERRITORY2":"France","SOVEREIGN1":"Monaco","SOVEREIGN2":"France"},"geometry":{"type":"LineString","coordinates":[[7.52833,43.5525],[7.75694,42.96639]]}},{"type":"Feature","properties":{"LINE_NAME":"Monaco - France","LINE_TYPE":"Treaty","TERRITORY1":"Monaco","TERRITORY2":"France","SOVEREIGN1":"Monaco","SOVEREIGN2":"France"},"geometry":{"type":"LineString","coordinates":[[7.75694,42.96639],[7.72389,42.94639]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain - Italy","LINE_TYPE":"Treaty","TERRITORY1":"Spain","TERRITORY2":"Italy","SOVEREIGN1":"Spain","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[5.94333,41.155],[6.3,40.02833],[6.3,39.625],[6.09667,38.91667]]}},{"type":"Feature","properties":{"LINE_NAME":"Libya - Malta","LINE_TYPE":"Treaty","TERRITORY1":"Libya","TERRITORY2":"Malta","SOVEREIGN1":"Libya","SOVEREIGN2":"Malta"},"geometry":{"type":"LineString","coordinates":[[13.83333,34.67944],[14.39833,34.56861],[15.16667,34.49806]]}},{"type":"Feature","properties":{"LINE_NAME":"Tunisia - Italy","LINE_TYPE":"Treaty","TERRITORY1":"Tunisia","TERRITORY2":"Italy","SOVEREIGN1":"Tunisia","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[7.81667,38.01],[8.81333,38.21833],[9.90333,38.24167],[10.695,38.41],[10.87833,38.05833],[11.17167,37.79],[11.80333,37.34333],[12.02278,37.05028],[11.81694,37.01194],[11.68611,36.90583],[11.65528,36.77],[11.74528,36.62583],[11.87722,36.53556],[12.04361,36.51333],[12.19722,36.56056],[12.29583,36.66278],[12.695,36.05917],[12.57694,35.90528],[12.62556,35.73861],[12.17083,35.71278],[12.07194,35.58222],[12.11833,35.42944],[12.53417,35.28139],[12.70667,35.28472],[12.87944,35.425],[12.84861,35.63333],[13.09583,35.72583],[13.61,35.25]]}},{"type":"Feature","properties":{"LINE_NAME":"Tunisia - Algeria","LINE_TYPE":"Treaty","TERRITORY1":"Tunisia","TERRITORY2":"Algeria","SOVEREIGN1":"Tunisia","SOVEREIGN2":"Algeria"},"geometry":{"type":"LineString","coordinates":[[8.64208,36.94093],[8.42095,37.80114],[7.83333,38.0]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain - France","LINE_TYPE":"Treaty","TERRITORY1":"Spain","TERRITORY2":"France","SOVEREIGN1":"Spain","SOVEREIGN2":"France"},"geometry":{"type":"LineString","coordinates":[[-1.80222,43.59528],[-1.925,43.72917],[-2.19028,43.89028],[-2.60528,44.41111],[-3.17222,44.86667],[-3.94202,45.0]]}},{"type":"Feature","properties":{"LINE_NAME":"Turkey - Bulgaria","LINE_TYPE":"Treaty","TERRITORY1":"Turkey","TERRITORY2":"Bulgaria","SOVEREIGN1":"Turkey","SOVEREIGN2":"Bulgaria"},"geometry":{"type":"LineString","coordinates":[[28.32383,41.98133],[29.34583,42.24111],[29.57222,42.44],[30.0,42.56773]]}},{"type":"Feature","properties":{"LINE_NAME":"Turkey - Bulgaria","LINE_TYPE":"Treaty","TERRITORY1":"Turkey","TERRITORY2":"Bulgaria","SOVEREIGN1":"Turkey","SOVEREIGN2":"Bulgaria"},"geometry":{"type":"LineString","coordinates":[[28.02944,41.98306],[28.03772,41.98014]]}},{"type":"Feature","properties":{"LINE_NAME":"Turkey - Bulgaria","LINE_TYPE":"Treaty","TERRITORY1":"Turkey","TERRITORY2":"Bulgaria","SOVEREIGN1":"Turkey","SOVEREIGN2":"Bulgaria"},"geometry":{"type":"LineString","coordinates":[[28.03772,41.98014],[28.32383,41.98133]]}},{"type":"Feature","properties":{"LINE_NAME":"Cape Verde - Mauritania","LINE_TYPE":"Treaty","TERRITORY1":"Cape Verde","TERRITORY2":"Mauritania","SOVEREIGN1":"Cape Verde","SOVEREIGN2":"Mauritania"},"geometry":{"type":"LineString","coordinates":[[-19.55833,16.06667],[-19.535,17.0],[-19.61333,17.1],[-19.63333,17.88833],[-20.0,18.73667]]}},{"type":"Feature","properties":{"LINE_NAME":"Cape Verde - Senegal","LINE_TYPE":"Treaty","TERRITORY1":"Cape Verde","TERRITORY2":"Senegal","SOVEREIGN1":"Cape Verde","SOVEREIGN2":"Senegal"},"geometry":{"type":"LineString","coordinates":[[-20.0,14.91667],[-19.64167,15.66667],[-19.55833,16.06806]]}},{"type":"Feature","properties":{"LINE_NAME":"Gambia - Senegal","LINE_TYPE":"Treaty","TERRITORY1":"Gambia","TERRITORY2":"Senegal","SOVEREIGN1":"Gambia","SOVEREIGN2":"Senegal"},"geometry":{"type":"LineString","coordinates":[[-16.74694,13.06417],[-20.0,13.0575]]}},{"type":"Feature","properties":{"LINE_NAME":"Guinea-Bissau - Guinea","LINE_TYPE":"Court ruling","TERRITORY1":"Guinea-Bissau","TERRITORY2":"Guinea","SOVEREIGN1":"Guinea-Bissau","SOVEREIGN2":"Guinea"},"geometry":{"type":"LineString","coordinates":[[-15.10833,10.88417],[-15.34167,10.66667],[-15.57083,10.66667],[-16.55857,10.0]]}},{"type":"Feature","properties":{"LINE_NAME":"Libya - Tunisia","LINE_TYPE":"Treaty","TERRITORY1":"Libya","TERRITORY2":"Tunisia","SOVEREIGN1":"Libya","SOVEREIGN2":"Tunisia"},"geometry":{"type":"LineString","coordinates":[[11.56139,33.17501],[12.14702,34.17701],[13.68389,35.15361]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain - France","LINE_TYPE":"Treaty","TERRITORY1":"Spain","TERRITORY2":"France","SOVEREIGN1":"Spain","SOVEREIGN2":"France"},"geometry":{"type":"LineString","coordinates":[[-1.80222,43.59528],[-1.77384,43.39001]]}},{"type":"Feature","properties":{"LINE_NAME":"Gambia - Senegal","LINE_TYPE":"Treaty","TERRITORY1":"Gambia","TERRITORY2":"Senegal","SOVEREIGN1":"Gambia","SOVEREIGN2":"Senegal"},"geometry":{"type":"LineString","coordinates":[[-16.545,13.59333],[-20.0,13.59333]]}},{"type":"Feature","properties":{"LINE_NAME":"France - Italy","LINE_TYPE":"Treaty","TERRITORY1":"France","TERRITORY2":"Italy","SOVEREIGN1":"France","SOVEREIGN2":"Italy"},"geometry":{"type":"MultiLineString","coordinates":[[[9.73017,42.79994],[9.83861,42.23056],[10.21833,41.71056],[10.21833,41.55361],[9.45,41.40639],[9.27,41.29194],[9.135,41.31806],[8.775,41.25],[8.66,41.26472],[8.30472,41.4875],[6.93028,41.81583],[5.88972,41.24333]],[[7.52994,43.78428],[7.84028,43.12389],[8.08167,43.12389],[8.45972,43.25333],[8.99944,43.63694],[9.57056,43.27528],[9.58809,43.17586]]]}},{"type":"Feature","properties":{"LINE_NAME":"France - Italy","LINE_TYPE":"Joint regime","TERRITORY1":"France","TERRITORY2":"Italy","SOVEREIGN1":"France","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[8.99889,41.27111],[8.99889,41.34333],[9.09889,41.34306],[9.09889,41.27111],[8.99889,41.27111]]}},{"type":"Feature","properties":{"LINE_NAME":"Senegal - Guinea-Bissau","LINE_TYPE":"Court ruling","TERRITORY1":"Senegal","TERRITORY2":"Guinea-Bissau","SOVEREIGN1":"Senegal","SOVEREIGN2":"Guinea-Bissau"},"geometry":{"type":"LineString","coordinates":[[-16.71864,12.34342],[-19.80417,10.56389]]}},{"type":"Feature","properties":{"LINE_NAME":"Senegal - Guinea-Bissau","LINE_TYPE":"Joint regime","TERRITORY1":"Senegal","TERRITORY2":"Guinea-Bissau","SOVEREIGN1":"Senegal","SOVEREIGN2":"Guinea-Bissau"},"geometry":{"type":"MultiLineString","coordinates":[[[-16.96333,12.335],[-16.88917,12.14333],[-18.69451,10.0]],[[-19.61384,10.0],[-19.80417,10.56389],[-19.66371,10.64607],[-20.0,11.35158]],[[-20.0,12.21063],[-16.96333,12.335]]]}},{"type":"Feature","properties":{"LINE_NAME":"Montenegro - Italy","LINE_TYPE":"Treaty","TERRITORY1":"Montenegro","TERRITORY2":"Italy","SOVEREIGN1":"Montenegro","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[18.0183,41.6297],[18.21667,41.5]]}},{"type":"Feature","properties":{"LINE_NAME":"Western Sahara 200 NM","LINE_TYPE":"200 NM","TERRITORY1":"Western Sahara","TERRITORY2":"","SOVEREIGN1":"Western Sahara","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-20.0,23.77634],[-19.5763,24.34589],[-19.50668,24.58474]]}},{"type":"Feature","properties":{"LINE_NAME":"Canary Islands (Spain) 200 NM","LINE_TYPE":"200 NM","TERRITORY1":"Canary Islands","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"MultiLineString","coordinates":[[[-19.50668,24.58474],[-19.68449,24.65914]],[[-19.68449,24.65914],[-19.68449,24.65914]],[[-19.68449,24.65914],[-20.0,24.80501]]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco 200 NM","LINE_TYPE":"200 NM","TERRITORY1":"Morocco","TERRITORY2":"","SOVEREIGN1":"Morocco","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-12.59045,34.41549],[-12.14817,34.87786]]}},{"type":"Feature","properties":{"LINE_NAME":"Portugal 200 NM","LINE_TYPE":"200 NM","TERRITORY1":"Portugal","TERRITORY2":"","SOVEREIGN1":"Portugal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-12.14817,34.87786],[-12.58713,35.38022],[-12.90943,35.93647],[-13.09846,36.50144],[-13.16442,37.07841],[-13.51905,37.6958],[-13.72764,38.38652],[-13.85948,39.36863],[-13.84058,39.90848],[-13.65012,40.58534],[-13.26472,41.2292],[-13.2999,41.39622]]}},{"type":"Feature","properties":{"LINE_NAME":"Madeira (Portugal) 200 NM","LINE_TYPE":"200 NM","TERRITORY1":"Madeira","TERRITORY2":"","SOVEREIGN1":"Portugal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-20.0,35.26615],[-19.54021,35.58844],[-19.03297,35.84562],[-17.55828,36.3004],[-16.65725,36.45569],[-15.7287,36.43801],[-14.71909,36.20912],[-13.81859,35.77279],[-13.42071,35.47783],[-13.08567,35.15209],[-12.80836,34.79645],[-12.59045,34.41549]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain 200 NM","LINE_TYPE":"200 NM","TERRITORY1":"Spain","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-13.2999,41.39622],[-13.55665,41.8309],[-13.74062,42.30896],[-13.82589,42.73734],[-13.84822,43.29223],[-13.77895,43.73948],[-13.62917,44.1695],[-13.41103,44.56283],[-13.07941,45.0]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Albania - Italy","LINE_TYPE":"Connection line","TERRITORY1":"Albania","TERRITORY2":"Italy","SOVEREIGN1":"Albania","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[18.99524,40.08358],[18.97722,40.13194]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Albania - Italy","LINE_TYPE":"Connection line","TERRITORY1":"Albania","TERRITORY2":"Italy","SOVEREIGN1":"Albania","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[18.46194,41.2775],[18.44818,41.29685]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Montenegro - Italy","LINE_TYPE":"Connection line","TERRITORY1":"Montenegro","TERRITORY2":"Italy","SOVEREIGN1":"Montenegro","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[18.21667,41.5],[18.24216,41.48504]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Italy - Spain","LINE_TYPE":"Connection line","TERRITORY1":"Italy","TERRITORY2":"Spain","SOVEREIGN1":"Italy","SOVEREIGN2":"Spain"},"geometry":{"type":"LineString","coordinates":[[5.88972,41.24333],[5.94333,41.155]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line France - Spain","LINE_TYPE":"Connection line","TERRITORY1":"France","TERRITORY2":"Spain","SOVEREIGN1":"France","SOVEREIGN2":"Spain"},"geometry":{"type":"LineString","coordinates":[[5.88972,41.24333],[5.7753,41.30857]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Italy - Spain","LINE_TYPE":"Connection line","TERRITORY1":"Italy","TERRITORY2":"Spain","SOVEREIGN1":"Italy","SOVEREIGN2":"Spain"},"geometry":{"type":"LineString","coordinates":[[6.06655,38.80087],[6.09667,38.91667]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Libya - Malta","LINE_TYPE":"Connection line","TERRITORY1":"Libya","TERRITORY2":"Malta","SOVEREIGN1":"Libya","SOVEREIGN2":"Malta"},"geometry":{"type":"LineString","coordinates":[[13.83333,34.67944],[13.7531,34.69647]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Libya - Malta","LINE_TYPE":"Connection line","TERRITORY1":"Libya","TERRITORY2":"Malta","SOVEREIGN1":"Libya","SOVEREIGN2":"Malta"},"geometry":{"type":"LineString","coordinates":[[15.16667,34.49806],[15.17098,34.21414]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Tunisia - Algeria","LINE_TYPE":"Connection line","TERRITORY1":"Tunisia","TERRITORY2":"Algeria","SOVEREIGN1":"Tunisia","SOVEREIGN2":"Algeria"},"geometry":{"type":"LineString","coordinates":[[7.81667,38.01],[7.83333,38.0]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Algeria - Italy","LINE_TYPE":"Connection line","TERRITORY1":"Algeria","TERRITORY2":"Italy","SOVEREIGN1":"Algeria","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[7.81667,38.01],[7.81355,38.00945]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Malta - Tunisia","LINE_TYPE":"Connection line","TERRITORY1":"Malta","TERRITORY2":"Tunisia","SOVEREIGN1":"Malta","SOVEREIGN2":"Tunisia"},"geometry":{"type":"LineString","coordinates":[[13.68389,35.15361],[13.61,35.25]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Malta - Italy","LINE_TYPE":"Connection line","TERRITORY1":"Malta","TERRITORY2":"Italy","SOVEREIGN1":"Malta","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[13.61,35.25],[13.60823,35.28351]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Cape Verde - Mauritania","LINE_TYPE":"Connection line","TERRITORY1":"Cape Verde","TERRITORY2":"Mauritania","SOVEREIGN1":"Cape Verde","SOVEREIGN2":"Mauritania"},"geometry":{"type":"LineString","coordinates":[[-20.0,18.73667],[-20.0,18.73667]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Cyprus - Egypt","LINE_TYPE":"Connection line","TERRITORY1":"Cyprus","TERRITORY2":"Egypt","SOVEREIGN1":"Cyprus","SOVEREIGN2":"Egypt"},"geometry":{"type":"LineString","coordinates":[[30.0,33.76926],[29.93981,33.78316]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Guinea-Bissau - Guinea","LINE_TYPE":"Connection line","TERRITORY1":"Guinea-Bissau","TERRITORY2":"Guinea","SOVEREIGN1":"Guinea-Bissau","SOVEREIGN2":"Guinea"},"geometry":{"type":"LineString","coordinates":[[-15.10833,10.88417],[-15.06633,10.90929]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line France - Spain","LINE_TYPE":"Connection line","TERRITORY1":"France","TERRITORY2":"Spain","SOVEREIGN1":"France","SOVEREIGN2":"Spain"},"geometry":{"type":"LineString","coordinates":[[-1.77384,43.39001],[-1.77386,43.38535]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Libya - Tunisia","LINE_TYPE":"Connection line","TERRITORY1":"Libya","TERRITORY2":"Tunisia","SOVEREIGN1":"Libya","SOVEREIGN2":"Tunisia"},"geometry":{"type":"LineString","coordinates":[[11.56139,33.17501],[11.56179,33.1672]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Montenegro - Croatia","LINE_TYPE":"Connection line","TERRITORY1":"Montenegro","TERRITORY2":"Croatia","SOVEREIGN1":"Montenegro","SOVEREIGN2":"Croatia"},"geometry":{"type":"LineString","coordinates":[[18.01896,41.63041],[18.0183,41.6297]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Joint regime Senegal / Guinea-Bissau - Senegal","LINE_TYPE":"Connection line","TERRITORY1":"Joint regime Senegal / Guinea-Bissau","TERRITORY2":"Senegal","SOVEREIGN1":"","SOVEREIGN2":"Senegal"},"geometry":{"type":"LineString","coordinates":[[-19.66371,10.64607],[-19.66315,10.64522]]}},{"type":"Feature","properties":{"LINE_NAME":"Gibraltar (United Kingdom) - Spain","LINE_TYPE":"Unsettled median line (land)","TERRITORY1":"Gibraltar","TERRITORY2":"Spain","SOVEREIGN1":"United Kingdom","SOVEREIGN2":"Spain"},"geometry":{"type":"LineString","coordinates":[[-5.33909,36.15337],[-5.14608,36.14756],[-4.96717,36.07563],[-5.33496,36.01186],[-5.39735,36.14142],[-5.35199,36.15493]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco - Algeria","LINE_TYPE":"Median line","TERRITORY1":"Morocco","TERRITORY2":"Algeria","SOVEREIGN1":"Morocco","SOVEREIGN2":"Algeria"},"geometry":{"type":"LineString","coordinates":[[-2.21233,35.08428],[-2.05752,35.64274],[-2.12171,35.88889]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain - Algeria","LINE_TYPE":"Median line","TERRITORY1":"Spain","TERRITORY2":"Algeria","SOVEREIGN1":"Spain","SOVEREIGN2":"Algeria"},"geometry":{"type":"LineString","coordinates":[[-2.12171,35.88889],[-2.09358,35.96473],[-0.87483,36.69142],[-0.44688,36.78375],[0.08886,37.05019],[0.79306,37.61615],[1.47976,37.60458],[2.03898,37.67583],[2.77002,37.97939],[3.31266,38.00966],[4.58385,38.37718],[5.30567,38.44218],[6.06655,38.80087]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain - France","LINE_TYPE":"Unsettled median line (maritime)","TERRITORY1":"Spain","TERRITORY2":"France","SOVEREIGN1":"Spain","SOVEREIGN2":"France"},"geometry":{"type":"LineString","coordinates":[[5.7753,41.30857],[5.32094,41.47211],[4.54375,42.44867],[4.14071,42.72218],[3.87024,42.7496],[3.1727,42.43338]]}},{"type":"Feature","properties":{"LINE_NAME":"Malta - Italy","LINE_TYPE":"Unsettled median line (maritime)","TERRITORY1":"Malta","TERRITORY2":"Italy","SOVEREIGN1":"Malta","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[17.49726,35.06441],[14.6094,36.3487],[13.93094,36.51094],[13.41697,36.46754],[13.60417,35.61068],[13.60823,35.28351]]}},{"type":"Feature","properties":{"LINE_NAME":"Libya - Malta","LINE_TYPE":"Median line","TERRITORY1":"Libya","TERRITORY2":"Malta","SOVEREIGN1":"Libya","SOVEREIGN2":"Malta"},"geometry":{"type":"MultiLineString","coordinates":[[[13.64633,35.12974],[13.7531,34.69647]],[[15.17098,34.21414],[15.81705,34.33721],[16.49747,34.56194],[17.49726,35.06441]]]}},{"type":"Feature","properties":{"LINE_NAME":"Libya - Italy","LINE_TYPE":"Median line","TERRITORY1":"Libya","TERRITORY2":"Italy","SOVEREIGN1":"Libya","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[18.30452,35.42515],[17.49726,35.06441]]}},{"type":"Feature","properties":{"LINE_NAME":"Greece - Albania","LINE_TYPE":"Unsettled median line (maritime)","TERRITORY1":"Greece","TERRITORY2":"Albania","SOVEREIGN1":"Greece","SOVEREIGN2":"Albania"},"geometry":{"type":"LineString","coordinates":[[20.00835,39.69182],[19.98922,39.64039],[19.92856,39.68671],[19.97379,39.78061],[19.95112,39.83325],[19.62895,40.00921],[18.99524,40.08358]]}},{"type":"Feature","properties":{"LINE_NAME":"Montenegro - Albania","LINE_TYPE":"Median line","TERRITORY1":"Montenegro","TERRITORY2":"Albania","SOVEREIGN1":"Montenegro","SOVEREIGN2":"Albania"},"geometry":{"type":"LineString","coordinates":[[18.32149,41.44175],[19.32217,41.70409],[19.38155,41.99554]]}},{"type":"Feature","properties":{"LINE_NAME":"Montenegro - Italy","LINE_TYPE":"Median line","TERRITORY1":"Montenegro","TERRITORY2":"Italy","SOVEREIGN1":"Montenegro","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[18.24216,41.48504],[18.32149,41.44175]]}},{"type":"Feature","properties":{"LINE_NAME":"Montenegro - Croatia","LINE_TYPE":"Median line","TERRITORY1":"Montenegro","TERRITORY2":"Croatia","SOVEREIGN1":"Montenegro","SOVEREIGN2":"Croatia"},"geometry":{"type":"LineString","coordinates":[[18.52456,42.42024],[18.51597,42.29564],[18.26665,41.90698],[18.01896,41.63041]]}},{"type":"Feature","properties":{"LINE_NAME":"Greece - Turkey","LINE_TYPE":"Unsettled median line (maritime)","TERRITORY1":"Greece","TERRITORY2":"Turkey","SOVEREIGN1":"Greece","SOVEREIGN2":"Turkey"},"geometry":{"type":"LineString","coordinates":[[26.03711,40.72984],[25.81111,40.64197],[25.95706,40.43816],[25.79772,40.332],[25.44175,40.22765],[25.68963,39.88002],[25.65553,39.5562],[25.98337,39.39325],[26.466,39.42122],[26.49667,39.27763],[26.71139,39.08902],[26.67631,38.92365],[26.5929,38.83152],[26.15185,38.79389],[26.34294,38.49777],[26.23027,38.43606],[26.17079,38.26253],[26.2721,37.95067],[26.68792,37.96234],[27.1092,37.88023],[27.1648,37.78062],[26.94205,37.64063],[26.94854,37.57259],[27.06114,37.55067],[27.09273,37.39677],[27.22142,37.23557],[27.13197,37.17485],[27.15561,37.07155],[27.11827,37.00837],[27.2263,36.93695],[27.39048,36.93214],[27.47043,36.86626],[27.26177,36.74134],[27.33622,36.58148],[27.57196,36.51788],[27.76444,36.69324],[27.87447,36.70463],[27.96464,36.46272],[28.28075,36.57283],[28.44266,36.56197],[28.53562,36.46958],[28.67461,36.24004],[28.86992,35.30849],[29.37726,36.11753],[29.4672,36.18258],[29.61368,36.17376],[29.69849,36.06566],[30.0,34.68361]]}},{"type":"Feature","properties":{"LINE_NAME":"Mauritania - Western Sahara","LINE_TYPE":"Median line","TERRITORY1":"Mauritania","TERRITORY2":"Western Sahara","SOVEREIGN1":"Mauritania","SOVEREIGN2":"Western Sahara"},"geometry":{"type":"LineString","coordinates":[[-20.0,19.44932],[-18.4068,20.11833],[-17.04786,20.77032]]}},{"type":"Feature","properties":{"LINE_NAME":"Canary Islands (Spain) - Western Sahara","LINE_TYPE":"Median line","TERRITORY1":"Canary Islands","TERRITORY2":"Western Sahara","SOVEREIGN1":"Spain","SOVEREIGN2":"Western Sahara"},"geometry":{"type":"LineString","coordinates":[[-19.50668,24.58474],[-17.17918,25.65737],[-16.73924,26.11882],[-16.02101,26.39672],[-14.70153,27.1899],[-14.34815,27.23486],[-14.00186,27.49468],[-13.66475,27.83362]]}},{"type":"Feature","properties":{"LINE_NAME":"Canary Islands (Spain) - Madeira (Portugal)","LINE_TYPE":"Median line","TERRITORY1":"Canary Islands","TERRITORY2":"Madeira","SOVEREIGN1":"Spain","SOVEREIGN2":"Portugal"},"geometry":{"type":"LineString","coordinates":[[-20.0,31.14667],[-18.1929,30.89511],[-16.89002,29.40855],[-15.15219,29.24785],[-14.93473,29.45],[-14.664,29.85681],[-13.87249,31.73585],[-13.03974,32.28908]]}},{"type":"Feature","properties":{"LINE_NAME":"Madeira (Portugal) - Morocco","LINE_TYPE":"Median line","TERRITORY1":"Madeira","TERRITORY2":"Morocco","SOVEREIGN1":"Portugal","SOVEREIGN2":"Morocco"},"geometry":{"type":"LineString","coordinates":[[-12.59045,34.41549],[-12.7369,33.23778],[-13.03974,32.28908]]}},{"type":"Feature","properties":{"LINE_NAME":"Cyprus - Egypt","LINE_TYPE":"Median line","TERRITORY1":"Cyprus","TERRITORY2":"Egypt","SOVEREIGN1":"Cyprus","SOVEREIGN2":"Egypt"},"geometry":{"type":"LineString","coordinates":[[29.93981,33.78316],[29.84648,33.82085]]}},{"type":"Feature","properties":{"LINE_NAME":"Portugal - Spain","LINE_TYPE":"Median line","TERRITORY1":"Portugal","TERRITORY2":"Spain","SOVEREIGN1":"Portugal","SOVEREIGN2":"Spain"},"geometry":{"type":"LineString","coordinates":[[-7.48092,37.4954],[-7.35377,37.08968],[-7.25694,36.51981],[-7.38228,36.07547],[-7.54199,35.75649]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco - Spain","LINE_TYPE":"Median line","TERRITORY1":"Morocco","TERRITORY2":"Spain","SOVEREIGN1":"Morocco","SOVEREIGN2":"Spain"},"geometry":{"type":"LineString","coordinates":[[-5.27747,35.81559],[-4.68216,35.80588],[-4.5283,35.89747],[-4.34178,35.87923],[-3.92542,35.99287],[-3.40942,35.66862],[-2.37556,35.75323],[-2.12171,35.88889]]}},{"type":"Feature","properties":{"LINE_NAME":"Portugal - Spain","LINE_TYPE":"Median line","TERRITORY1":"Portugal","TERRITORY2":"Spain","SOVEREIGN1":"Portugal","SOVEREIGN2":"Spain"},"geometry":{"type":"LineString","coordinates":[[-8.60193,42.05467],[-8.89931,41.85499],[-11.40896,41.78482],[-13.2999,41.39622]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco - Spain","LINE_TYPE":"Median line","TERRITORY1":"Morocco","TERRITORY2":"Spain","SOVEREIGN1":"Morocco","SOVEREIGN2":"Spain"},"geometry":{"type":"MultiLineString","coordinates":[[[-7.54199,35.75649],[-6.10303,35.96254],[-5.52423,35.96234]],[[-5.52565,35.96147],[-5.52423,35.96234]],[[-5.52423,35.96234],[-5.37215,36.0051],[-5.38584,35.91746]]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco - Portugal","LINE_TYPE":"Median line","TERRITORY1":"Morocco","TERRITORY2":"Portugal","SOVEREIGN1":"Morocco","SOVEREIGN2":"Portugal"},"geometry":{"type":"LineString","coordinates":[[-12.14817,34.87786],[-9.61319,35.08444],[-8.48552,35.24681],[-8.06082,35.43432],[-7.54199,35.75649]]}},{"type":"Feature","properties":{"LINE_NAME":"Algeria - Italy","LINE_TYPE":"Median line","TERRITORY1":"Algeria","TERRITORY2":"Italy","SOVEREIGN1":"Algeria","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[6.06655,38.80087],[6.82199,38.39309],[7.81355,38.00945]]}},{"type":"Feature","properties":{"LINE_NAME":"Libya - Greece","LINE_TYPE":"Median line","TERRITORY1":"Libya","TERRITORY2":"Greece","SOVEREIGN1":"Libya","SOVEREIGN2":"Greece"},"geometry":{"type":"LineString","coordinates":[[25.74174,33.35965],[25.15128,33.46947],[24.46253,33.44798],[23.3515,33.81653],[21.33931,34.79641],[19.74528,34.94909],[18.30452,35.42515]]}},{"type":"Feature","properties":{"LINE_NAME":"Egypt - Greece","LINE_TYPE":"Median line","TERRITORY1":"Egypt","TERRITORY2":"Greece","SOVEREIGN1":"Egypt","SOVEREIGN2":"Greece"},"geometry":{"type":"LineString","coordinates":[[29.84648,33.82085],[29.23413,33.75381],[28.80439,33.50559],[27.84184,33.42979],[27.05516,33.30782],[26.22908,33.28186]]}},{"type":"Feature","properties":{"LINE_NAME":"Albania - Italy","LINE_TYPE":"Median line","TERRITORY1":"Albania","TERRITORY2":"Italy","SOVEREIGN1":"Albania","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[18.44818,41.29685],[18.32149,41.44175]]}},{"type":"Feature","properties":{"LINE_NAME":"Cyprus - Greece","LINE_TYPE":"Median line","TERRITORY1":"Cyprus","TERRITORY2":"Greece","SOVEREIGN1":"Cyprus","SOVEREIGN2":"Greece"},"geometry":{"type":"LineString","coordinates":[[29.84648,33.82085],[30.0,34.05288]]}},{"type":"Feature","properties":{"LINE_NAME":"Guinea-Bissau - Guinea","LINE_TYPE":"Median line","TERRITORY1":"Guinea-Bissau","TERRITORY2":"Guinea","SOVEREIGN1":"Guinea-Bissau","SOVEREIGN2":"Guinea"},"geometry":{"type":"MultiLineString","coordinates":[[[-15.06633,10.90929],[-14.9597,10.98489]],[[-14.92329,11.04989],[-14.91316,11.0793]]]}},{"type":"Feature","properties":{"LINE_NAME":"Bosnia and Herzegovina - Croatia","LINE_TYPE":"Treaty","TERRITORY1":"Bosnia and Herzegovina","TERRITORY2":"Croatia","SOVEREIGN1":"Bosnia and Herzegovina","SOVEREIGN2":"Croatia"},"geometry":{"type":"MultiLineString","coordinates":[[[17.64799,42.88872],[17.542,42.92856],[17.58044,42.93836]],[[17.68448,43.05271],[17.68387,43.05369]]]}},{"type":"Feature","properties":{"LINE_NAME":"Bulgaria - Romania","LINE_TYPE":"Median line","TERRITORY1":"Bulgaria","TERRITORY2":"Romania","SOVEREIGN1":"Bulgaria","SOVEREIGN2":"Romania"},"geometry":{"type":"LineString","coordinates":[[28.57951,43.73847],[29.12955,43.67726],[30.0,43.66202]]}},{"type":"Feature","properties":{"LINE_NAME":"Gambia - Senegal","LINE_TYPE":"Median line","TERRITORY1":"Gambia","TERRITORY2":"Senegal","SOVEREIGN1":"Gambia","SOVEREIGN2":"Senegal"},"geometry":{"type":"MultiLineString","coordinates":[[[-16.51554,13.59325],[-16.50802,13.59326]],[[-16.08581,13.5935],[-16.08421,13.5935]]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain - France","LINE_TYPE":"Median line","TERRITORY1":"Spain","TERRITORY2":"France","SOVEREIGN1":"Spain","SOVEREIGN2":"France"},"geometry":{"type":"LineString","coordinates":[[-1.78657,43.35052],[-1.77386,43.38535]]}},{"type":"Feature","properties":{"LINE_NAME":"Canary Islands (Spain) - Morocco","LINE_TYPE":"Median line","TERRITORY1":"Canary Islands","TERRITORY2":"Morocco","SOVEREIGN1":"Spain","SOVEREIGN2":"Morocco"},"geometry":{"type":"LineString","coordinates":[[-13.66475,27.83362],[-13.44876,28.06831],[-13.21488,28.43494],[-12.73347,28.7018],[-12.21287,29.1366],[-12.06634,29.45788],[-11.81335,30.30716],[-12.22794,31.16447],[-13.03974,32.28908]]}},{"type":"Feature","properties":{"LINE_NAME":"Senegal - Mauritania","LINE_TYPE":"Median line","TERRITORY1":"Senegal","TERRITORY2":"Mauritania","SOVEREIGN1":"Senegal","SOVEREIGN2":"Mauritania"},"geometry":{"type":"MultiLineString","coordinates":[[[-19.55823,16.06806],[-16.50928,16.06717]],[[-16.50649,16.06728],[-16.45596,16.08823],[-16.44051,16.20399],[-16.37099,16.23414],[-16.28136,16.51115],[-16.1708,16.52891]]]}},{"type":"Feature","properties":{"LINE_NAME":"Peñón de Vélez de la Gomera (Spain) - Morocco","LINE_TYPE":"Unsettled median line (land)","TERRITORY1":"Peñón de Vélez de la Gomera","TERRITORY2":"Morocco","SOVEREIGN1":"Spain","SOVEREIGN2":"Morocco"},"geometry":{"type":"LineString","coordinates":[[-5.42919,35.91569],[-5.41259,35.91846]]}},{"type":"Feature","properties":{"LINE_NAME":"Ceuta (Spain) - Morocco","LINE_TYPE":"Unsettled median line (land)","TERRITORY1":"Ceuta","TERRITORY2":"Morocco","SOVEREIGN1":"Spain","SOVEREIGN2":"Morocco"},"geometry":{"type":"MultiLineString","coordinates":[[[-5.34432,35.87046],[-5.27747,35.81559]],[[-5.38584,35.91746],[-5.38169,35.91321]]]}},{"type":"Feature","properties":{"LINE_NAME":"Alhucemas Islands (Spain) - Morocco","LINE_TYPE":"Unsettled median line (land)","TERRITORY1":"Alhucemas Islands","TERRITORY2":"Morocco","SOVEREIGN1":"Spain","SOVEREIGN2":"Morocco"},"geometry":{"type":"LineString","coordinates":[[-3.84588,35.26534],[-3.90397,35.21383],[-3.85117,35.26499]]}},{"type":"Feature","properties":{"LINE_NAME":"Melilla (Spain) - Morocco","LINE_TYPE":"Unsettled median line (land)","TERRITORY1":"Melilla","TERRITORY2":"Morocco","SOVEREIGN1":"Spain","SOVEREIGN2":"Morocco"},"geometry":{"type":"MultiLineString","coordinates":[[[-2.92912,35.27224],[-2.88091,35.32011]],[[-2.89817,35.3499],[-2.9522,35.32012]]]}},{"type":"Feature","properties":{"LINE_NAME":"Chafarinas Islands (Spain) - Morocco","LINE_TYPE":"Unsettled median line (land)","TERRITORY1":"Chafarinas Islands","TERRITORY2":"Morocco","SOVEREIGN1":"Spain","SOVEREIGN2":"Morocco"},"geometry":{"type":"LineString","coordinates":[[-2.52456,35.17553],[-2.38372,35.16795]]}},{"type":"Feature","properties":{"LINE_NAME":"Perejil Island (Spain) - Morocco","LINE_TYPE":"Unsettled median line (land)","TERRITORY1":"Perejil Island","TERRITORY2":"Morocco","SOVEREIGN1":"Spain","SOVEREIGN2":"Morocco"},"geometry":{"type":"MultiLineString","coordinates":[[[-4.29642,35.17129],[-4.30511,35.19798]],[[-4.31911,35.19883],[-4.29862,35.17064]]]}},{"type":"Feature","properties":{"LINE_NAME":"Malta Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Malta","TERRITORY2":"","SOVEREIGN1":"Malta","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[14.56089,35.81858],[14.57064,35.8725],[14.31067,36.05933],[14.18547,36.07489],[14.40528,35.78747],[14.56089,35.81858]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Spain","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[3.23267,41.94833],[3.33167,42.3175],[3.17333,42.43333]]}},{"type":"Feature","properties":{"LINE_NAME":"Albania Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Albania","TERRITORY2":"","SOVEREIGN1":"Albania","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[19.44389,41.58806],[19.39111,41.41389],[19.43611,41.14611],[19.265,40.51194],[19.28806,40.42]]}},{"type":"Feature","properties":{"LINE_NAME":"Algeria Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Algeria","TERRITORY2":"","SOVEREIGN1":"Algeria","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-2.16722,35.10111],[-1.93417,35.08667],[-1.69833,35.17917],[-1.48,35.32722],[-1.14667,35.75667],[-0.77917,35.75972],[-0.47,35.89],[0.135,36.04222],[0.34528,36.19528],[0.66,36.33139],[1.34194,36.55333],[2.38056,36.62833],[2.89722,36.80778],[3.30333,36.81778],[3.89667,36.92722],[4.79167,36.895],[5.10667,36.77861],[5.6,36.78806],[6.15222,36.89861],[6.26667,37.02833],[6.41667,37.09139],[6.75333,36.96528],[7.20639,37.09667],[7.39583,37.08639],[7.66111,36.98083],[8.40472,36.91667],[8.64167,36.94472]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[12.55028,45.0],[12.54667,44.95833]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[12.41,44.7925],[12.28,44.62417]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[14.71333,42.17667],[15.00583,42.005],[15.51333,42.13917]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[15.52333,42.1375],[15.99083,41.94417]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[16.15333,41.90667],[16.295,41.3325]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[17.80833,40.71583],[18.00333,40.65417],[18.21333,40.46333]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[18.42917,40.28833],[18.525,40.14167],[18.39083,39.81667]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[18.36833,39.7925],[17.15833,39.39833],[17.15,39.20833],[17.20833,39.02667]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[17.20667,39.02],[17.17333,38.95667]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[17.09667,38.89167],[16.57333,38.42417]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[16.47417,38.34333],[16.09083,37.94583]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[15.71667,38.255],[15.82833,38.62167]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[15.975,38.71333],[16.1,39.03167]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[15.77917,39.81917],[15.27083,40.02417],[14.93917,40.22667]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[14.9,40.2525],[13.89333,40.69167],[12.84667,40.91917],[12.62,41.44667]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[12.22333,41.74333],[11.83667,42.02833]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[11.7775,42.09583],[10.92083,42.31583],[10.31833,42.3125],[10.06417,42.3575],[10.045,42.58167],[10.10167,42.76667],[9.80167,43.00583]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[9.7925,43.02333],[9.89,43.42667]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[9.89583,43.43583],[10.2125,43.59083],[10.26917,43.6775],[10.04083,44.02833],[9.8525,44.02167],[9.40583,44.25833],[9.21917,44.29667]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[9.145,44.32167],[8.93833,44.38833],[8.67833,44.39167],[8.45667,44.26167],[8.07667,43.8925]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[7.8325,43.81583],[7.55667,43.77917]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[15.30833,37.85833],[15.22,37.70833]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[15.17917,37.575],[15.29833,37.105]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[15.30333,37.07917],[15.325,37.04167]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[15.33833,37.00833],[15.15333,36.68333],[15.07833,36.6425],[14.4975,36.79167],[13.45,37.29167]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[13.32333,37.36167],[13.02083,37.49417],[12.66333,37.56417],[12.52,37.65917]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[12.425,37.80833],[12.04333,37.95667]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[12.03083,37.99083],[12.53167,38.06333],[12.73,38.18833]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[12.73667,38.18833],[13.325,38.22333],[13.54,38.11167],[14.02333,38.04],[15.22583,38.26917]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[15.24083,38.26917],[15.54333,38.3]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[9.72833,40.84333],[9.82917,40.5275]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[9.79667,40.44083],[9.60917,39.1425]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[9.60583,39.1325],[9.53583,39.08083],[9.0275,39.00167]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[8.85583,38.875],[8.40833,38.85833],[8.20833,39.14667],[8.37417,39.37417],[8.445,39.75833],[8.275,39.88083],[8.3825,40.33583],[8.13833,40.60167],[8.1725,40.93917],[8.275,41.10333]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[8.35,41.0875],[8.87083,41.015]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[9.04667,41.1375],[9.14167,41.24417]]}},{"type":"Feature","properties":{"LINE_NAME":"Italy Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Italy","TERRITORY2":"","SOVEREIGN1":"Italy","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[9.14583,41.24667],[9.40833,41.30167],[9.77917,40.875],[9.72833,40.84333]]}},{"type":"Feature","properties":{"LINE_NAME":"Bulgaria Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Bulgaria","TERRITORY2":"","SOVEREIGN1":"Bulgaria","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[28.46278,43.35694],[28.21194,43.39556],[28.06389,43.3225]]}},{"type":"Feature","properties":{"LINE_NAME":"Bulgaria Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Bulgaria","TERRITORY2":"","SOVEREIGN1":"Bulgaria","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[28.00278,43.21667],[27.90861,43.05611]]}},{"type":"Feature","properties":{"LINE_NAME":"Bulgaria Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Bulgaria","TERRITORY2":"","SOVEREIGN1":"Bulgaria","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[27.89694,42.69722],[27.77722,42.30472],[27.86306,42.15444]]}},{"type":"Feature","properties":{"LINE_NAME":"Croatia Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Croatia","TERRITORY2":"","SOVEREIGN1":"Croatia","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[18.22667,42.56556],[17.74833,42.68611]]}},{"type":"Feature","properties":{"LINE_NAME":"Croatia Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Croatia","TERRITORY2":"","SOVEREIGN1":"Croatia","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[17.32833,42.77417],[16.88722,42.72278],[16.70861,42.74861],[16.60722,42.98278],[16.30972,43.16833],[16.05444,43.44583],[15.57389,43.6225],[15.16861,43.88222]]}},{"type":"Feature","properties":{"LINE_NAME":"Croatia Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Croatia","TERRITORY2":"","SOVEREIGN1":"Croatia","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[14.81889,44.15222],[14.58972,44.335],[13.90139,44.73528],[13.64685,45.0]]}},{"type":"Feature","properties":{"LINE_NAME":"Egypt Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Egypt","TERRITORY2":"","SOVEREIGN1":"Egypt","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[25.14889,31.675],[25.18,31.57333],[25.33194,31.50333],[25.89,31.63333],[26.985,31.45333],[27.35,31.37],[27.475,31.21],[27.86,31.24667],[27.91667,31.10333],[28.59,31.055],[28.83222,30.975],[29.0,30.84333],[29.78833,31.14833],[30.0,31.28933]]}},{"type":"Feature","properties":{"LINE_NAME":"Guinea-Bissau Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Guinea-Bissau","TERRITORY2":"","SOVEREIGN1":"Guinea-Bissau","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-16.71806,12.33889],[-16.48139,11.27167],[-16.18333,11.02611],[-15.72639,10.85694],[-15.175,10.83333]]}},{"type":"Feature","properties":{"LINE_NAME":"Libya Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Libya","TERRITORY2":"","SOVEREIGN1":"Libya","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[11.56139,33.17501],[12.43862,32.82076],[12.68807,32.79389],[12.99751,32.83639],[13.2125,32.92111],[13.38779,32.89669],[13.53446,32.82001],[13.80306,32.80251],[14.24974,32.69086],[14.58279,32.5],[20.50089,32.5],[21.06085,32.76113],[21.42334,32.79503],[21.6278,32.92556],[21.93974,32.90278],[22.145,32.93861],[23.10723,32.63419],[23.10751,32.53306],[23.23696,32.37528],[23.28446,32.2353],[23.45863,32.17807],[23.77502,32.16389],[23.97335,32.10556],[24.10445,32.01168],[24.7378,32.02056],[24.97889,31.97167],[25.03502,31.9353],[25.14889,31.67528]]}},{"type":"Feature","properties":{"LINE_NAME":"Mauritania Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Mauritania","TERRITORY2":"","SOVEREIGN1":"Mauritania","SOVEREIGN2":""},"geometry":{"type":"MultiLineString","coordinates":[[[-17.05028,20.77],[-17.05014,20.76961]],[[-17.04866,20.76557],[-16.54389,19.38444]]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Morocco","TERRITORY2":"","SOVEREIGN1":"Morocco","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-7.345,33.73],[-7.65333,33.615]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Morocco","TERRITORY2":"","SOVEREIGN1":"Morocco","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-8.29833,33.37333],[-8.51667,33.26833]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Morocco","TERRITORY2":"","SOVEREIGN1":"Morocco","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-8.63,33.16333],[-8.74667,33.0]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Morocco","TERRITORY2":"","SOVEREIGN1":"Morocco","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-9.28667,32.54333],[-9.32333,32.115]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Morocco","TERRITORY2":"","SOVEREIGN1":"Morocco","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-9.69,31.69833],[-9.84667,31.39167],[-9.875,30.70333]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Morocco","TERRITORY2":"","SOVEREIGN1":"Morocco","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-9.875,30.63167],[-9.645,30.435],[-9.645,30.20167]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Morocco","TERRITORY2":"","SOVEREIGN1":"Morocco","SOVEREIGN2":""},"geometry":{"type":"MultiLineString","coordinates":[[[-5.91,35.79667],[-5.38584,35.91746]],[[-5.38573,35.91735],[-5.38584,35.91746]],[[-5.38584,35.91746],[-5.28833,35.90333]]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Morocco","TERRITORY2":"","SOVEREIGN1":"Morocco","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-5.28,35.89667],[-5.27333,35.68333],[-5.01833,35.415],[-4.67,35.22],[-4.28333,35.19667],[-3.75,35.27167]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Morocco","TERRITORY2":"","SOVEREIGN1":"Morocco","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-3.67833,35.28333],[-3.20833,35.22833],[-2.99667,35.43833]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Morocco","TERRITORY2":"","SOVEREIGN1":"Morocco","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-2.94167,35.425],[-2.78333,35.15167],[-2.38372,35.16795]]}},{"type":"Feature","properties":{"LINE_NAME":"Morocco Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Morocco","TERRITORY2":"","SOVEREIGN1":"Morocco","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-2.38372,35.16795],[-2.21167,35.08667]]}},{"type":"Feature","properties":{"LINE_NAME":"Romania Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Romania","TERRITORY2":"","SOVEREIGN1":"Romania","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[29.69728,45.0],[29.61444,44.83972],[29.53,44.78111],[29.05278,44.72722],[28.87222,44.52389],[28.58083,43.73889]]}},{"type":"Feature","properties":{"LINE_NAME":"Senegal Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Senegal","TERRITORY2":"","SOVEREIGN1":"Senegal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-16.52667,15.87833],[-16.52556,15.80139]]}},{"type":"Feature","properties":{"LINE_NAME":"Senegal Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Senegal","TERRITORY2":"","SOVEREIGN1":"Senegal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-17.46167,14.76361],[-17.54333,14.74333],[-17.47361,14.65278],[-17.28333,14.71]]}},{"type":"Feature","properties":{"LINE_NAME":"Senegal Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Senegal","TERRITORY2":"","SOVEREIGN1":"Senegal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-16.76111,13.83333],[-16.67222,13.66167]]}},{"type":"Feature","properties":{"LINE_NAME":"Senegal Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Senegal","TERRITORY2":"","SOVEREIGN1":"Senegal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-16.64583,13.6375],[-16.54833,13.59333]]}},{"type":"Feature","properties":{"LINE_NAME":"Senegal Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Senegal","TERRITORY2":"","SOVEREIGN1":"Senegal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-16.78889,12.775],[-16.79333,12.48333]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Spain","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-1.79333,43.396],[-2.20317,43.31133],[-2.75417,43.45733],[-3.43667,43.465]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Spain","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-7.37333,37.17083],[-6.94833,37.17167],[-6.72833,37.08967],[-6.03383,36.18383],[-5.60833,36.0025],[-5.46417,36.051]]}},{"type":"Feature","properties":{"LINE_NAME":"Canary Islands (Spain) Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Canary Islands","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-15.3975,28.16333],[-15.37967,27.85967],[-15.5735,27.73417],[-15.673,27.7475]]}},{"type":"Feature","properties":{"LINE_NAME":"Canary Islands (Spain) Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Canary Islands","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-16.8275,28.3925],[-16.31833,28.5775],[-16.13,28.57917]]}},{"type":"Feature","properties":{"LINE_NAME":"Canary Islands (Spain) Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Canary Islands","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-17.88333,27.7985],[-17.98917,27.637],[-18.14633,27.7035],[-18.13083,27.77033],[-17.96233,27.83833]]}},{"type":"Feature","properties":{"LINE_NAME":"Canary Islands (Spain) Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Canary Islands","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-17.90917,28.85633],[-17.78633,28.84283],[-17.7225,28.73733],[-17.75767,28.56867]]}},{"type":"Feature","properties":{"LINE_NAME":"Canary Islands (Spain) Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Canary Islands","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-13.48333,29.40278],[-13.33333,29.275],[-13.46333,29.01833],[-13.6145,28.93],[-13.82083,28.59083],[-13.9425,28.2275],[-14.33,28.04333],[-14.50583,28.062],[-14.198,28.33167],[-13.815,29.03083],[-13.5225,29.40833],[-13.48333,29.40167]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Spain","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-5.3,36.245],[-5.00583,36.46017],[-4.63833,36.50833],[-4.10333,36.72667],[-3.4175,36.6955],[-3.20967,36.74633],[-2.77033,36.6815],[-2.16583,36.7225],[-2.05883,36.77917],[-1.9025,36.97217],[-1.81517,37.18283],[-1.49,37.42333],[-0.648,37.6565],[-0.645,37.99867],[-0.46583,38.16],[-0.40333,38.351],[0.23667,38.73067],[-0.2155,39.18567],[-0.207,39.64233],[0.40833,40.3575],[0.88667,40.71933],[1.17067,41.05383]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Spain","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[3.21333,39.96167],[3.46083,39.74833],[3.39667,39.57667],[3.23,39.36083],[2.96,39.12583],[2.30333,39.56833]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Spain","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[3.825,40.05167],[4.075,40.092],[4.17167,40.06],[4.27,39.995],[4.32833,39.875],[4.29667,39.79917],[3.821,39.92167],[3.79333,39.99833]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Spain","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[1.60417,39.08867],[1.6525,39.03167],[1.56917,38.64833],[1.385,38.64],[1.18667,38.8625],[1.15833,38.97833],[1.36033,39.07367]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Spain","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-3.58833,43.51383],[-4.34333,43.40567],[-4.92667,43.4625],[-5.867,43.6645],[-6.24417,43.59633],[-6.94917,43.57633],[-7.69083,43.792],[-7.8675,43.7805],[-8.84883,43.3625],[-9.21467,43.16417],[-9.29917,43.0565]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Spain","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-9.301,43.04833],[-9.28933,42.88967],[-9.09167,42.57467],[-8.9005,42.11517]]}},{"type":"Feature","properties":{"LINE_NAME":"Tunisia Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Tunisia","TERRITORY2":"","SOVEREIGN1":"Tunisia","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[10.28222,37.17972],[11.03528,37.08889]]}},{"type":"Feature","properties":{"LINE_NAME":"Tunisia Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Tunisia","TERRITORY2":"","SOVEREIGN1":"Tunisia","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[11.16,35.23111],[11.21194,35.14444],[11.48639,35.02222],[11.63722,34.8575],[11.55639,34.73],[11.06056,34.58167],[11.05556,33.82472]]}},{"type":"Feature","properties":{"LINE_NAME":"Tunisia Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Tunisia","TERRITORY2":"","SOVEREIGN1":"Tunisia","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[11.06306,33.78806],[11.04944,33.625]]}},{"type":"Feature","properties":{"LINE_NAME":"Tunisia Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Tunisia","TERRITORY2":"","SOVEREIGN1":"Tunisia","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[11.32139,33.27639],[11.32417,33.27583]]}},{"type":"Feature","properties":{"LINE_NAME":"Spain Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Spain","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[2.17033,41.33517],[2.555,41.57167]]}},{"type":"Feature","properties":{"LINE_NAME":"Canary Islands (Spain) Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Canary Islands","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-16.12317,28.53133],[-16.36,28.30333]]}},{"type":"Feature","properties":{"LINE_NAME":"Canary Islands (Spain) Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Canary Islands","TERRITORY2":"","SOVEREIGN1":"Spain","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-15.82167,28.012],[-15.7075,28.16383],[-15.41833,28.17883]]}},{"type":"Feature","properties":{"LINE_NAME":"France Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"France","TERRITORY2":"","SOVEREIGN1":"France","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-1.26472,44.62583],[-1.26222,44.52306]]}},{"type":"Feature","properties":{"LINE_NAME":"France Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"France","TERRITORY2":"","SOVEREIGN1":"France","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[3.93306,43.52222],[4.13611,43.48278]]}},{"type":"Feature","properties":{"LINE_NAME":"France Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"France","TERRITORY2":"","SOVEREIGN1":"France","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[4.39139,43.45083],[4.56111,43.3725]]}},{"type":"Feature","properties":{"LINE_NAME":"France Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"France","TERRITORY2":"","SOVEREIGN1":"France","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[4.83361,43.32944],[5.05333,43.32444],[5.22889,43.19778],[5.60472,43.16028],[5.80722,43.06528]]}},{"type":"Feature","properties":{"LINE_NAME":"France Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"France","TERRITORY2":"","SOVEREIGN1":"France","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[5.85917,43.04583],[6.19778,42.98222]]}},{"type":"Feature","properties":{"LINE_NAME":"France Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"France","TERRITORY2":"","SOVEREIGN1":"France","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[6.20611,42.98222],[6.395,42.98694],[6.5325,43.05056],[6.68889,43.19917],[6.71667,43.34667],[7.1225,43.54194]]}},{"type":"Feature","properties":{"LINE_NAME":"France Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"France","TERRITORY2":"","SOVEREIGN1":"France","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[7.145,43.55194],[7.32667,43.67417]]}},{"type":"Feature","properties":{"LINE_NAME":"France Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"France","TERRITORY2":"","SOVEREIGN1":"France","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[7.34972,43.68667],[7.40639,43.71861]]}},{"type":"Feature","properties":{"LINE_NAME":"France Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"France","TERRITORY2":"","SOVEREIGN1":"France","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[7.44444,43.74972],[7.48667,43.74889]]}},{"type":"Feature","properties":{"LINE_NAME":"France Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"France","TERRITORY2":"","SOVEREIGN1":"France","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[9.40083,41.69333],[9.38444,41.50917],[9.26194,41.33333],[8.90639,41.45472],[8.78444,41.55611],[8.5825,41.87361],[8.53472,42.37222],[8.64944,42.47472]]}},{"type":"Feature","properties":{"LINE_NAME":"France Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"France","TERRITORY2":"","SOVEREIGN1":"France","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[8.72694,42.58389],[8.80583,42.60389]]}},{"type":"Feature","properties":{"LINE_NAME":"France Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"France","TERRITORY2":"","SOVEREIGN1":"France","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[9.16722,42.73667],[9.30972,42.83333]]}},{"type":"Feature","properties":{"LINE_NAME":"Portugal Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Portugal","TERRITORY2":"","SOVEREIGN1":"Portugal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-8.78667,41.41417],[-8.757,40.644]]}},{"type":"Feature","properties":{"LINE_NAME":"Portugal Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Portugal","TERRITORY2":"","SOVEREIGN1":"Portugal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-8.90917,40.18367],[-9.557,39.47],[-9.50333,38.78033]]}},{"type":"Feature","properties":{"LINE_NAME":"Portugal Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Portugal","TERRITORY2":"","SOVEREIGN1":"Portugal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-9.485,38.708],[-8.8875,37.93617],[-8.99617,37.02083]]}},{"type":"Feature","properties":{"LINE_NAME":"Portugal Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Portugal","TERRITORY2":"","SOVEREIGN1":"Portugal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-8.94867,36.99217],[-7.8845,36.95917]]}},{"type":"Feature","properties":{"LINE_NAME":"Madeira (Portugal) Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Madeira","TERRITORY2":"","SOVEREIGN1":"Portugal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-17.10083,32.67333],[-16.46617,32.4025]]}},{"type":"Feature","properties":{"LINE_NAME":"Madeira (Portugal) Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Madeira","TERRITORY2":"","SOVEREIGN1":"Portugal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-16.65167,32.72783],[-16.9,32.83367],[-17.17917,32.87633]]}},{"type":"Feature","properties":{"LINE_NAME":"Madeira (Portugal) Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Madeira","TERRITORY2":"","SOVEREIGN1":"Portugal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-16.54267,32.588],[-16.65167,32.72783]]}},{"type":"Feature","properties":{"LINE_NAME":"Madeira (Portugal) Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Madeira","TERRITORY2":"","SOVEREIGN1":"Portugal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-16.277,33.05083],[-16.3815,32.9945]]}},{"type":"Feature","properties":{"LINE_NAME":"Madeira (Portugal) Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Madeira","TERRITORY2":"","SOVEREIGN1":"Portugal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-16.38917,33.00167],[-16.405,33.03033]]}},{"type":"Feature","properties":{"LINE_NAME":"Madeira (Portugal) Straight Baseline","LINE_TYPE":"Straight baseline","TERRITORY1":"Madeira","TERRITORY2":"","SOVEREIGN1":"Portugal","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[-16.4055,33.03833],[-16.28133,33.12417],[-16.27667,33.0525]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Greece - Italy","LINE_TYPE":"Connection line","TERRITORY1":"Greece","TERRITORY2":"Italy","SOVEREIGN1":"Greece","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[18.95758,39.96068],[18.99524,40.08358]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Greece - Italy","LINE_TYPE":"Connection line","TERRITORY1":"Greece","TERRITORY2":"Italy","SOVEREIGN1":"Greece","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[18.34443,35.56893],[18.30452,35.42515]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Greece - Overlapping claim Egypt / Libya","LINE_TYPE":"Connection line","TERRITORY1":"Overlapping claim Egypt / Libya","TERRITORY2":"Libya","SOVEREIGN1":"","SOVEREIGN2":"Libya"},"geometry":{"type":"LineString","coordinates":[[25.37881,33.28006],[26.0,33.41559]]}},{"type":"Feature","properties":{"LINE_NAME":"Egypt - Overlapping claim Egypt / Libya","LINE_TYPE":"Unsettled (maritime)","TERRITORY1":"Egypt","TERRITORY2":"Overlapping claim Egypt / Libya","SOVEREIGN1":"Egypt","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[25.14907,31.6539],[25.33615,31.66435],[25.44322,31.80005],[26.01855,32.84119],[26.65175,34.15219]]}},{"type":"Feature","properties":{"LINE_NAME":"Libya - Overlapping claim Egypt / Libya","LINE_TYPE":"Unsettled (maritime)","TERRITORY1":"Libya","TERRITORY2":"Overlapping claim Egypt / Libya","SOVEREIGN1":"Libya","SOVEREIGN2":""},"geometry":{"type":"LineString","coordinates":[[25.14907,31.6539],[25.33615,31.66435],[25.37881,31.7068],[25.37881,33.28006]]}},{"type":"Feature","properties":{"LINE_NAME":"Greece - Italy","LINE_TYPE":"Treaty","TERRITORY1":"Greece","TERRITORY2":"Italy","SOVEREIGN1":"Greece","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[18.95758,39.96068],[18.91425,39.81568],[18.89926,39.03233],[18.28259,37.35396],[18.31926,36.90562],[18.26094,36.14894],[18.34443,35.56893]]}},{"type":"Feature","properties":{"LINE_NAME":"Croatia - Italy","LINE_TYPE":"Treaty","TERRITORY1":"Croatia","TERRITORY2":"Italy","SOVEREIGN1":"Croatia","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[13.06426,45.0],[13.12944,44.50278],[14.16861,43.90278],[14.79778,43.17444],[15.36278,42.61278],[15.99222,42.43639],[16.22722,42.19333],[16.61778,42.26639],[17.31167,41.91222],[17.6175,41.83472],[17.9975,41.63889]]}},{"type":"Feature","properties":{"LINE_NAME":"Egypt - Greece","LINE_TYPE":"Unsettled (maritime)","TERRITORY1":"Egypt","TERRITORY2":"Greece","SOVEREIGN1":"Egypt","SOVEREIGN2":"Greece"},"geometry":{"type":"LineString","coordinates":[[27.98389,33.88472],[27.5118,33.699],[26.0,33.41559]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line Croatia - Italy","LINE_TYPE":"Connection line","TERRITORY1":"Croatia","TERRITORY2":"Italy","SOVEREIGN1":"Croatia","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[17.9975,41.63889],[18.0183,41.6297]]}},{"type":"Feature","properties":{"LINE_NAME":"Libya - Turkey","LINE_TYPE":"Unsettled (maritime)","TERRITORY1":"Libya","TERRITORY2":"Turkey","SOVEREIGN1":"Libya","SOVEREIGN2":"Turkey"},"geometry":{"type":"LineString","coordinates":[[26.3199,34.27048],[26.65175,34.15219]]}},{"type":"Feature","properties":{"LINE_NAME":"France - Italy","LINE_TYPE":"Unilateral claim (undisputed)","TERRITORY1":"France","TERRITORY2":"Italy","SOVEREIGN1":"France","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[9.71248,42.79553],[9.59443,43.17666]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line France - Italy","LINE_TYPE":"Connection line","TERRITORY1":"France","TERRITORY2":"Italy","SOVEREIGN1":"France","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[9.73017,42.79994],[9.71248,42.79553]]}},{"type":"Feature","properties":{"LINE_NAME":"Connection line France - Italy","LINE_TYPE":"Connection line","TERRITORY1":"France","TERRITORY2":"Italy","SOVEREIGN1":"France","SOVEREIGN2":"Italy"},"geometry":{"type":"LineString","coordinates":[[9.59443,43.17666],[9.58809,43.17586]]}}]};
+  var eezLayer = L.geoJSON(eezBoundaries, {
+    style: function() {
+      return {
+        color: '#6B8EAD',
+        weight: 1.15,
+        opacity: 0.75,
+        dashArray: '5 5',
+        fill: false
+      };
+    },
+    onEachFeature: function(feature, layer) {
+      var p = feature.properties || {};
+      var name = p.LINE_NAME || ((p.TERRITORY1 || 'Zone 1') + ' / ' + (p.TERRITORY2 || 'Zone 2'));
+      var type = p.LINE_TYPE ? ' · ' + p.LINE_TYPE : '';
+      layer.bindTooltip(name + type, {sticky:true});
+    }
+  }).addTo(map);
+
+  var alerts = [
+    // Central Med - red - Libya/Tunisia origin
+    {lat:26.3351,lng:17.2283,c:'#D92B2B',loc:'Libya',txt:'Boat in distress off Libya — alerted authorities — no response after 12h',date:'2025-10',rt:14,lk:21},
+    {lat:33.8869,lng:9.5375,c:'#D92B2B',loc:'Tunisia',txt:'Tunisian coast guard intercepted — persons returned to Tunisia',date:'2025-11',rt:9,lk:16},
+    {lat:34.74,lng:10.76,c:'#D92B2B',loc:'Sfax',txt:'Boat departed Sfax — 40 people in distress — contact established',date:'2025-09',rt:6,lk:10},
+    {lat:35.5018,lng:12.6047,c:'#D92B2B',loc:'Lampedusa',txt:'45 people arrived Lampedusa — exhausted — no NGO on site',date:'2025-12',rt:6,lk:10},
+    {lat:35.9375,lng:14.3754,c:'#D92B2B',loc:'Malta',txt:'Malta SAR zone — boat reported 12h ago — no rescue operation confirmed',date:'2026-01',rt:8,lk:13},
+    {lat:38.0,lng:13.5,c:'#D92B2B',loc:'Sicily',txt:'Rescue off Sicily — 31 people — several in medical distress',date:'2025-08',rt:7,lk:11},
+    {lat:36.5,lng:12.5,c:'#D92B2B',loc:'Central Med',txt:'117 people feared drowned — central Mediterranean — authorities silent',date:'2025-10',rt:31,lk:47},
+    {lat:33.5,lng:11.5,c:'#D92B2B',loc:'Tunisia',txt:'Lost contact with boat carrying ~35 people — departed Tunisia 2 days ago',date:'2025-11',rt:5,lk:9},
+    // Western Med - blue - Algeria/Morocco origin
+    {lat:28.0339,lng:1.6596,c:'#1A6FA8',loc:'Algeria',txt:'19 people left Algeria towards Spain 4 days ago — rescue NOW',date:'2026-04',rt:2,lk:7},
+    {lat:36.7538,lng:3.0588,c:'#1A6FA8',loc:'Algiers',txt:'Departure from Algiers confirmed — 25 people — contact lost Day 3',date:'2026-03',rt:7,lk:12},
+    {lat:36.7627,lng:3.479,c:'#1A6FA8',loc:'Boumerdes',txt:'Boat departed Boumerdes — relatives worried — no news 3 days',date:'2026-04',rt:5,lk:8},
+    {lat:35.0065,lng:-1.1438,c:'#1A6FA8',loc:'AïnTemouch',txt:'Departure AïnTemouch → Almeria confirmed — lost track after 48h',date:'2026-04',rt:10,lk:15},
+    {lat:35.6987,lng:-0.6349,c:'#1A6FA8',loc:'Oran',txt:'Departed Oran — 18 people — contact lost after 30h',date:'2025-09',rt:4,lk:8},
+    {lat:36.8381,lng:-2.4597,c:'#1A6FA8',loc:'Almeria',txt:'31 people arrived Almeria after 4 days — several needing medical care',date:'2025-08',rt:8,lk:14},
+    {lat:39.5696,lng:2.6502,c:'#1A6FA8',loc:'Mallorca/Palma',txt:'22 people in distress near Palma — coast guard alerted',date:'2025-10',rt:7,lk:11},
+    {lat:37.5,lng:2.0,c:'#1A6FA8',loc:'WesternMed',txt:'Lost track of boat ~19 people — WesternMed — 48h no news',date:'2026-04',rt:10,lk:15},
+    {lat:36.0,lng:-4.5,c:'#1A6FA8',loc:'Strait',txt:'Strait of Gibraltar — 30 people — rescue by Spanish coast guard',date:'2025-09',rt:5,lk:9},
+    {lat:35.8,lng:-5.2,c:'#1A6FA8',loc:'Morocco',txt:'Boat departed Morocco — 22 people — alerted Spanish MRCC',date:'2025-08',rt:6,lk:10},
+    // Atlantic - dark grey - West Africa to Canaries
+    {lat:28.1,lng:-15.4,c:'#555555',loc:'Canary Islands',txt:'Atlantic route — 60 people — 4 days at sea — demand immediate action',date:'2025-11',rt:13,lk:20},
+    {lat:28.2916,lng:-16.6291,c:'#555555',loc:'Canaries',txt:'78 people arrived Canary Islands after 7 days at sea — critical condition',date:'2025-08',rt:11,lk:18},
+    {lat:13.4432,lng:-15.3101,c:'#555555',loc:'Gambia',txt:'Departure from Gambia confirmed — lost contact Day 5',date:'2025-07',rt:3,lk:6},
+    {lat:17.5,lng:-16.5,c:'#555555',loc:'Mauritania',txt:'Boat adrift off Mauritania — Atlantic crossing — 50 people',date:'2025-09',rt:8,lk:13},
+    {lat:14.7,lng:-17.3,c:'#555555',loc:'Senegal',txt:'Departure Dakar — 65 people — lost contact after 48h',date:'2025-10',rt:9,lk:15},
+    // Bulgaria - land route
+    {lat:42.0,lng:26.5,c:'#888888',loc:'Bulgaria',txt:'Bulgaria border — group 45 — pushback documented by Bulgarian authorities',date:'2025-09',rt:6,lk:10},
+    {lat:41.5,lng:26.0,c:'#888888',loc:'Bulgaria',txt:'Bulgaria — second pushback this week — EU law violated',date:'2025-10',rt:8,lk:12},
+    // Greece
+    {lat:38.0,lng:23.7,c:'#888888',loc:'Greece',txt:'Greece — boat intercepted — Aegean crossing — persons detained',date:'2025-11',rt:5,lk:8},
+  ];
+
+  alerts.forEach(function(a) {
+    var icon = L.divIcon({
+      className: '',
+      html: '<div style="width:10px;height:10px;border-radius:50%;background:' + a.c + ';border:1.5px solid rgba(255,255,255,0.8);"></div>',
+      iconSize: [10,10],
+      iconAnchor: [5,5]
+    });
+    L.marker([a.lat, a.lng], {icon: icon})
+      .bindPopup(
+        '<div style="font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;padding:14px 16px;min-width:220px;max-width:260px;">' +
+        '<div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-weight:600;">' + a.date + ' · ' + a.loc + '</div>' +
+        '<div style="font-size:13px;line-height:1.6;color:#222;">' + a.txt + '</div>' +
+        '<div style="margin-top:10px;font-size:11px;color:#aaa;">' + a.rt + ' RT · ' + a.lk + ' ♥</div>' +
+        '</div>',
+        { className: '' }
+      )
+      .addTo(map);
+  });
+
+  // ─── WORD FREQUENCY TREEMAP ─────────────────────────
+  var wordData = [
+    {label:'rescue', value:87},
+    {label:'authorities', value:67},
+    {label:'alerted', value:64},
+    {label:'distress', value:49},
+    {label:'Libya', value:47, red:true},
+    {label:'Algeria', value:43, red:true},
+    {label:'missing / disparu', value:38, red:true},
+    {label:'EU / Europe', value:33},
+    {label:'Tunisia', value:26},
+    {label:'hours / jours', value:23},
+    {label:'Italy', value:20},
+    {label:'Atlantic', value:17},
+    {label:'Malta', value:12},
+    {label:'SAR', value:8, red:true},
+    {label:'coast guard', value:7, red:true},
+    {label:'pushback', value:4, red:true},
+    {label:'Frontex', value:2}
+  ];
+
+  function normalizeSizes(data, area) {
+    var total = data.reduce(function(sum, d) { return sum + d.value; }, 0);
+    return data.map(function(d) {
+      return Object.assign({}, d, {area: d.value * area / total});
+    });
+  }
+
+  function worst(row, side) {
+    if (!row.length) return Infinity;
+    var areas = row.map(function(d) { return d.area; });
+    var sum = areas.reduce(function(a,b){ return a+b; }, 0);
+    var max = Math.max.apply(null, areas);
+    var min = Math.min.apply(null, areas);
+    return Math.max((side * side * max) / (sum * sum), (sum * sum) / (side * side * min));
+  }
+
+  function layoutRow(row, rect, horizontal, out) {
+    var rowArea = row.reduce(function(sum, d) { return sum + d.area; }, 0);
+    if (horizontal) {
+      var h = rowArea / rect.w;
+      var x = rect.x;
+      row.forEach(function(d) {
+        var w = d.area / h;
+        out.push(Object.assign({}, d, {x:x, y:rect.y, w:w, h:h}));
+        x += w;
+      });
+      rect.y += h; rect.h -= h;
+    } else {
+      var w = rowArea / rect.h;
+      var y = rect.y;
+      row.forEach(function(d) {
+        var h = d.area / w;
+        out.push(Object.assign({}, d, {x:rect.x, y:y, w:w, h:h}));
+        y += h;
+      });
+      rect.x += w; rect.w -= w;
+    }
+  }
+
+  function squarify(data, width, height) {
+    var items = normalizeSizes(data.slice().sort(function(a,b){ return b.value - a.value; }), width * height);
+    var rect = {x:0, y:0, w:width, h:height};
+    var row = [];
+    var out = [];
+    while (items.length) {
+      var item = items[0];
+      var side = Math.min(rect.w, rect.h);
+      if (!row.length || worst(row.concat([item]), side) <= worst(row, side)) {
+        row.push(item);
+        items.shift();
+      } else {
+        layoutRow(row, rect, rect.w >= rect.h, out);
+        row = [];
+      }
+    }
+    if (row.length) layoutRow(row, rect, rect.w >= rect.h, out);
+    return out;
+  }
+
+  function renderTreemap() {
+    var el = document.getElementById('treemapWords');
+    if (!el) return;
+    var width = el.clientWidth;
+    var height = el.clientHeight;
+    var cells = squarify(wordData, width, height);
+    el.innerHTML = '';
+    cells.forEach(function(cell) {
+      var div = document.createElement('div');
+      var isSmall = cell.w < 88 || cell.h < 48;
+      div.className = 'treemap-cell' + (cell.red ? ' is-red' : '') + (isSmall ? ' is-small' : '');
+      div.style.left = cell.x + 'px';
+      div.style.top = cell.y + 'px';
+      div.style.width = Math.max(0, cell.w) + 'px';
+      div.style.height = Math.max(0, cell.h) + 'px';
+      div.title = cell.label + ' · ' + cell.value + ' occurrences';
+      div.innerHTML = '<span class="treemap-label">' + cell.label + '</span><span class="treemap-value">' + cell.value + '</span>';
+      el.appendChild(div);
+    });
+  }
+
+  renderTreemap();
+  window.addEventListener('resize', renderTreemap);
+
+  // ─── TIMELINE CHART ────────────────────────────────
+  var tlCtx = document.getElementById('chartTimeline').getContext('2d');
+  new Chart(tlCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Juil. 25','Août 25','Sep. 25','Oct. 25','Nov. 25','Déc. 25','Jan. 26','Fév. 26','Mar. 26','Avr. 26*'],
+      datasets: [{
+        label: 'Alertes @alarm_phone',
+        data: [11, 30, 38, 52, 32, 33, 31, 23, 27, 16],
+        backgroundColor: [
+          '#BBBBBB','#999999','#777777',
+          '#D92B2B',
+          '#888888','#888888','#888888','#888888','#888888',
+          '#CCCCCC'
+        ],
+        borderWidth: 0,
+        borderRadius: 0,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#111',
+          titleColor: '#fff',
+          bodyColor: '#ccc',
+          padding: 10,
+          callbacks: { label: function(c) { return ' ' + c.parsed.y + ' alertes'; } }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { font: { family: 'Helvetica Neue, Helvetica, Arial', size: 11 }, color: '#888' }
+        },
+        y: {
+          grid: { color: '#EEEEEE' },
+          ticks: { font: { family: 'Helvetica Neue, Helvetica, Arial', size: 11 }, color: '#888' }
+        }
+      }
+    }
+  });
+
+}); // end DOMContentLoaded
+</script>
+</body>
+</html>

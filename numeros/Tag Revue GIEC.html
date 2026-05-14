@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAG REVUE — Monitoring · Rapport du GIEC 2022</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --red:#D92B2B; --blue:#0000FF; --black:#111111; --grey-dark:#444444; --grey-mid:#888888;
+  --grey-light:#CCCCCC; --grey-bg:#F2F2F2; --white:#FFFFFF; --font:'Source Sans 3','Helvetica Neue',Arial,sans-serif;
+}
+body { background:var(--white); color:var(--black); font-family:var(--font); font-size:15px; line-height:1.5; }
+.site-header { border-bottom:1px solid var(--black); padding:14px 40px; display:flex; justify-content:space-between; gap:20px; align-items:center; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--grey-dark); }
+.site-header strong { color:var(--black); font-weight:700; }
+.cover { padding:72px 40px 76px; border-bottom:1px solid var(--grey-light); max-width:1120px; margin:0 auto; }
+.cover-eyebrow { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--red); font-weight:600; margin-bottom:20px; }
+.cover-title { font-size:clamp(34px,4.8vw,62px); font-weight:300; line-height:1.08; letter-spacing:-.025em; max-width:900px; margin-bottom:28px; }
+.cover-title strong { font-weight:700; }
+.cover-lead { font-size:16px; line-height:1.75; color:var(--grey-dark); max-width:760px; margin-bottom:36px; font-weight:300; }
+.cover-tags { display:flex; gap:10px; flex-wrap:wrap; }
+.ctag { font-size:11px; letter-spacing:.1em; text-transform:uppercase; border:1px solid var(--grey-light); padding:5px 12px; color:var(--grey-dark); font-weight:600; }
+.ctag-red { border-color:var(--red); color:var(--red); } .ctag-blue { border-color:var(--blue); color:var(--blue); }
+.sec-label { padding:12px 40px; background:var(--grey-bg); border-top:1px solid var(--grey-light); border-bottom:1px solid var(--grey-light); display:flex; justify-content:space-between; align-items:center; gap:20px; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:var(--grey-mid); }
+.sec-label strong { color:var(--black); }
+.stats-row { display:grid; grid-template-columns:repeat(6,1fr); border-bottom:1px solid var(--grey-light); }
+.stat-cell { padding:34px 28px; border-right:1px solid var(--grey-light); min-height:168px; } .stat-cell:last-child { border-right:none; }
+.stat-n { font-size:clamp(28px,3.2vw,44px); font-weight:700; line-height:1; letter-spacing:-.02em; }
+.stat-n-red { color:var(--red); } .stat-n-blue { color:var(--blue); }
+.stat-lbl { font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--grey-mid); margin-top:10px; font-weight:600; }
+.stat-sub { font-size:12px; color:var(--grey-mid); margin-top:7px; line-height:1.45; }
+.section { padding:56px 40px; max-width:1120px; margin:0 auto; border-bottom:1px solid var(--grey-light); }
+.section-title { font-size:23px; font-weight:700; margin-bottom:6px; line-height:1.2; }
+.section-sub { font-size:12px; color:var(--grey-mid); letter-spacing:.1em; text-transform:uppercase; font-weight:600; margin-bottom:34px; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; } .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--grey-light); border:1px solid var(--grey-light); }
+.card { background:var(--white); padding:28px 24px; }
+.card-k { font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--grey-mid); font-weight:700; margin-bottom:12px; }
+.card-title { font-size:17px; font-weight:700; margin-bottom:10px; line-height:1.25; }
+.card-body { font-size:13px; line-height:1.7; color:var(--grey-dark); font-weight:300; }
+.card-num { font-size:38px; font-weight:700; line-height:1; letter-spacing:-.02em; margin-bottom:12px; }
+.red { color:var(--red); } .blue { color:var(--blue); }
+.aside-note { font-size:13px; line-height:1.75; color:var(--grey-dark); font-weight:300; padding:20px 24px; border-left:3px solid var(--red); margin-top:26px; background:var(--grey-bg); }
+.aside-note.blue-border { border-left-color:var(--blue); }
+.chart-box { position:relative; width:100%; height:320px; max-height:320px; overflow:hidden; }
+.chart-box.small { height:240px; max-height:240px; }
+.chart-box.tall { height:380px; max-height:380px; }
+.chart-box canvas { display:block; width:100% !important; height:100% !important; max-height:100% !important; }
+.treemap-wrap { width:100%; height:380px; max-height:380px; overflow:hidden; border:1px solid var(--grey-light); background:var(--grey-bg); position:relative; }
+.treemap-cell { position:absolute; overflow:hidden; border:1px solid var(--white); background:var(--black); color:var(--white); padding:8px 9px; display:flex; flex-direction:column; justify-content:space-between; line-height:1.05; }
+.treemap-cell.redcell { background:var(--red); } .treemap-cell.bluecell { background:var(--blue); }
+.treemap-label { font-size:clamp(9px,1.1vw,13px); font-weight:700; letter-spacing:.02em; } .treemap-value { font-size:clamp(11px,1.5vw,20px); font-weight:700; opacity:.85; }
+.h-bar-row { display:flex; align-items:center; gap:14px; margin-bottom:13px; } .h-bar-lbl { width:155px; flex-shrink:0; font-size:12px; color:var(--grey-dark); font-weight:600; text-align:right; }
+.h-bar-track { flex:1; height:20px; background:var(--grey-bg); position:relative; } .h-bar-fill { height:100%; background:var(--black); } .h-bar-fill-red { background:var(--red); } .h-bar-fill-blue { background:var(--blue); }
+.h-bar-val { width:44px; flex-shrink:0; font-size:12px; font-weight:700; text-align:right; }
+.matrix { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--grey-light); border:1px solid var(--grey-light); }
+.matrix-cell { background:#fff; padding:24px; min-height:150px; } .matrix-cell.dark { background:var(--black); color:#fff; }
+.matrix-label { font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--grey-mid); font-weight:700; margin-bottom:10px; } .matrix-cell.dark .matrix-label { color:#aaa; }
+.matrix-text { font-size:13px; line-height:1.65; color:var(--grey-dark); } .matrix-cell.dark .matrix-text { color:#ccc; }
+.samples-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--grey-light); border:1px solid var(--grey-light); margin-top:34px; }
+.tweet-card { background:var(--white); padding:26px 22px; } .tw-meta { font-size:10px; color:var(--grey-mid); letter-spacing:.1em; text-transform:uppercase; font-weight:600; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--grey-bg); }
+.tw-body { font-size:13px; line-height:1.72; color:var(--black); font-weight:300; } .tw-eng { margin-top:16px; font-size:10px; color:var(--grey-mid); letter-spacing:.06em; }
+.black-section { background:var(--black); color:var(--white); padding:74px 40px; } .black-inner { max-width:1120px; margin:0 auto; } .black-section .section-sub { color:#777; }
+.black-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; border:1px solid #333; background:#333; margin-top:32px; } .black-card { background:var(--black); padding:30px; } .black-card h3 { font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--red); margin-bottom:12px; } .black-card p { color:#aaa; font-size:13px; line-height:1.75; font-weight:300; }
+.network { position:relative; height:360px; border:1px solid var(--grey-light); background:linear-gradient(90deg,#fff,#f7f7f7); overflow:hidden; }
+.node { position:absolute; transform:translate(-50%,-50%); border:1px solid var(--black); background:#fff; padding:7px 12px; font-size:11px; letter-spacing:.08em; text-transform:uppercase; font-weight:700; white-space:nowrap; } .node.rednode { border-color:var(--red); color:var(--red); } .node.bluenode { border-color:var(--blue); color:var(--blue); }
+.edge { position:absolute; height:1px; background:#ccc; transform-origin:left center; }
+.footer { padding:20px 40px; border-top:1px solid #333; background:var(--black); display:flex; justify-content:space-between; gap:20px; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:#666; }
+@media (max-width:900px) { .stats-row { grid-template-columns:1fr 1fr; } .grid-2,.grid-3,.samples-grid,.black-grid,.matrix { grid-template-columns:1fr; } .site-header,.sec-label,.footer { flex-direction:column; align-items:flex-start; } .section,.cover,.black-section { padding-left:20px; padding-right:20px; } }
+</style>
+</head>
+<body>
+<header class="site-header"><span><strong>TAG REVUE</strong> — Monitoring</span><span>Corpus tweets · GIEC · 2022</span><span>Maquette d’essai · extraction CSV</span></header>
+
+<div class="cover">
+  <div class="cover-eyebrow">Rapport du GIEC 2022 · flux Twitter · fenêtre de collecte : 17 octobre 2022, 15:17:32 → 26 octobre 2022, 11:09:59 CEST</div>
+  <h1 class="cover-title">Le rapport est public.<br><strong>Le conflit porte sur sa traduction politique.</strong></h1>
+  <p class="cover-lead">Ce monitoring observe 2,898 tweets contenant ou mobilisant le GIEC pendant une fenêtre courte de neuf jours. Le corpus ne raconte pas seulement la réception d’un rapport scientifique : il montre une infrastructure de circulation où se superposent science, institutions, soupçon, énergie, militantisme, médias et territoires. Le GIEC apparaît moins comme un document que comme un opérateur de controverse.</p>
+  <div class="cover-tags"><span class="ctag ctag-red">2,898 tweets</span><span class="ctag">17 octobre 2022, 15:17:32 → 26 octobre 2022, 11:09:59 CEST</span><span class="ctag ctag-blue">2687 tweets FR</span><span class="ctag">373 tweets avec lien</span><span class="ctag ctag-red">22,194 interactions</span></div>
+</div>
+
+<div class="sec-label"><span><strong>§ 01</strong> — Chiffres structurels</span><span>Robustes dans le CSV · pas d’inférence externe</span></div>
+<div class="stats-row">
+  <div class="stat-cell"><div class="stat-n stat-n-red">2,898</div><div class="stat-lbl">Tweets collectés</div><div class="stat-sub">Aucun retweet marqué comme tel dans la colonne retweet : le corpus est composé de posts originaux ou réponses.</div></div>
+  <div class="stat-cell"><div class="stat-n">9<span style="font-size:.55em;color:var(--grey-mid)"> j</span></div><div class="stat-lbl">Fenêtre courte</div><div class="stat-sub">Du 17/10/2022 15:17:32 au 26/10/2022 11:09:59 CEST.</div></div>
+  <div class="stat-cell"><div class="stat-n stat-n-blue">2687</div><div class="stat-lbl">Tweets en français</div><div class="stat-sub">92.7% du corpus. L’objet est d’abord francophone, malgré quelques relais EN/IT.</div></div>
+  <div class="stat-cell"><div class="stat-n">373</div><div class="stat-lbl">Avec URL</div><div class="stat-sub">Le débat fonctionne par renvoi : articles, fils, sources, captures, pages institutionnelles.</div></div>
+  <div class="stat-cell"><div class="stat-n">379</div><div class="stat-lbl">Avec média</div><div class="stat-sub">Photos ou vidéos signalées dans le CSV. Le rapport circule aussi par image et extrait.</div></div>
+  <div class="stat-cell"><div class="stat-n stat-n-red">1</div><div class="stat-lbl">Engagement médian</div><div class="stat-sub">Distribution très asymétrique : quelques comptes captent l’essentiel de la visibilité.</div></div>
+</div>
+
+<div class="sec-label"><span><strong>§ 02</strong> — Identification structurelle</span><span>Thèmes · acteurs · tensions · hypothèses</span></div>
+<section class="section">
+  <div class="grid-3">
+    <div class="card"><div class="card-k">Hypothèse centrale</div><div class="card-title">Le rapport scientifique devient un test de traduction institutionnelle.</div><div class="card-body">Le corpus montre moins une discussion du contenu intégral du rapport qu’une bataille autour de ses usages : sortir d’un traité, défendre ou contester le nucléaire, légitimer l’action militante, dénoncer une supposée idéologie.</div></div>
+    <div class="card"><div class="card-k">Contradiction principale</div><div class="card-title">Le consensus scientifique circule comme objet public, mais se fragmente dès qu’il devient politique.</div><div class="card-body">Le GIEC est cité comme autorité, archive, alarme, preuve, écran de soupçon ou ressource rhétorique. Un même nom stabilise la science et instabilise le débat.</div></div>
+    <div class="card"><div class="card-k">Résultat visuel à montrer</div><div class="card-title">Une carte sans géographie : un atlas des arènes de conflictualité.</div><div class="card-body">Aucune géolocalisation exploitable dans le CSV. Le territoire doit donc être reconstruit par les lieux nommés : France, COP27/Afrique, Occitanie, Toulouse–Castres, Accord de Paris, Ukraine/énergie.</div></div>
+  </div>
+  <div class="aside-note"><strong>Angle éditorial :</strong> “Le rapport est public, mais sa mise en œuvre est disputée.” Le flux transforme le GIEC en infrastructure : une source scientifique qui traverse le gouvernement, les médias, les militants, les climatosceptiques, les débats énergétiques et les territoires locaux.</div>
+</section>
+
+<div class="sec-label"><span><strong>§ 03</strong> — Timeline du flux</span><span>Volume quotidien · fenêtre de collecte explicitée</span></div>
+<section class="section">
+  <div class="section-title">Neuf jours de circulation</div><div class="section-sub">Nombre de tweets par jour · 17 octobre 2022, 15:17:32 → 26 octobre 2022, 11:09:59 CEST</div>
+  <div class="chart-box"><canvas id="timelineChart"></canvas></div>
+  <div class="aside-note blue-border"><strong>Lecture :</strong> le pic du 21 octobre correspond à une séquence où le GIEC est mobilisé dans le débat institutionnel autour du retrait français du Traité sur la Charte de l’énergie, puis relayé dans des controverses énergie / politique / climat.</div>
+</section>
+
+<div class="sec-label"><span><strong>§ 04</strong> — Lexique et thèmes</span><span>Treemap · bar chart · limiteurs de hauteur canvas</span></div>
+<section class="section">
+  <div class="grid-2">
+    <div><div class="section-title">Ce que le corpus répète</div><div class="section-sub">Mots récurrents nettoyés · hors stopwords</div><div id="treemapWords" class="treemap-wrap"></div></div>
+    <div><div class="section-title">Arènes de conflit</div><div class="section-sub">Tweets contenant au moins un mot-clé par registre</div><div class="chart-box tall"><canvas id="themesChart"></canvas></div></div>
+  </div>
+</section>
+
+<div class="sec-label"><span><strong>§ 05</strong> — Acteurs et relais</span><span>Institutions · comptes · hashtags</span></div>
+<section class="section">
+  <div class="grid-2">
+    <div><div class="section-title">Comptes mentionnés</div><div class="section-sub">Réseau d’interpellation et d’autorité</div><div class="chart-box small"><canvas id="mentionsChart"></canvas></div></div>
+    <div><div class="section-title">Hashtags dominants</div><div class="section-sub">Balises de circulation</div><div id="treemapHash" class="treemap-wrap" style="height:240px;max-height:240px;"></div></div>
+  </div>
+  <div class="aside-note"><strong>Acteurs principaux détectés :</strong> Emmanuel Macron, Bruno Le Maire, IPCC/GIEC, Haut Conseil pour le Climat, CNRS, médias généralistes, comptes de vulgarisation climatique, comptes de soupçon climatosceptique, militants climat, acteurs territoriaux autour de projets d’infrastructures.</div>
+</section>
+
+<div class="sec-label"><span><strong>§ 06</strong> — Atlas politique sans coordonnées</span><span>Lieux nommés · pas de géolocalisation exploitable</span></div>
+<section class="section">
+  <div class="grid-2">
+    <div>
+      <div class="section-title">Lieux récurrents</div><div class="section-sub">Occurrences par mots-clés territoriaux</div>
+      <div class="chart-box small"><canvas id="locationsChart"></canvas></div>
+    </div>
+    <div>
+      <div class="section-title">Diagramme relationnel</div><div class="section-sub">Structure éditoriale, non graphe social exhaustif</div>
+      <div class="network" id="network">
+        <div class="edge" style="left:50%;top:50%;width:230px;transform:rotate(-145deg);"></div><div class="edge" style="left:50%;top:50%;width:210px;transform:rotate(-80deg);"></div><div class="edge" style="left:50%;top:50%;width:220px;transform:rotate(-20deg);"></div><div class="edge" style="left:50%;top:50%;width:220px;transform:rotate(35deg);"></div><div class="edge" style="left:50%;top:50%;width:220px;transform:rotate(105deg);"></div>
+        <div class="node rednode" style="left:50%;top:50%;">GIEC 2022</div>
+        <div class="node bluenode" style="left:20%;top:23%;">Institutions</div>
+        <div class="node" style="left:50%;top:12%;">Science / preuve</div>
+        <div class="node" style="left:82%;top:39%;">Médias</div>
+        <div class="node rednode" style="left:80%;top:73%;">Soupçon</div>
+        <div class="node bluenode" style="left:35%;top:82%;">Énergie</div>
+        <div class="node" style="left:18%;top:63%;">Territoires</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sec-label"><span><strong>§ 07</strong> — Contradictions visibles</span><span>Matrice d’enquête</span></div>
+<section class="section">
+  <div class="matrix">
+    <div class="matrix-cell"><div class="matrix-label">Science / politique</div><div class="matrix-text">Le rapport est cité comme base d’action publique ; simultanément, les tweets interrogent la capacité des institutions à transformer cette base en décisions effectives.</div></div>
+    <div class="matrix-cell dark"><div class="matrix-label">Attention / contenu</div><div class="matrix-text">Les actions militantes et images spectaculaires produisent plus de débat que la lecture longue du rapport. Le bruit public ne suit pas mécaniquement la gravité documentaire.</div></div>
+    <div class="matrix-cell"><div class="matrix-label">Consensus / soupçon</div><div class="matrix-text">Le GIEC est à la fois source d’autorité et cible de récits de falsification. La même institution sert de point fixe à deux régimes de vérité incompatibles.</div></div>
+    <div class="matrix-cell dark"><div class="matrix-label">Global / local</div><div class="matrix-text">Un rapport mondial est ramené à des lieux précis : France, Occitanie, Toulouse–Castres, COP27, Afrique, énergie européenne.</div></div>
+    <div class="matrix-cell"><div class="matrix-label">Énergie / climat</div><div class="matrix-text">Le nucléaire, les EnR, la Charte de l’énergie et le CO₂ agissent comme traducteurs techniques d’un débat apparemment scientifique.</div></div>
+    <div class="matrix-cell dark"><div class="matrix-label">Archive / temps réel</div><div class="matrix-text">Le rapport 2022 fonctionne comme archive stabilisée ; Twitter le recompose en réactions courtes, polarisées, incomplètes et fortement contextuelles.</div></div>
+  </div>
+</section>
+
+<div class="sec-label"><span><strong>§ 08</strong> — Fragments du flux</span><span>Tweets symptomatiques · extraits raccourcis</span></div>
+<section class="section">
+  <div class="section-title">Neuf fragments</div><div class="section-sub">Preuves faibles, voix humaines, interruptions du système</div>
+  <div class="samples-grid">
+    <div class="tweet-card"><div class="tw-meta">2022-10-21 · 15:51:41 · @brunolemaire</div><div class="tw-body">.@EmmanuelMacron annonce le retrait de la France du traité sur la Charte de l’énergie. Il n’était pas compatible avec les objectifs de l’accord de Paris, rappelés par le Haut conseil pour le Climat et le GIEC. Une décision juste et forte en accord avec nos ambitions climatiques !</div><div class="tw-eng">Engagement brut : 3236</div></div>
+    <div class="tweet-card"><div class="tw-meta">2022-10-24 · 13:56:56 · @khattabizakia</div><div class="tw-body">CP | Zakia Khattabi appelle à une sortie du Traité sur la Charte de l’Énergie Le #GIEC a déjà dénoncé l&#x27;impact catastrophique de ce Traité sur les ambitions climatiques. Important signal à donner après la mobilisation d&#x27;hier #TCE #Climat</div><div class="tw-eng">Engagement brut : 74</div></div>
+    <div class="tweet-card"><div class="tw-meta">2022-10-21 · 21:40:04 · @goneri76</div><div class="tw-body">Le rapport du GIEC de 2022 résumé par votre serviteur dans ce fil 🧵 En notant que la version originale, avec ses rapports impeccablement édités, ses factsheets très pratiques et ses FAQs particulièrement percutantes, se trouve ici:</div><div class="tw-eng">Engagement brut : 517</div></div>
+    <div class="tweet-card"><div class="tw-meta">2022-10-17 · 18:25:50 · @goneri76</div><div class="tw-body">Le rapport du GIEC de 2022 insiste sur le fait qu’un développement équitable et juste favorise un développement résilient au réchauffement climatique. Cela doit pouvoir se traduire d&#x27;une manière ou d&#x27;une autre dans un projet de lois de finances.</div><div class="tw-eng">Engagement brut : 3</div></div>
+    <div class="tweet-card"><div class="tw-meta">2022-10-23 · 20:31:20 · @gdeleur</div><div class="tw-body">Cette action militante là, elle sert la cause, c’est bon ? Elle est dans les critères ? Et pourtant, quasiment personne n’en parle. Comme le rapport du GIEC, quoi. Pourquoi ? Parce qu’on préfère s’émouvoir pour une vitre de protection d’un tableau. (Oui, je suis énervé.)</div><div class="tw-eng">Engagement brut : 815</div></div>
+    <div class="tweet-card"><div class="tw-meta">2022-10-18 · 21:00:57 · @jdicajdisrien</div><div class="tw-body">À plus de +1,5° de rechauffement on bascule vers un point de non retour qui nous mène à une Terre quasi inhabitable. On est aujourd&#x27;hui à +1,1°. Le Giec vient de rectifier les previsions pour la France d&#x27;ici 2100 à +3,8°, scénario basses emissions de GES. Vous pouvez pleurer.</div><div class="tw-eng">Engagement brut : 425</div></div>
+    <div class="tweet-card"><div class="tw-meta">2022-10-19 · 05:09:04 · @youkitripifree</div><div class="tw-body">@GaetanHeymes Toute l’ineptie du #GIEC se résume à votre tweet !☝️🐸 Le #GIEC parle de +1,5 à 2°C d’ici 2100, alors que vous montrez clairement que ce n’est pas «la moyenne» qui agit, mais bien les pics ! 👉 le principe de la stérilisation. 👮‍♂️🚧👨‍🔬🔥🪙🔥👩‍🔬🚧👮🏻 (la Science sans tête aux arrêts)</div><div class="tw-eng">Engagement brut : 2</div></div>
+    <div class="tweet-card"><div class="tw-meta">2022-10-23 · 07:01:38 · @jdicajdisrien</div><div class="tw-body">Si l&#x27;anomalie de t° actuelle dans le SO avait lieu cette été, on frolerait les 50° La France est le pays ou l&#x27;anomalie de t° a ete la plus forte dans le monde Le Giec nous montre qu&#x27;on est sur une trajectoire à +3,8° c&#x27;est pas l&#x27;immigration votre problème.</div><div class="tw-eng">Engagement brut : 249</div></div>
+    <div class="tweet-card"><div class="tw-meta">2022-10-23 · 14:46:23 · @antoine_pepito</div><div class="tw-body">@EnergieGrise J&#x27;ose espérer que c&#x27;est une blague ? Le solaire, l&#x27;éolien et l&#x27;hydraulique n&#x27;emettent pas de CO2 selon vous ? Mais le nucléaire oui ? Ça vous dit quelque chose une analyse en cycle de vie ? Le GIEC ? Tout ça... ?</div><div class="tw-eng">Engagement brut : 87</div></div>
+  </div>
+</section>
+
+<div class="sec-label"><span><strong>§ 09</strong> — Architecture du numéro</span><span>Sommaire · indicateurs · enquête complémentaire</span></div>
+<section class="section">
+  <div class="grid-3">
+    <div class="card"><div class="card-k">Sommaire proposé</div><div class="card-body">01 Fenêtre de collecte · 02 Le rapport comme infrastructure · 03 Courbe de circulation · 04 Lexique de la preuve · 05 Arènes de conflit · 06 Atlas des lieux nommés · 07 Fragments · 08 Limites.</div></div>
+    <div class="card"><div class="card-k">Indicateurs calculables</div><div class="card-body">Volume par jour/heure, part FR, taux de liens, taux de média, engagement médian/moyen, concentration par auteur, co-occurrences GIEC + énergie / soupçon / institutions, hashtags dominants, lieux nommés.</div></div>
+    <div class="card"><div class="card-k">Pistes d’enquête</div><div class="card-body">Comparer avec les jours de publication officielle du rapport, cartographier les URLs réelles hors t.co, qualifier les comptes influents, distinguer citations scientifiques et usages polémiques, relier le pic du 21 octobre à l’actualité politique.</div></div>
+  </div>
+  <div class="aside-note"><strong>Limites méthodologiques :</strong> le CSV ne permet pas de déduire une opinion publique. La collecte dépend d’un mot-clé, d’une fenêtre temporelle courte et d’un accès Twitter. Les citations sont des fragments, non des preuves représentatives. Aucune localisation native n’est exploitable dans les colonnes place / near / geo.</div>
+</section>
+
+<div class="black-section">
+  <div class="black-inner">
+    <div class="section-sub">Note de concept</div>
+    <h2 class="cover-title" style="color:#fff;margin-bottom:24px;">Le monitoring ne raconte pas le climat.<br><strong>Il observe la circulation d’une autorité.</strong></h2>
+    <p class="cover-lead" style="color:#bbb;max-width:780px;">Cette édition traite le rapport du GIEC comme un objet politique en transit. Dans le flux, il n’est jamais seulement un PDF scientifique : il devient argument gouvernemental, référence militante, ressource médiatique, cible climatosceptique, matrice de scénarios, et preuve locale contre des projets d’infrastructure. Le corpus rend visible une structure : la science stabilise des constats, mais leur traduction publique ouvre une chaîne de conflits.</p>
+    <div class="black-grid">
+      <div class="black-card"><h3>Direction artistique</h3><p>Minimalisme froid, fonds blancs, grilles noires, rouge pour l’alerte climatique / contradiction, bleu pur pour les institutions et la décision publique. Les graphiques ne décorent pas : ils classent les tensions.</p></div>
+      <div class="black-card"><h3>Direction narrative</h3><p>Entrer par la fenêtre de collecte, puis montrer l’éclatement du rapport en arènes. La page doit ressembler à un poste d’observation : peu d’effets, beaucoup de structure.</p></div>
+      <div class="black-card"><h3>Positionnement</h3><p>Ne pas moraliser. Montrer ce que le CSV permet de soutenir, puis nommer ce qu’il ne permet pas : intention des auteurs, représentativité générale, causalité politique.</p></div>
+      <div class="black-card"><h3>Formule centrale</h3><p>Le rapport est public ; le conflit commence au moment où chacun tente de s’en servir.</p></div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer"><span>Tag Revue · Monitoring · GIEC 2022</span><span>Fenêtre : 17 octobre 2022, 15:17:32 → 26 octobre 2022, 11:09:59 CEST</span><span>CSV : 2,898 tweets</span></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+const daily = {"labels": ["2022-10-17", "2022-10-18", "2022-10-19", "2022-10-20", "2022-10-21", "2022-10-22", "2022-10-23", "2022-10-24", "2022-10-25", "2022-10-26"], "values": [167, 291, 373, 368, 403, 316, 267, 334, 287, 92]};
+const themes = {"labels": ["Institutions / politique", "Rapport / science", "Médias / relais", "Énergie / nucléaire", "Territoires / lieux", "Déni / soupçon", "Action militante / attention", "Émotion / alerte"], "values": [1921, 999, 477, 383, 329, 224, 198, 103]};
+const words = [{"label": "#giec", "value": 242}, {"label": "scientifiques", "value": 212}, {"label": "scientifique", "value": 154}, {"label": "dit", "value": 144}, {"label": "réchauffement", "value": 135}, {"label": "france", "value": 118}, {"label": "ans", "value": 105}, {"label": "monde", "value": 101}, {"label": "co2", "value": 101}, {"label": "experts", "value": 86}, {"label": "contre", "value": 84}, {"label": "juste", "value": 81}, {"label": "science", "value": 74}, {"label": "dire", "value": 73}, {"label": "nucléaire", "value": 71}, {"label": "pourquoi", "value": 71}, {"label": "émissions", "value": 70}, {"label": "temps", "value": 70}];
+const hashtags = [{"label": "#giec", "value": 242}, {"label": "#climat", "value": 58}, {"label": "#pblv", "value": 21}, {"label": "#youbasokona", "value": 16}, {"label": "#climatechange", "value": 14}, {"label": "#dialogue_virtuel", "value": 14}, {"label": "#ballondor", "value": 13}, {"label": "#ipcc", "value": 12}, {"label": "#cop27", "value": 11}, {"label": "#environnement", "value": 10}, {"label": "#changementclimatique", "value": 10}, {"label": "#3yearsleft", "value": 9}];
+const mentions = {"labels": ["emmanuelmacron", "cassouman40", "bfmtv", "salomesaque", "ipcc_ch", "brunolemaire", "bonpote", "professeurnow", "trucmuc28502451", "elpis_r"], "values": [96, 87, 57, 50, 48, 48, 44, 44, 41, 38]};
+const locations = {"labels": ["France", "Paris / accord de Paris", "Occitanie", "Toulouse–Castres", "Afrique / COP27", "Ukraine / Kherson"], "values": [204, 40, 9, 5, 26, 22]};
+const users = {"labels": ["2ceyrat2furious", "upsided54201655", "gieckys", "bellocraoul", "elpis_r", "ventdelogique", "trucmuc28502451", "qraaal", "wathi_thinktank", "rensemblejmv", "matflamm", "cassouman40"], "values": [471, 371, 60, 49, 31, 27, 22, 21, 14, 14, 13, 12]};
+const BLACK = '#111111', RED = '#D92B2B', BLUE = '#0000FF', GREY = '#888888', GRID = '#EEEEEE';
+function makeChart(id, config) { new Chart(document.getElementById(id), config); }
+makeChart('timelineChart', { type:'bar', data:{ labels:daily.labels, datasets:[{ label:'Tweets', data:daily.values, backgroundColor:daily.values.map((v,i)=> i===4 ? RED : BLACK), borderWidth:0 }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{backgroundColor:BLACK,titleColor:'#fff',bodyColor:'#ccc'}}, scales:{ x:{grid:{display:false}, ticks:{color:GREY, font:{size:11}}}, y:{grid:{color:GRID}, ticks:{color:GREY,font:{size:11}}} } } });
+makeChart('themesChart', { type:'bar', data:{ labels:themes.labels, datasets:[{ data:themes.values, backgroundColor:themes.labels.map(l=> l.includes('Déni')||l.includes('Émotion')||l.includes('Action') ? RED : (l.includes('Institutions')||l.includes('Énergie') ? BLUE : BLACK)), borderWidth:0 }] }, options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{backgroundColor:BLACK,titleColor:'#fff',bodyColor:'#ccc', callbacks:{label:c=>' '+c.parsed.x+' tweets'}}}, scales:{ x:{grid:{color:GRID},ticks:{color:GREY,font:{size:11}}}, y:{grid:{display:false},ticks:{color:BLACK,font:{size:12}}} } } });
+makeChart('mentionsChart', { type:'bar', data:{ labels:mentions.labels, datasets:[{ data:mentions.values, backgroundColor:mentions.labels.map((l,i)=> i<3?BLUE:BLACK), borderWidth:0 }] }, options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{backgroundColor:BLACK,titleColor:'#fff',bodyColor:'#ccc'}}, scales:{ x:{grid:{color:GRID},ticks:{color:GREY,font:{size:11}}}, y:{grid:{display:false},ticks:{color:BLACK,font:{size:11}}} } } });
+makeChart('locationsChart', { type:'bar', data:{ labels:locations.labels, datasets:[{ data:locations.values, backgroundColor:locations.labels.map(l=> l.includes('France')||l.includes('Paris')?BLUE:BLACK), borderWidth:0 }] }, options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{backgroundColor:BLACK,titleColor:'#fff',bodyColor:'#ccc'}}, scales:{ x:{grid:{color:GRID},ticks:{color:GREY,font:{size:11}}}, y:{grid:{display:false},ticks:{color:BLACK,font:{size:11}}} } } });
+function sliceTreemap(containerId, data, colorFn) {
+  const el=document.getElementById(containerId); const W=el.clientWidth, H=el.clientHeight; el.innerHTML='';
+  const total=data.reduce((s,d)=>s+d.value,0); let x=0, y=0, w=W, h=H; let horizontal = W>=H;
+  data.forEach((d,i)=>{ let area=(d.value/total)*W*H; let cellW, cellH;
+    if(horizontal){ cellW=area/h; cellH=h; } else { cellW=w; cellH=area/w; }
+    const div=document.createElement('div'); div.className='treemap-cell '+(colorFn?colorFn(d,i):'');
+    div.style.left=x+'px'; div.style.top=y+'px'; div.style.width=Math.max(1,cellW)+'px'; div.style.height=Math.max(1,cellH)+'px';
+    if(cellW*cellH<2600) div.classList.add('small');
+    div.innerHTML='<div class="treemap-label">'+d.label+'</div><div class="treemap-value">'+d.value+'</div>'; el.appendChild(div);
+    if(horizontal) x += cellW; else y += cellH;
+  });
+}
+sliceTreemap('treemapWords', words, (d,i)=> d.label.includes('réchauffement')||d.label.includes('émissions')||d.label.includes('co2') ? 'redcell' : (d.label.includes('france')||d.label.includes('politique')||d.label.includes('nucléaire') ? 'bluecell' : ''));
+sliceTreemap('treemapHash', hashtags, (d,i)=> d.label.includes('giec')||d.label.includes('climat')||d.label.includes('climate') ? 'redcell' : (d.label.includes('cop27')||d.label.includes('france') ? 'bluecell' : ''));
+window.addEventListener('resize',()=>{ sliceTreemap('treemapWords', words, (d,i)=> d.label.includes('réchauffement')||d.label.includes('émissions')||d.label.includes('co2') ? 'redcell' : (d.label.includes('france')||d.label.includes('politique')||d.label.includes('nucléaire') ? 'bluecell' : '')); sliceTreemap('treemapHash', hashtags, (d,i)=> d.label.includes('giec')||d.label.includes('climat')||d.label.includes('climate') ? 'redcell' : (d.label.includes('cop27')||d.label.includes('france') ? 'bluecell' : '')); });
+</script>
+</body>
+</html>

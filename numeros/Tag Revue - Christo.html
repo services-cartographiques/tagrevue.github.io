@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAG REVUE — Monitoring · Christo / Arc de Triomphe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#D92B2B;--blue:#0057FF;--black:#111;--grey-dark:#444;--grey-mid:#888;--grey-light:#ccc;--grey-bg:#f2f2f2;--white:#fff;--font:'Source Sans 3','Helvetica Neue',Arial,sans-serif}
+body{background:var(--white);color:var(--black);font-family:var(--font);font-size:15px;line-height:1.5}
+.site-header{border-bottom:1px solid var(--black);padding:14px 40px;display:flex;justify-content:space-between;gap:20px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-dark)}
+.site-header strong{color:var(--black)}
+.cover{padding:76px 40px 84px;border-bottom:1px solid var(--grey-light);max-width:1120px;margin:0 auto}
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:20px}
+.cover h1{font-size:clamp(34px,5.2vw,64px);font-weight:300;line-height:1.05;letter-spacing:-.025em;max-width:920px;margin-bottom:28px}
+.cover h1 strong{font-weight:700}
+.cover-lead{font-size:17px;line-height:1.75;color:var(--grey-dark);font-weight:300;max-width:760px;margin-bottom:34px}
+.tags{display:flex;gap:10px;flex-wrap:wrap}
+.tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--grey-light);padding:5px 12px;color:var(--grey-dark);font-weight:700}
+.tag.red{border-color:var(--red);color:var(--red)}.tag.blue{border-color:var(--blue);color:var(--blue)}
+.sec-label{padding:12px 40px;background:var(--grey-bg);border-top:1px solid var(--grey-light);border-bottom:1px solid var(--grey-light);display:flex;justify-content:space-between;gap:20px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--grey-mid)}
+.sec-label strong{color:var(--black)}
+.stats-row{display:grid;grid-template-columns:repeat(6,1fr);border-bottom:1px solid var(--grey-light)}
+.stat-cell{padding:34px 26px;border-right:1px solid var(--grey-light)}.stat-cell:last-child{border-right:0}
+.stat-n{font-size:clamp(30px,3.4vw,48px);font-weight:700;line-height:1;letter-spacing:-.02em}.stat-n.red{color:var(--red)}.stat-n.blue{color:var(--blue)}
+.stat-lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-mid);margin-top:10px;font-weight:700}
+.stat-sub{font-size:12px;color:var(--grey-mid);margin-top:7px;line-height:1.45}
+.section{padding:58px 40px;max-width:1120px;margin:0 auto;border-bottom:1px solid var(--grey-light)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:58px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--grey-light);border:1px solid var(--grey-light)}
+.title{font-size:23px;font-weight:700;line-height:1.2;margin-bottom:6px}.sub{font-size:12px;color:var(--grey-mid);letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:30px}
+.hypo{background:var(--black);color:var(--white);padding:70px 40px}.hypo-inner{max-width:1120px;margin:0 auto}.hypo .eyebrow{color:var(--red)}.hypo h2{font-size:clamp(28px,4vw,48px);font-weight:300;line-height:1.15;letter-spacing:-.02em;max-width:850px;margin-bottom:26px}.hypo h2 strong{font-weight:700}
+.hypo p{max-width:760px;color:#bbb;font-size:16px;line-height:1.8;font-weight:300}
+.card{background:var(--white);padding:28px 24px}.card.redline{border-top:3px solid var(--red)}.card.blueline{border-top:3px solid var(--blue)}
+.card-title{font-size:13px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:12px;color:var(--black)}.card-body{font-size:13px;color:var(--grey-dark);line-height:1.75;font-weight:300}
+.chart-box{position:relative;width:100%;height:340px;max-height:340px;overflow:hidden;border:1px solid var(--grey-light);background:var(--white);padding:10px}
+.chart-box.small{height:260px;max-height:260px}
+.chart-box canvas{display:block;width:100%!important;height:100%!important;max-height:100%!important}
+.treemap{position:relative;width:100%;height:380px;max-height:380px;overflow:hidden;border:1px solid var(--grey-light);background:var(--grey-bg)}
+.tcell{position:absolute;border:1px solid var(--white);background:var(--black);color:var(--white);padding:9px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}.tcell.red{background:var(--red)}.tcell.blue{background:var(--blue)}.tlabel{font-size:12px;font-weight:700;line-height:1.05}.tval{font-size:20px;font-weight:700;opacity:.85}
+.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}.bar-lbl{width:170px;font-size:12px;color:var(--grey-dark);font-weight:700;text-align:right}.bar-track{flex:1;height:20px;background:var(--grey-bg)}.bar-fill{height:100%;background:var(--black)}.bar-fill.red{background:var(--red)}.bar-fill.blue{background:var(--blue)}.bar-val{width:44px;text-align:right;font-size:12px;font-weight:700}
+.matrix{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--grey-light);border:1px solid var(--grey-light)}.matrix .m{background:var(--white);padding:26px}.m small{display:block;color:var(--grey-mid);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:8px}.m strong{font-size:15px}.m p{font-size:13px;color:var(--grey-dark);line-height:1.7;margin-top:8px;font-weight:300}
+.samples{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--grey-light);border:1px solid var(--grey-light);margin-top:28px}.tweet{background:var(--white);padding:26px 22px}.tweet-meta{font-size:10px;color:var(--grey-mid);letter-spacing:.1em;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--grey-bg);padding-bottom:10px;margin-bottom:12px}.tweet-body{font-size:13px;line-height:1.75;font-weight:300}.tweet-body mark{background:transparent;color:var(--red);font-weight:700}
+.note{font-size:13px;line-height:1.75;color:var(--grey-dark);font-weight:300;background:var(--grey-bg);border-left:3px solid var(--red);padding:20px 24px;margin-top:24px}
+.footer{padding:22px 40px;border-top:1px solid #333;background:var(--black);color:#777;display:flex;justify-content:space-between;gap:20px;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+@media(max-width:900px){.stats-row{grid-template-columns:1fr 1fr}.grid-2,.grid-3,.samples,.matrix{grid-template-columns:1fr}.site-header,.sec-label,.footer{flex-direction:column}.cover,.section,.hypo{padding-left:22px;padding-right:22px}}
+</style>
+</head>
+<body>
+<header class="site-header"><span><strong>TAG REVUE</strong> — Monitoring</span><span>Christo · Arc de Triomphe Wrapped</span><span>Archive Twitter · Octobre 2021</span></header>
+
+<section class="cover">
+  <div class="eyebrow">Corpus · 1646 tweets uniques · fenêtre étudiée : 01/10/2021 22:20:41 → 20/10/2021 22:58:16 CEST</div>
+  <h1>L’Arc emballé.<br><strong>Qui a le droit de toucher au monument ?</strong></h1>
+  <p class="cover-lead">Cette archive ne raconte pas seulement la réception d’une œuvre de Christo et Jeanne-Claude. Elle enregistre un conflit de propriété symbolique : certains voient une expérience esthétique et populaire, d’autres une atteinte au patrimoine, une provocation de classe, une dépense suspecte ou une “non-œuvre”. Le monument devient une surface d’inscription où se superposent art contemporain, tourisme, mémoire nationale, polémique politique et jugement social.</p>
+  <div class="tags"><span class="tag red">#christo</span><span class="tag">#arcdetriomphe</span><span class="tag">#artcontemporain</span><span class="tag blue">patrimoine / mémoire</span><span class="tag red">sac poubelle / sublime</span><span class="tag">biais sociaux</span></div>
+</section>
+
+<div class="sec-label"><span><strong>§ 01</strong> — Chiffres structurels</span><span>Données extraites de 3 fichiers TXT/RTF · doublons supprimés par identifiant tweet</span></div>
+<section class="stats-row">
+ <div class="stat-cell"><div class="stat-n">1646</div><div class="stat-lbl">tweets uniques</div><div class="stat-sub">Corpus brut consolidé, avec bruit assumé.</div></div>
+ <div class="stat-cell"><div class="stat-n red">439</div><div class="stat-lbl">tweets cœur Christo</div><div class="stat-sub">Mentions emballage, Christo, tissu, installation.</div></div>
+ <div class="stat-cell"><div class="stat-n">381</div><div class="stat-lbl">auteurs cœur</div><div class="stat-sub">Indicateur de dispersion, pas de représentativité.</div></div>
+ <div class="stat-cell"><div class="stat-n blue">20</div><div class="stat-lbl">jours couverts</div><div class="stat-sub">Du 1er au 20 octobre 2021.</div></div>
+ <div class="stat-cell"><div class="stat-n">160</div><div class="stat-lbl">mémoire / nation</div><div class="stat-sub">Le monument réactive Soldat inconnu, Napoléon, République.</div></div>
+ <div class="stat-cell"><div class="stat-n red">56</div><div class="stat-lbl">rejets explicites</div><div class="stat-sub">Moche, sac poubelle, immonde, non-œuvre, etc.</div></div>
+</section>
+
+<section class="hypo">
+ <div class="hypo-inner">
+  <div class="eyebrow">Hypothèse éditoriale centrale</div>
+  <h2>Le débat esthétique sert d’interface à une question politique : <strong>qui possède le droit d’interpréter un symbole national ?</strong></h2>
+  <p>Le corpus ne prouve pas que l’œuvre divise mécaniquement selon une classe sociale ou une appartenance politique. Il montre plutôt que le jugement esthétique devient rapidement un jugement de légitimité : légitimité de l’art contemporain, des institutions culturelles, de Paris, de l’argent privé, des touristes, du “peuple”, du patrimoine et de ceux qui prétendent parler en son nom.</p>
+ </div>
+</section>
+
+<div class="sec-label"><span><strong>§ 02</strong> — Timeline du flux</span><span>Volume quotidien · corpus total vs tweets cœur Christo</span></div>
+<section class="section">
+ <div class="title">Après l’événement, la controverse continue</div><div class="sub">L’œuvre est visible jusqu’au 3 octobre ; le corpus continue ensuite avec démontage, bilan, reprises médiatiques et réactivation politique.</div>
+ <div class="chart-box"><canvas id="timeline"></canvas></div>
+ <div class="note">Lecture : le flux le plus dense ne correspond pas seulement à la contemplation de l’œuvre, mais aussi à son retrait. Le démontage produit un second événement : retour du monument, recyclage du tissu, bilan des visiteurs, et réouverture du conflit “art contemporain” contre “patrimoine”.</div>
+</section>
+
+<div class="sec-label"><span><strong>§ 03</strong> — Lexique</span><span>Treemap · occurrences éditorialisées dans le sous-corpus Christo</span></div>
+<section class="section">
+ <div class="grid-2">
+  <div><div class="title">Les mots qui cadrent la réception</div><div class="sub">Entre matérialité, jugement esthétique et mémoire</div><div class="treemap" id="treemap">
+<div class="tcell " style="left:0.000%;top:0.000%;width:42.433%;height:58.406%;"><span class="tlabel">wrapped</span><span class="tval">143</span></div>
+<div class="tcell " style="left:42.433%;top:0.000%;width:21.958%;height:58.406%;"><span class="tlabel">Christo / Jeanne-Claude</span><span class="tval">74</span></div>
+<div class="tcell " style="left:64.392%;top:0.000%;width:21.068%;height:58.406%;"><span class="tlabel">emballé / empaqueté</span><span class="tval">71</span></div>
+<div class="tcell " style="left:85.460%;top:0.000%;width:14.540%;height:58.406%;"><span class="tlabel">art / installation</span><span class="tval">49</span></div>
+<div class="tcell " style="left:0.000%;top:58.406%;width:24.167%;height:10.040%;"><span class="tlabel">monument</span><span class="tval">14</span></div>
+<div class="tcell " style="left:0.000%;top:68.446%;width:24.167%;height:17.929%;"><span class="tlabel">tissu / fabric</span><span class="tval">25</span></div>
+<div class="tcell red" style="left:0.000%;top:86.374%;width:24.167%;height:7.171%;"><span class="tlabel">sac poubelle</span><span class="tval">10</span></div>
+<div class="tcell " style="left:0.000%;top:93.546%;width:24.167%;height:6.454%;"><span class="tlabel">culture</span><span class="tval">9</span></div>
+<div class="tcell red" style="left:24.167%;top:58.406%;width:25.833%;height:41.594%;"><span class="tlabel">tourisme / photo</span><span class="tval">62</span></div>
+<div class="tcell blue" style="left:50.000%;top:58.406%;width:20.000%;height:41.594%;"><span class="tlabel">mémoire / flamme</span><span class="tval">48</span></div>
+<div class="tcell blue" style="left:70.000%;top:58.406%;width:14.167%;height:41.594%;"><span class="tlabel">Napoléon / nation</span><span class="tval">34</span></div>
+<div class="tcell " style="left:84.167%;top:58.406%;width:15.833%;height:41.594%;"><span class="tlabel">déballage / chantier</span><span class="tval">38</span></div>
+  </div></div>
+  <div><div class="title">Trois registres de réception</div><div class="sub">Ce que l’archive rend visible</div>
+   <div class="card redline"><div class="card-title">1 · Goût / dégoût</div><div class="card-body">Le vocabulaire est souvent pauvre mais violent : “moche”, “sac poubelle”, “immonde”. L’objet esthétique est traduit en objet ménager, en déchet ou en souillure.</div></div>
+   <div class="card blueline"><div class="card-title">2 · Patrimoine / sacralité</div><div class="card-body">L’Arc n’est pas seulement un monument : il est relié à Napoléon, au Soldat inconnu, à la République, aux Gilets jaunes, aux cérémonies et à l’ordre symbolique national.</div></div>
+   <div class="card"><div class="card-title">3 · Expérience / consommation</div><div class="card-body">Le flux touristique convertit l’œuvre en photo, itinéraire, vue, souvenir, visite et contenu instagrammable. C’est aussi une réception : moins théorique, plus située.</div></div>
+  </div>
+ </div>
+</section>
+
+<div class="sec-label"><span><strong>§ 04</strong> — Thèmes dominants</span><span>Occurrences par familles lexicales · non exclusives</span></div>
+<section class="section">
+ <div class="grid-2">
+  <div><div class="title">Baromètre des tensions</div><div class="sub">Un tweet peut appartenir à plusieurs familles</div>
+<div class="bar-row"><div class="bar-lbl">Christo / œuvre</div><div class="bar-track"><div class="bar-fill " style="width:100.0%"></div></div><div class="bar-val">439</div></div>
+<div class="bar-row"><div class="bar-lbl">Patrimoine / mémoire</div><div class="bar-track"><div class="bar-fill blue" style="width:36.4%"></div></div><div class="bar-val">160</div></div>
+<div class="bar-row"><div class="bar-lbl">Tourisme / expérience urbaine</div><div class="bar-track"><div class="bar-fill " style="width:64.9%"></div></div><div class="bar-val">285</div></div>
+<div class="bar-row"><div class="bar-lbl">Rejet esthétique</div><div class="bar-track"><div class="bar-fill red" style="width:12.8%"></div></div><div class="bar-val">56</div></div>
+<div class="bar-row"><div class="bar-lbl">Adhésion / admiration</div><div class="bar-track"><div class="bar-fill " style="width:26.9%"></div></div><div class="bar-val">118</div></div>
+<div class="bar-row"><div class="bar-lbl">Coût / gouvernance</div><div class="bar-track"><div class="bar-fill " style="width:7.7%"></div></div><div class="bar-val">34</div></div>
+<div class="bar-row"><div class="bar-lbl">Bruit hippique / autre Arc</div><div class="bar-track"><div class="bar-fill " style="width:27.3%"></div></div><div class="bar-val">120</div></div>
+<div class="bar-row"><div class="bar-lbl">Humour / détournement</div><div class="bar-track"><div class="bar-fill red" style="width:15.9%"></div></div><div class="bar-val">70</div></div>
+  </div>
+  <div><div class="title">Résultat politique à montrer</div><div class="sub">Une même architecture, cinq régimes de propriété</div>
+   <div class="matrix">
+    <div class="m"><small>Institution</small><strong>CMN, État, mémoire</strong><p>L’Arc parle comme lieu officiel : flamme, Soldat inconnu, cérémonies, dates historiques.</p></div>
+    <div class="m"><small>Art</small><strong>Christo / Jeanne-Claude</strong><p>Le monument devient support temporaire, non propriété définitive : l’œuvre est son propre délai.</p></div>
+    <div class="m"><small>Public</small><strong>Touristes et passants</strong><p>La réception se fait par photo, marche, vue, regret d’être arrivé trop tard, commentaire immédiat.</p></div>
+    <div class="m"><small>Contre-public</small><strong>Patrimoine offensé</strong><p>Le rejet ne porte pas seulement sur la forme mais sur l’idée qu’on puisse modifier le symbole.</p></div>
+    <div class="m"><small>Marché médiatique</small><strong>Liens, reprises, articles</strong><p>Le corpus contient des titres recyclés, SEO, presse internationale, podcasts et publications commerciales.</p></div>
+    <div class="m"><small>Bruit structurel</small><strong>Prix de l’Arc, tourisme, memes</strong><p>Le scrape par mot-clé capture aussi les autres vies du mot “Arc” : hippisme, trajet, monument visité.</p></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<div class="sec-label"><span><strong>§ 05</strong> — Visual investigation</span><span>Matrice des contradictions détectées</span></div>
+<section class="section">
+ <div class="title">Contradictions structurelles</div><div class="sub">Non comme verdict, mais comme carte des tensions</div>
+ <div class="matrix">
+  <div class="m"><small>Élite / populaire</small><strong>“Culture élitiste” vs “culture populaire”</strong><p>L’œuvre devient un test : qui peut aimer l’art contemporain sans être soupçonné de distinction sociale ?</p></div>
+  <div class="m"><small>Protection / profanation</small><strong>Recouvrir pour révéler</strong><p>Le geste de protection matérielle est reçu par certains comme dissimulation ou offense patrimoniale.</p></div>
+  <div class="m"><small>Éphémère / monument</small><strong>16 jours contre 200 ans</strong><p>La durée courte de l’œuvre produit un débat long sur la permanence des symboles.</p></div>
+  <div class="m"><small>Public / privé</small><strong>Coût, mécénat, soupçon</strong><p>La mention de l’argent intervient même lorsque le financement n’est pas toujours compris ou vérifié par les tweets.</p></div>
+  <div class="m"><small>Art / ingénierie</small><strong>Œuvre ou chantier ?</strong><p>Le tissu, les nacelles, le démontage et le recyclage rendent visible l’infrastructure matérielle de l’art.</p></div>
+  <div class="m"><small>Image / mémoire</small><strong>Instagram contre Soldat inconnu</strong><p>Le même lieu supporte selfie, tourisme, ravivage de flamme, polémique et récit national.</p></div>
+ </div>
+</section>
+
+<div class="sec-label"><span><strong>§ 06</strong> — Matière brute</span><span>Fragments sélectionnés · valeur documentaire et symptomatique</span></div>
+<section class="section">
+ <div class="title">Six tweets-fragments</div><div class="sub">Ils fonctionnent comme preuves de registres, pas comme sondage d’opinion</div>
+ <div class="samples">
+<div class="tweet"><div class="tweet-meta">2021-10-20 21:29 · @CBernardins · Culture populaire / culture légitime</div><div class="tweet-body">Le projet européen ne se construit pas derrière des portes closes, il a vocation à être populaire. Quoi de plus populaire que la culture ? « Je ne crois pas à une <mark>culture élitiste</mark> s’opposant à une <mark>culture populaire</mark>. On le voit avec l’Arc de Triomphe par Christo »</div></div>
+<div class="tweet"><div class="tweet-meta">2021-10-20 21:10 · @MarjLamidel · Rejet esthétique / vocabulaire social</div><div class="tweet-body">Vous devriez appliquer l&#x27;adage que vous affichez sur votre profil, et vous claquez un <mark>sac poubelle</mark> sur tout le corps en guise d’art contemporain comme la merde dont a été emballé l’Arc de Triomphe.</div></div>
+<div class="tweet"><div class="tweet-meta">2021-10-03 21:05 · @APonsonnet · Réception ordinaire / jugement d’usage</div><div class="tweet-body">Puisque l’empaquetage de l’#ArcDeTriomphe se termine aujourd’hui : « C’est instagrammable. » « C’est pas mal, mais j’aurais pas fait ça comme ça. » « C’est <mark>plus beau sans le tissu</mark>. »</div></div>
+<div class="tweet"><div class="tweet-meta">2021-10-20 14:44 · @palais_au · Contre-champ positif</div><div class="tweet-body">J’ai pour ma part adoré l’Arc de Triomphe que je suis allée voir plusieurs fois. Une très <mark>grande réussite</mark>.</div></div>
+<div class="tweet"><div class="tweet-meta">2021-10-04 11:30 · @ParisLive · Matérialité / fin de l’événement</div><div class="tweet-body">Les opérations de démontage de l’œuvre éphémère de #ChristoetJeanneClaude débutent ce lundi. La toile sera ensuite recyclée pour avoir une seconde vie.</div></div>
+<div class="tweet"><div class="tweet-meta">2021-10-08 16:02 · @ArcDeTriomphe · Patrimoine réactivé</div><div class="tweet-body">Aujourd&#x27;hui, le Départ des volontaires de 1792, sculpté par François Rude, réapparaît sur la façade de l’#ArcDeTriomphe.</div></div>
+ </div>
+</section>
+
+<div class="sec-label"><span><strong>§ 07</strong> — Architecture du numéro</span><span>Sommaire complet · Tag Revue Monitoring</span></div>
+<section class="section">
+ <div class="grid-3">
+  <div class="card"><div class="card-title">01 · Cover</div><div class="card-body">L’Arc emballé : qui a le droit de toucher au monument ? Chapô sur la transformation d’un objet esthétique en conflit de propriété symbolique.</div></div>
+  <div class="card"><div class="card-title">02 · Chiffres structurels</div><div class="card-body">Fenêtre de collecte, volume, sous-corpus Christo, thèmes dominants, part du bruit et matérialité du démontage.</div></div>
+  <div class="card"><div class="card-title">03 · Timeline</div><div class="card-body">Suivre le passage contemplation → démontage → reprise médiatique → mémoire nationale.</div></div>
+  <div class="card"><div class="card-title">04 · Lexique social</div><div class="card-body">Treemap du vocabulaire : tissu, sac poubelle, monument, art, mémoire, photo, culture.</div></div>
+  <div class="card"><div class="card-title">05 · Atlas politique</div><div class="card-body">Cartographier les régimes de propriété : État, art, public, contre-public, médias, bruit.</div></div>
+  <div class="card"><div class="card-title">06 · Archive brute</div><div class="card-body">Tweets comme interruptions : admiration, rejet, ironie, coût, sacralité, expérience touristique.</div></div>
+ </div>
+</section>
+
+<section class="hypo">
+ <div class="hypo-inner">
+  <div class="eyebrow">Note de concept</div>
+  <h2>Ce monitoring ne tranche pas le débat esthétique. <strong>Il observe comment le débat se fabrique.</strong></h2>
+  <p>L’archive montre que l’Arc de Triomphe n’est pas un décor neutre. Dès qu’il est recouvert, il cesse d’être seulement visible : il devient discutable. Le flux révèle une structure politique froide : l’art contemporain agit comme un test de tolérance symbolique. Certains tweets évaluent une forme ; d’autres défendent une mémoire ; d’autres encore rejouent des clivages sociaux autour de Paris, de la culture légitime, du prix supposé des choses, de la France patrimoniale ou de la ville touristique. La donnée importante n’est donc pas “les gens aiment ou n’aiment pas Christo”, mais le fait que l’œuvre transforme un monument consensuel en interface de conflits.</p>
+  <p style="margin-top:22px;"><strong>Limites méthodologiques :</strong> le corpus provient d’une collecte par mots-clés autour d’“Arc de Triomphe” et non d’un panel représentatif. Il contient du bruit : hippisme, tourisme, presse automatisée, cérémonies militaires, posts commerciaux. Les engagements ne sont pas exploitables de manière robuste dans les fichiers fournis. Les catégories lexicales sont indicatives et non exclusives. Elles servent à construire une maquette d’enquête, pas à produire une mesure d’opinion.</p>
+ </div>
+</section>
+
+<footer class="footer"><span>Tag Revue · Monitoring · Christo / Arc de Triomphe</span><span>Fenêtre : 01/10/2021 22:20:41 → 20/10/2021 22:58:16 CEST</span><span>Maquette HTML · données Twitter/Twint</span></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+const labels=["2021-10-01", "2021-10-02", "2021-10-03", "2021-10-04", "2021-10-06", "2021-10-07", "2021-10-08", "2021-10-09", "2021-10-10", "2021-10-11", "2021-10-12", "2021-10-13", "2021-10-14", "2021-10-15", "2021-10-16", "2021-10-17", "2021-10-18", "2021-10-19", "2021-10-20"];
+const total=[5, 6, 2, 2, 144, 208, 147, 58, 3, 54, 142, 128, 91, 177, 111, 115, 106, 81, 66];
+const core=[5, 6, 2, 2, 51, 66, 34, 18, 1, 27, 30, 40, 20, 26, 26, 30, 15, 17, 23];
+new Chart(document.getElementById('timeline'),{
+ type:'line',data:{labels,datasets:[{label:'Corpus total',data:total,borderColor:'#111',backgroundColor:'rgba(17,17,17,.08)',fill:true,tension:.25,borderWidth:2.5,pointRadius:3},{label:'Sous-corpus Christo / emballage',data:core,borderColor:'#D92B2B',backgroundColor:'rgba(217,43,43,.08)',fill:true,tension:.25,borderWidth:2.5,pointRadius:3}]},
+ options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:'Source Sans 3',size:12},boxWidth:12}},tooltip:{backgroundColor:'#111',titleColor:'#fff',bodyColor:'#fff'}},scales:{x:{ticks:{font:{family:'Source Sans 3',size:11},maxRotation:45,minRotation:45},grid:{color:'rgba(0,0,0,.05)'}},y:{ticks:{font:{family:'Source Sans 3',size:11}},grid:{color:'rgba(0,0,0,.06)'}}}}
+});
+</script>
+</body></html>
